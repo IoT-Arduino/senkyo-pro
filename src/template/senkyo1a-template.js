@@ -92,7 +92,6 @@ class senkyo1aTemplate extends Component  {
     const { data } = this.props
     const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
-    const markdown = data.allMarkdownRemark
     const kenblock = data.kenblock
 
     console.log(kenblock)
@@ -100,26 +99,106 @@ class senkyo1aTemplate extends Component  {
     return (
       <Layout>
 
-  <HorizontalBar
-  data={chartData}
-  options={{
-      title:{
-        display:true,
-        text:`${edges.s1_syu_block}ブロックの年代別有権者数`,
-        fontSize:25
-      },
-      legend:{
-        display:true,
-        position:'top'
-      }
-    }}
-  />
+      <h2>衆議院比例{edges.s1_syu_block}ブロック</h2>
 
-     <div>
-      {edges.pref}<br />
-      {edges.ttl_pop}<br />
-      {edges.ttl_votes}<br />
-     </div>
+        <div>
+        <h3>選挙区データ</h3>
+        <table>
+          <tbody>
+                <tr>
+                    <td>人口</td>
+                    <td>{edges.s1_ttl_pop}</td>
+                </tr>
+                <tr>
+                    <td>有権者数</td>
+                    <td>{edges.s1_ttl_votes}*推計</td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+
+
+      <HorizontalBar
+      data={chartData}
+      options={{
+          title:{
+            display:true,
+            text:`${edges.s1_syu_block}ブロックの年代別有権者数`,
+            fontSize:20
+          },
+          legend:{
+            display:true,
+            position:'top'
+          }
+        }}
+      />
+
+      <div>
+      <h3>議員データ</h3>
+        <table>
+        <tbody>
+              <tr>
+                  <td>議員定数</td>
+                  <td>{edges.s1_gikai_teisu}</td>
+              </tr>
+              <tr>
+                  <td>議員報酬</td>
+                  <td>{edges.s1_housyu_y}</td>
+              </tr>
+              <tr>
+                  <td>議員任期</td>
+                  <td>{edges.s1_g_ninki}</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <div>
+      <h3>議会選挙データ</h3>
+        <table>
+        <tbody>
+              <tr>
+                  <td>前回投票率</td>
+                  <td>{edges.s1_gikai_teisu}</td>
+              </tr>
+              <tr>
+                  <td>前回有効投票数</td>
+                  <td>{edges.s1_housyu_y}</td>
+              </tr>
+              <tr>
+                  <td>最下位当選得票数</td>
+                  <td>{edges.s1_g_ninki}</td>
+              </tr>
+              <tr>
+                  <td>最下位当選得票率</td>
+                  <td>{edges.s1_g_ninki}</td>
+              </tr>
+              <tr>
+                  <td>最下位当選有権者比率</td>
+                  <td>{edges.s1_gikai_teisu}</td>
+              </tr>
+              <tr>
+                  <td>法定得票数</td>
+                  <td>{edges.s1_housyu_y}</td>
+              </tr>
+              <tr>
+                  <td>供託金没収ライン（票数）</td>
+                  <td>{edges.s1_g_ninki}</td>
+              </tr>
+              <tr>
+                  <td>前回選挙時期</td>
+                  <td>{edges.s1_g_ninki}</td>
+              </tr>
+        </tbody>
+        </table>
+      </div>
+
+      <div>
+      <h3>供託金情報</h3>
+
+      </div>
+
+  
 
      <div>該当選挙区都道府県</div>
      {kenblock.edges.map(({ node }) => (
