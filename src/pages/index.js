@@ -2,7 +2,6 @@ import React from "react"
 import { Link,graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
 const IndexPage = (props) => {
@@ -10,7 +9,10 @@ const IndexPage = (props) => {
   const s1a = props.data.s1a
   const s1b = props.data.s1b
   const s3 = props.data.s3
+  const s10 = props.data.s10
   const news = props.data.allMarkdownRemark
+
+  console.log(s10)
 
   return (
     <Layout>
@@ -58,12 +60,15 @@ const IndexPage = (props) => {
         </div>
       ))}
 
-      <h3>政党データ</h3>
-      <p>Now go build something great.</p>
-      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <Image />
-      </div>
-      <Link to="./seitou/jimintou/">自由民主党</Link>
+      <div>政党データ</div>
+      {s10.edges.map(({ node }) => (
+        <div key={node.data.s10_code}>
+            <h3>
+            <Link to={`/seitou/${node.data.s10_code}`}>
+              {node.data.s10_seitou_name}</Link>
+            </h3>
+        </div>
+      ))}
 
     </Layout>
   )
@@ -115,6 +120,26 @@ query{
               data {
                 s3_code
                 s3_shiku_chouson
+              }
+            }
+          }
+        }
+
+        s10:allAirtable(
+          filter:  { table: {eq: "s10_seitou"}}
+          sort: {fields: data___s10_code, order: ASC} 
+          ) {
+          edges {
+            node {
+              data {
+                s10_code
+                s10_kengi_ttl
+                s10_san_hirei
+                s10_san_shou
+                s10_seitou_name
+                s10_shigi_ttl
+                s10_syu_hirei
+                s10_syu_shou
               }
             }
           }

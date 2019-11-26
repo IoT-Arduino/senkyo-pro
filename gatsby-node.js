@@ -15,6 +15,7 @@ const senkyo1aTemplate = path.resolve('./src/template/senkyo1a-template.js')
 const senkyo1bTemplate = path.resolve('./src/template/senkyo1b-template.js')
 const senkyo2Template = path.resolve('./src/template/senkyo2-template.js')
 const senkyo3Template = path.resolve('./src/template/senkyo3-template.js')
+const senkyo10Template = path.resolve('./src/template/senkyo10-template.js')
 
 exports.onCreateNode = ({ node,getNode,actions }) => {
     const { createNodeField } = actions
@@ -74,6 +75,16 @@ exports.createPages = async ({ graphql,actions }) => {
           }
         }
 
+        s10:allAirtable(filter:  { table: {eq: "s10_seitou"}}) {
+          edges {
+            node {
+              data {
+                s10_code
+              }
+            }
+          }
+        }
+
         allMarkdownRemark{
           edges{
           node{
@@ -98,7 +109,6 @@ exports.createPages = async ({ graphql,actions }) => {
     })
     })
 
-    console.log(s1a)
 
     const s1b = result.data.s1b.edges
     s1b.forEach(({ node: s1bdata })=>{
@@ -135,6 +145,18 @@ exports.createPages = async ({ graphql,actions }) => {
        })
        })
 
+       const s10 = result.data.s10.edges
+       s10.forEach(({ node: s10data })=>{
+        createPage({
+            path:`seitou/${s10data.data.s10_code}`,
+            component:senkyo10Template,
+            context:{
+                slug:s10data.data.s10_code,
+            }
+        })
+        })
+
+        console.log(s10)
 
     const posts = result.data.allMarkdownRemark.edges
     posts.forEach(({ node: post })=>{

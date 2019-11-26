@@ -68,8 +68,21 @@ module.exports = {
             baseId: process.env.AIRTABLE_BASEID_SENPRO,
             tableName: `s3_seirei`,
           },
+          {
+            baseId: process.env.AIRTABLE_BASEID_SENPRO,
+            tableName: `s10_seitou`,
+          },
         ]
       }
+    },
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        postCssPlugins: [
+          require("tailwindcss"),
+          // require("./tailwind.config.js"), // Optional: Load custom Tailwind CSS configuration
+        ],
+      },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
