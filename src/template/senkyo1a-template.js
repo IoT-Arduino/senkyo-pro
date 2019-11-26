@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import { Bar,HorizontalBar } from 'react-chartjs-2';
+import { HorizontalBar } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
 
@@ -134,7 +134,7 @@ class senkyo1aTemplate extends Component  {
       />
 
       <div>
-      <h3>議員データ</h3>
+        <h3>議会・議員データ</h3>
         <table>
         <tbody>
               <tr>
@@ -143,7 +143,7 @@ class senkyo1aTemplate extends Component  {
               </tr>
               <tr>
                   <td>議員報酬</td>
-                  <td>{edges.s1_housyu_y}</td>
+                  <td>{edges.s1_housyu_y}円/年</td>
               </tr>
               <tr>
                   <td>議員任期</td>
@@ -154,51 +154,38 @@ class senkyo1aTemplate extends Component  {
       </div>
 
       <div>
-      <h3>議会選挙データ</h3>
+        <h3>議会選挙データ</h3>
         <table>
         <tbody>
               <tr>
                   <td>前回投票率</td>
-                  <td>{edges.s1_gikai_teisu}</td>
+                  <td>{edges.s1_giin_vrate}%</td>
               </tr>
               <tr>
                   <td>前回有効投票数</td>
-                  <td>{edges.s1_housyu_y}</td>
+                  <td>{edges.s1_ef_vote}</td>
               </tr>
               <tr>
                   <td>最下位当選得票数</td>
-                  <td>{edges.s1_g_ninki}</td>
+                  <td>{edges.s1_last_vote}</td>
               </tr>
               <tr>
                   <td>最下位当選得票率</td>
-                  <td>{edges.s1_g_ninki}</td>
+                  <td>{edges.s1_last_toku_rate}%</td>
               </tr>
               <tr>
                   <td>最下位当選有権者比率</td>
-                  <td>{edges.s1_gikai_teisu}</td>
+                  <td>{edges.s1_last_yuu_rate}%</td>
               </tr>
               <tr>
-                  <td>法定得票数</td>
-                  <td>{edges.s1_housyu_y}</td>
-              </tr>
-              <tr>
-                  <td>供託金没収ライン（票数）</td>
-                  <td>{edges.s1_g_ninki}</td>
-              </tr>
-              <tr>
-                  <td>前回選挙時期</td>
+                  <td>議員任期</td>
                   <td>{edges.s1_g_ninki}</td>
               </tr>
         </tbody>
         </table>
       </div>
 
-      <div>
-      <h3>供託金情報</h3>
-
-      </div>
-
-  
+ 
 
      <div>該当選挙区都道府県</div>
      {kenblock.edges.map(({ node }) => (
@@ -255,6 +242,12 @@ query($slug:String!){
             s1_syu_block
             s1_syu_block_code
             s1_teate
+            s1_giin_vrate
+            s1_ef_vote
+            s1_last_vote
+            s1_last_toku_rate
+            s1_last_yuu_rate
+
             s1_ttl_pop
             s1_ttl_votes
             s1_v_eighties
@@ -276,31 +269,7 @@ query($slug:String!){
         node {
           data {
               s1_code
-              s1_chou_ef_vote
-              s1_chou_ninki
-              s1_chou_re_elected
-              s1_chou_toku_votes
-              s1_chou_vrate
-              s1_g_ninki
-              s1_gikai_teisu
-              s1_housyu_m
-              s1_housyu_y
               s1_pref
-              s1_san_teisu
-              s1_syu_block
-              s1_syu_block_code
-              s1_teate
-              s1_ttl_pop
-              s1_ttl_votes
-              s1_v_eighties
-              s1_v_fifties
-              s1_v_forties
-              s1_v_nineties
-              s1_v_seventies
-              s1_v_sixties
-              s1_v_teen
-              s1_v_thirries
-              s1_v_twenties
           }
         }
       }

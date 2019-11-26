@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import { Bar,HorizontalBar } from 'react-chartjs-2';
+import { HorizontalBar } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
 
@@ -92,13 +92,30 @@ class senkyo1bTemplate extends Component  {
     const { data,pageContext } = this.props
     const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
-    const markdown = data.allMarkdownRemark
     const cityBlock = data.cityBlock
 
     console.log(pageContext)
 
     return (
       <Layout>
+
+      <h2>{edges.s1_pref}</h2>
+
+      <div>
+      <h3>選挙区データ</h3>
+      <table>
+        <tbody>
+              <tr>
+                  <td>人口</td>
+                  <td>{edges.s1_ttl_pop}</td>
+              </tr>
+              <tr>
+                  <td>有権者数</td>
+                  <td>{edges.s1_ttl_votes}*推計</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
 
   <HorizontalBar
   data={chartData}
@@ -115,11 +132,26 @@ class senkyo1bTemplate extends Component  {
     }}
   />
 
-     <div>
-      {edges.s1_pref}<br />
-      {edges.ttl_pop}<br />
-      {edges.ttl_votes}<br />
-     </div>
+    <div>
+      <h3>県議会・議員データ</h3>
+      <table>
+      <tbody>
+            <tr>
+                <td>議員定数</td>
+                <td>{edges.s1_gikai_teisu}</td>
+            </tr>
+            <tr>
+                <td>議員報酬</td>
+                <td>{edges.s1_housyu_y}円/年</td>
+            </tr>
+            <tr>
+                <td>議員任期</td>
+                <td>{edges.s1_g_ninki}</td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+
 
      <div>傘下自治体(人口10万人以上)</div>
      {cityBlock.edges.map(({ node }) => (
@@ -201,46 +233,13 @@ query($slug:String!,$codeFilter:String!){
       edges {
         node {
           data {
-            s2_bosyu
-            s2_chou_ef_vote
-            s2_chou_ninki
-            s2_chou_re_elected
-            s2_chou_toku_votes
-            s2_chou_vrate
             s2_code
-            s2_filter_code
-            s2_ef_vote
-            s2_link_flag
-            s2_g_ninki
-            s2_giin_vrate
-            s2_giinteisuu
-            s2_housyu_m
-            s2_housyu_y
-            s2_houtei_toku
-            s2_last_toku_rate
-            s2_last_vote
-            s2_last_yuu_rate
-            s2_menseki
-            s2_mitsudo
-            s2_pref
-            s2_shiku
             s2_shiku_chouson
-            s2_ttl_pop
-            s2_ttl_votes
-            s2_v_eighties
-            s2_v_fifties
-            s2_v_forties
-            s2_v_nineties
-            s2_v_seventies
-            s2_v_sixties
-            s2_v_teen
-            s2_v_thirries
-            s2_v_twenties
+
           }
         }
       }
     }
-
 
 
     allMarkdownRemark(filter: {frontmatter: {senkyo: {eq:  $slug}}}) {

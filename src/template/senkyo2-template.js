@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import { Bar,HorizontalBar } from 'react-chartjs-2';
+import { HorizontalBar } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
 
@@ -92,36 +92,130 @@ class senkyo2Template extends Component  {
     const { data,pageContext } = this.props
     const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
-    const markdown = data.allMarkdownRemark
-
+    const s2_last_toku_rate 
+    = Math.round(edges.s2_chou_toku_votes / edges.s2_chou_ef_vote *10000 ) /100
 
     console.log(pageContext)
 
     return (
       <Layout>
 
-  <HorizontalBar
-  data={chartData}
-  options={{
-      title:{
-        display:true,
-        text:`${edges.s2_shiku_chouson}の年代別有権者数`,
-        fontSize:25
-      },
-      legend:{
-        display:true,
-        position:'top'
-      }
-    }}
-  />
+      <h2>{edges.s2_shiku_chouson}</h2>
 
-     <div>
-      {edges.pref}<br />
-      {edges.ttl_pop}<br />
-      {edges.ttl_votes}<br />
-     </div>
+      <div>
+        <h3>選挙区データ</h3>
+        <table>
+          <tbody>
+                <tr>
+                    <td>人口</td>
+                    <td>{edges.s2_ttl_pop}人</td>
+                </tr>
+                <tr>
+                    <td>有権者数</td>
+                    <td>{edges.s2_ttl_votes}人　*推計</td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
 
+      <HorizontalBar
+      data={chartData}
+      options={{
+          title:{
+            display:true,
+            text:`${edges.s2_shiku_chouson}の年代別有権者数`,
+            fontSize:25
+          },
+          legend:{
+            display:true,
+            position:'top'
+          }
+        }}
+      />
 
+      <div>
+        <h3>議会・議員データ</h3>
+        <table>
+        <tbody>
+              <tr>
+                  <td>議員定数</td>
+                  <td>{edges.s2_giinteisuu}</td>
+              </tr>
+              <tr>
+                  <td>議員報酬</td>
+                  <td>{edges.s2_housyu_y}円/年</td>
+              </tr>
+              <tr>
+                  <td>議員任期</td>
+                  <td>{edges.s2_g_ninki}</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+
+      <div>
+      <h3>議会選挙データ</h3>
+      <table>
+      <tbody>
+            <tr>
+                <td>前回投票率</td>
+                <td>{edges.s2_giin_vrate}%</td>
+            </tr>
+            <tr>
+                <td>前回有効投票数</td>
+                <td>{edges.s2_ef_vote}</td>
+            </tr>
+            <tr>
+                <td>最下位当選得票数</td>
+                <td>{edges.s2_last_vote}</td>
+            </tr>
+            <tr>
+                <td>最下位当選得票率</td>
+                <td>{edges.s2_last_toku_rate}%</td>
+            </tr>
+            <tr>
+                <td>最下位当選有権者比率</td>
+                <td>{edges.s2_last_yuu_rate}%</td>
+            </tr>
+            <tr>
+                <td>議員任期</td>
+                <td>{edges.s2_g_ninki}</td>
+            </tr>
+      </tbody>
+      </table>
+    </div>
+
+    <div>
+    <h3>首長選挙データ</h3>
+    <table>
+    <tbody>
+          <tr>
+              <td>前回投票率</td>
+              <td>{edges.s2_chou_vrate}%</td>
+          </tr>
+          <tr>
+              <td>前回有効投票数</td>
+              <td>{edges.s2_chou_ef_vote}</td>
+          </tr>
+          <tr>
+              <td>当選者得票数</td>
+              <td>{edges.s2_chou_toku_votes}</td>
+          </tr>
+          <tr>
+              <td>当選者得票率</td>
+              <td>{s2_last_toku_rate}%</td>
+          </tr>
+          <tr>
+              <td>連続在任期</td>
+              <td>{edges.s2_chou_re_elected}</td>
+          </tr>
+          <tr>
+              <td>首長任期</td>
+              <td>{edges.s2_chou_ninki}</td>
+          </tr>
+    </tbody>
+    </table>
+  </div>
 
 
      <div>選挙区トピックス</div>

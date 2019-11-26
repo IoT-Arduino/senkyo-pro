@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import { Bar,HorizontalBar } from 'react-chartjs-2';
+import { HorizontalBar } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
 
@@ -89,37 +89,100 @@ class senkyo3Template extends Component  {
   }
 
   render(){
-    const { data,pageContext } = this.props
+    const { data } = this.props
     const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
-    const markdown = data.allMarkdownRemark
     const cityBlock = data.cityBlock
 
+    const s3_last_toku_rate 
+    = Math.round(edges.s3_chou_toku_votes / edges.s3_chou_ef_vote *10000 ) /100
     console.log(cityBlock)
 
     return (
       <Layout>
 
-  <HorizontalBar
-  data={chartData}
-  options={{
-      title:{
-        display:true,
-        text:`${edges.s3_shiku_chouson}の年代別有権者数`,
-        fontSize:25
-      },
-      legend:{
-        display:true,
-        position:'top'
-      }
-    }}
-  />
+      
+      <h2>{edges.s3_shiku_chouson}　(政令指定都市)</h2>
 
-     <div>
-      {edges.pref}<br />
-      {edges.ttl_pop}<br />
-      {edges.ttl_votes}<br />
-     </div>
+        <div>
+        <h3>選挙区データ</h3>
+        <table>
+          <tbody>
+                <tr>
+                    <td>人口</td>
+                    <td>{edges.s3_ttl_pop}人</td>
+                </tr>
+                <tr>
+                    <td>有権者数</td>
+                    <td>{edges.s3_ttl_votes}人　*推計</td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+
+      <HorizontalBar
+      data={chartData}
+      options={{
+          title:{
+            display:true,
+            text:`${edges.s3_shiku_chouson}の年代別有権者数`,
+            fontSize:25
+          },
+          legend:{
+            display:true,
+            position:'top'
+          }
+        }}
+      />
+
+        <div>
+          <h3>議会・議員データ</h3>
+          <table>
+          <tbody>
+                <tr>
+                    <td>議員定数</td>
+                    <td>{edges.s3_giinteisuu}</td>
+                </tr>
+                <tr>
+                    <td>議員報酬</td>
+                    <td>{edges.s3_housyu_y}円/年</td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h3>首長選挙データ</h3>
+          <table>
+          <tbody>
+                <tr>
+                    <td>前回投票率</td>
+                    <td>{edges.s3_chou_vrate}%</td>
+                </tr>
+                <tr>
+                    <td>前回有効投票数</td>
+                    <td>{edges.s3_chou_ef_vote}</td>
+                </tr>
+                <tr>
+                    <td>当選者得票数</td>
+                    <td>{edges.s3_chou_toku_votes}</td>
+                </tr>
+                <tr>
+                    <td>当選者得票率</td>
+                    <td>{s3_last_toku_rate}%</td>
+                </tr>
+                <tr>
+                    <td>連続在任期</td>
+                    <td>{edges.s3_chou_re_elected}</td>
+                </tr>
+                <tr>
+                    <td>首長任期</td>
+                    <td>{edges.s3_chou_ninki}</td>
+                </tr>
+          </tbody>
+          </table>
+        </div>
+
 
      <div>傘下自治体</div>
       {cityBlock.edges.map(({ node }) => (
@@ -201,34 +264,8 @@ query($slug:String!,$codeFilter:Date!){
       edges {
         node {
           data {
-            s3_chou_ef_vote
-            s3_chou_ninki
-            s3_chou_re_elected
-            s3_chou_toku_votes
-            s3_chou_vrate
             s3_code
-            s3_filter_code
-            s3_ef_vote
-            s3_giin_vrate
-            s3_g_ninki
-            s3_giinteisuu
-            s3_housyu_m
-            s3_housyu_y
-            s3_kei_flag
-            s3_last_vote
-            s3_pref
             s3_shiku_chouson
-            s3_ttl_pop
-            s3_ttl_votes
-            s3_v_eighties
-            s3_v_fifties
-            s3_v_forties
-            s3_v_nineties
-            s3_v_seventies
-            s3_v_sixties
-            s3_v_teen
-            s3_v_thirries
-            s3_v_twenties
           }
         }
       }
