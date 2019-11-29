@@ -99,7 +99,7 @@ class senkyo1aTemplate extends Component  {
     return (
       <Layout>
 
-      <h2>衆議院比例{edges.s1_syu_block}ブロック</h2>
+      <h2 className="text-center">衆議院比例{edges.s1_syu_block}ブロック</h2>
 
         <div>
         <h3>選挙区データ</h3>
@@ -119,6 +119,7 @@ class senkyo1aTemplate extends Component  {
 
 
       <HorizontalBar
+      className="container"
       data={chartData}
       options={{
           title:{

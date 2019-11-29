@@ -12,63 +12,85 @@ const IndexPage = (props) => {
   const s10 = props.data.s10
   const news = props.data.allMarkdownRemark
 
-  console.log(s10)
-
   return (
     <Layout>
       <SEO title="Home" />
 
-      <div>選挙区トピックス</div>
-      {news.edges.map(({ node }) => (
-       <div key={node.fields.slug}>
-           <h3>
-           <Link to={`/posts/${node.fields.slug}`}>
-             {node.frontmatter.title}</Link>
-             <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
-           </h3>
-           <p>{node.excerpt}</p>
-       </div>
-       ))}
-
-      <div>衆議院比例ブロック</div>
-      {s1a.edges.map(({ node }) => (
-        <div key={node.data.s1_code}>
+      <div className="my-4">
+        <h2>選挙区トピックス</h2>
+        {news.edges.map(({ node }) => (
+        <div key={node.fields.slug}
+        >
             <h3>
-            <Link to={`/senkyo/${node.data.s1_code}`}>
-              {node.data.s1_syu_block}</Link>
+            <Link to={`/posts/${node.fields.slug}`}>
+              {node.frontmatter.title}</Link>
+              <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
             </h3>
+            <p>{node.excerpt}</p>
         </div>
-      ))}
+        ))}
+      </div>
 
-      <div>県</div>
-      {s1b.edges.map(({ node }) => (
-        <div key={node.data.s1_code}>
-            <h3>
-            <Link to={`/senkyo/${node.data.s1_code}`}>
-              {node.data.s1_pref}</Link>
-            </h3>
-        </div>
-      ))}
+      <div className="my-0 mx-0 bg-gray-200">
 
-      <div>政令指定都市</div>
-      {s3.edges.map(({ node }) => (
-        <div key={node.data.s3_code}>
-            <h3>
-            <Link to={`/senkyo/${node.data.s3_code}`}>
-              {node.data.s3_shiku_chouson}</Link>
-            </h3>
+      <div className="my-4">
+        <h2>衆議院比例ブロック</h2>
+        <div className="flex flex-wrap">
+          {s1a.edges.map(({ node }) => (
+            <div key={node.data.s1_code}
+            className="mx-4"
+            >
+                <Link to={`/senkyo/${node.data.s1_code}`}
+                >
+                  {node.data.s1_syu_block}</Link>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
 
-      <div>政党データ</div>
-      {s10.edges.map(({ node }) => (
-        <div key={node.data.s10_code}>
-            <h3>
-            <Link to={`/seitou/${node.data.s10_code}`}>
-              {node.data.s10_seitou_name}</Link>
-            </h3>
+      <div className="my-4">
+        <h2>都道府県</h2>
+        <div className="flex flex-wrap">
+          {s1b.edges.map(({ node }) => (
+            <div key={node.data.s1_code}
+            className="mx-4"
+            >
+                <Link to={`/senkyo/${node.data.s1_code}`}
+                >
+                  {node.data.s1_pref}</Link>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
+
+      <div className="my-4">
+        <h2>政令指定都市</h2>
+        <div className="flex flex-wrap">
+          {s3.edges.map(({ node }) => (
+            <div key={node.data.s3_code}
+            className="mx-4"
+            >
+                <Link to={`/senkyo/${node.data.s3_code}`}>
+                  {node.data.s3_shiku_chouson}</Link>
+            </div>
+          ))}
+        </div>
+      </div>
+      </div>
+
+      <div className="my-4">
+        <h2>政党データ</h2>
+        <div className="flex flex-wrap">
+          {s10.edges.map(({ node }) => (
+            <div key={node.data.s10_code}
+              className="mx-4"
+            >
+                <Link to={`/seitou/${node.data.s10_code}`}>
+                  {node.data.s10_seitou_name}</Link>
+            </div>
+          ))}
+        </div>
+      </div>
 
     </Layout>
   )
