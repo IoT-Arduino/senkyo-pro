@@ -99,71 +99,81 @@ class senkyo1bTemplate extends Component  {
     return (
       <Layout>
 
-      <h2>{edges.s1_pref}</h2>
+      <h2 className="text-center mb-4">{edges.s1_pref}</h2>
 
-      <div>
       <h3>選挙区データ</h3>
-      <table>
+      <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
+        <div className="text-center">
+          <p>人口</p>
+          <p className="text-center">{edges.s1_ttl_pop}人</p>
+        </div>
+        <div className="text-center mt-4 sm:mt-0">
+          <p>有権者数*推計</p>
+          <p className="text-center">{edges.s1_ttl_votes}人</p>
+       </div>
+      </div>
+
+
+    <div className="relative h-64 w-9/10 mx-auto my-4">
+      <HorizontalBar
+      data={chartData}
+      options={{
+          title:{
+            display:true,
+            text:`${edges.s1_pref}の年代別有権者数`,
+            fontSize:18
+          },
+          legend:{
+            display:false,
+            position:'top'
+          },
+          responsive: true,
+          maintainAspectRatio: false
+        }}
+      />
+    </div>
+
+    <div className="block md:flex mt-8">
+      <div className="mt-8 md:w-1/2 md:px-3">
+        <h3>県議会・議員データ</h3>
+        <table  className="border-2 mt-2 ml-8 md:ml-0">
         <tbody>
               <tr>
-                  <td>人口</td>
-                  <td>{edges.s1_ttl_pop}</td>
+                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員定数</td>
+                  <td className="text-right w-40 px-2 border-b-2">{edges.s1_gikai_teisu}</td>
               </tr>
               <tr>
-                  <td>有権者数</td>
-                  <td>{edges.s1_ttl_votes}*推計</td>
+                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員報酬</td>
+                  <td className="text-right w-40 px-2 border-b-2">{edges.s1_housyu_y}円/年</td>
+              </tr>
+              <tr>
+                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員任期</td>
+                  <td className="text-right w-40 px-2 border-b-2">{edges.s1_g_ninki}</td>
               </tr>
             </tbody>
         </table>
-    </div>
-
-  <HorizontalBar
-  data={chartData}
-  options={{
-      title:{
-        display:true,
-        text:`${edges.s1_pref}の年代別有権者数`,
-        fontSize:25
-      },
-      legend:{
-        display:true,
-        position:'top'
-      }
-    }}
-  />
-
-    <div>
-      <h3>県議会・議員データ</h3>
-      <table>
-      <tbody>
-            <tr>
-                <td>議員定数</td>
-                <td>{edges.s1_gikai_teisu}</td>
-            </tr>
-            <tr>
-                <td>議員報酬</td>
-                <td>{edges.s1_housyu_y}円/年</td>
-            </tr>
-            <tr>
-                <td>議員任期</td>
-                <td>{edges.s1_g_ninki}</td>
-            </tr>
-          </tbody>
-      </table>
-    </div>
-
-
-     <div>傘下自治体(人口10万人以上)</div>
-     {cityBlock.edges.map(({ node }) => (
-      <div key={node.data.s2_code}>
-          <h3>
-          <Link to={`/senkyo/${node.data.s2_code}`}>
-            {node.data.s2_shiku_chouson}</Link>
-          </h3>
       </div>
-            ))}
 
-     <div>選挙区トピックス</div>
+    <div className="mt-8 md:w-1/2 md:px-3">
+      <h3>傘下自治体(人口10万人以上)</h3>
+      <div className="flex flex-wrap mx-2 ml-8 md:ml-0">
+        {cityBlock.edges.map(({ node }) => (
+          <div key={node.data.s2_code}
+          className="mx-2" >
+              <h3>
+              <Link to={`/senkyo/${node.data.s2_code}`}>
+                {node.data.s2_shiku_chouson}</Link>
+              </h3>
+          </div>
+        ))}
+      </div>
+    </div>
+
+
+    </div>
+
+
+     <div className="mt-8">選挙区トピックス</div>
      {data.allMarkdownRemark.edges.map(({ node }) => (
       <div key={node.fields.slug}>
           <h3>
@@ -173,7 +183,7 @@ class senkyo1bTemplate extends Component  {
           </h3>
           <p>{node.excerpt}</p>
       </div>
-  ))}
+      ))}
 
 
       </Layout>

@@ -100,125 +100,131 @@ class senkyo2Template extends Component  {
     return (
       <Layout>
 
-      <h2>{edges.s2_shiku_chouson}</h2>
+      <h2 className="text-center mb-4">{edges.s2_shiku_chouson}</h2>
 
-      <div>
-        <h3>選挙区データ</h3>
-        <table>
-          <tbody>
-                <tr>
-                    <td>人口</td>
-                    <td>{edges.s2_ttl_pop}人</td>
-                </tr>
-                <tr>
-                    <td>有権者数</td>
-                    <td>{edges.s2_ttl_votes}人　*推計</td>
-                </tr>
-              </tbody>
-          </table>
+      <h3>選挙区データ</h3>
+      <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
+        <div className="text-center">
+          <p>人口</p>
+          <p className="text-center">{edges.s2_ttl_pop}人</p>
+        </div>
+        <div className="text-center mt-4 sm:mt-0">
+          <p>有権者数*推計</p>
+          <p className="text-center">{edges.s2_ttl_votes}人</p>
+       </div>
       </div>
 
-      <HorizontalBar
-      data={chartData}
-      options={{
-          title:{
-            display:true,
-            text:`${edges.s2_shiku_chouson}の年代別有権者数`,
-            fontSize:25
-          },
-          legend:{
-            display:true,
-            position:'top'
-          }
-        }}
-      />
 
-      <div>
+      <div className="relative h-64 w-9/10 mx-auto my-4">
+        <HorizontalBar
+        data={chartData}
+        options={{
+            title:{
+              display:true,
+              text:`${edges.s2_shiku_chouson}の年代別有権者数`,
+              fontSize:18
+            },
+            legend:{
+              display:false,
+              position:'top'
+            },
+            responsive: true,
+            maintainAspectRatio: false
+          }}
+        />
+      </div>
+
+      <div className="block md:flex mt-8">
+
+        <div className="mt-8 md:w-1/3 md:px-3">
         <h3>議会・議員データ</h3>
-        <table>
+        <table  className="border-2 mt-2 ml-8 md:ml-0">
         <tbody>
               <tr>
-                  <td>議員定数</td>
-                  <td>{edges.s2_giinteisuu}</td>
+                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員定数</td>
+                  <td className="text-right w-40 px-2 border-b-2">{edges.s2_giinteisuu}</td>
               </tr>
               <tr>
-                  <td>議員報酬</td>
-                  <td>{edges.s2_housyu_y}円/年</td>
+                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員報酬</td>
+                  <td className="text-right w-40 px-2 border-b-2">{edges.s2_housyu_y}円/年</td>
               </tr>
               <tr>
-                  <td>議員任期</td>
-                  <td>{edges.s2_g_ninki}</td>
+                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員任期</td>
+                  <td className="text-right w-40 px-2 border-b-2">{edges.s2_g_ninki}</td>
               </tr>
             </tbody>
         </table>
       </div>
 
-      <div>
+      <div className="mt-8 md:w-1/3 md:px-3">
       <h3>議会選挙データ</h3>
-      <table>
+      <table className="border-2 mt-2 ml-8 md:ml-0">
       <tbody>
             <tr>
-                <td>前回投票率</td>
-                <td>{edges.s2_giin_vrate}%</td>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回投票率</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_giin_vrate}%</td>
             </tr>
             <tr>
-                <td>前回有効投票数</td>
-                <td>{edges.s2_ef_vote}</td>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_ef_vote}</td>
             </tr>
             <tr>
-                <td>最下位当選得票数</td>
-                <td>{edges.s2_last_vote}</td>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票数</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_last_vote}</td>
             </tr>
             <tr>
-                <td>最下位当選得票率</td>
-                <td>{edges.s2_last_toku_rate}%</td>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票率</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_last_toku_rate}%</td>
             </tr>
             <tr>
-                <td>最下位当選有権者比率</td>
-                <td>{edges.s2_last_yuu_rate}%</td>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選有権者比率</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_last_yuu_rate}%</td>
             </tr>
             <tr>
-                <td>議員任期</td>
-                <td>{edges.s2_g_ninki}</td>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">議員任期</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_g_ninki}</td>
             </tr>
       </tbody>
       </table>
     </div>
 
-    <div>
-    <h3>首長選挙データ</h3>
-    <table>
-    <tbody>
-          <tr>
-              <td>前回投票率</td>
-              <td>{edges.s2_chou_vrate}%</td>
-          </tr>
-          <tr>
-              <td>前回有効投票数</td>
-              <td>{edges.s2_chou_ef_vote}</td>
-          </tr>
-          <tr>
-              <td>当選者得票数</td>
-              <td>{edges.s2_chou_toku_votes}</td>
-          </tr>
-          <tr>
-              <td>当選者得票率</td>
-              <td>{s2_last_toku_rate}%</td>
-          </tr>
-          <tr>
-              <td>連続在任期</td>
-              <td>{edges.s2_chou_re_elected}</td>
-          </tr>
-          <tr>
-              <td>首長任期</td>
-              <td>{edges.s2_chou_ninki}</td>
-          </tr>
-    </tbody>
-    </table>
-  </div>
+
+      <div className="mt-8 md:w-1/3 md:px-3">
+      <h3>首長選挙データ</h3>
+      <table className="border-2 mt-2 ml-8 md:ml-0">
+      <tbody>
+            <tr>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回投票率</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_vrate}%</td>
+            </tr>
+            <tr>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_ef_vote}</td>
+            </tr>
+            <tr>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票数</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_toku_votes}</td>
+            </tr>
+            <tr>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票率</td>
+                <td className="text-right w-24 px-2 border-b-2">{s2_last_toku_rate}%</td>
+            </tr>
+            <tr>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">連続在任期</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_re_elected}</td>
+            </tr>
+            <tr>
+                <td className="w-2/3 px-2 bg-gray-200 border-b-2">首長任期</td>
+                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_ninki}</td>
+            </tr>
+      </tbody>
+      </table>
+    </div>
+      </div>
 
 
-     <div>選挙区トピックス</div>
+
+     <div className="mt-8">選挙区トピックス</div>
      {data.allMarkdownRemark.edges.map(({ node }) => (
       <div key={node.fields.slug}>
           <h3>

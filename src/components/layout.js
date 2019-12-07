@@ -10,6 +10,7 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import Footer from "./footer"
 // import "./layout.css"
 import "../styles/tailwind.css"
 
@@ -33,12 +34,8 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <main className="py-3 px-3 max-w-6xl mx-auto">{children}</main>
+        <Footer />
       </div>
     </>
   )

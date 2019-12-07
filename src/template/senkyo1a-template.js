@@ -99,107 +99,116 @@ class senkyo1aTemplate extends Component  {
     return (
       <Layout>
 
-      <h2 className="text-center">衆議院比例{edges.s1_syu_block}ブロック</h2>
+      <h2 className="text-center mb-4">衆議院比例{edges.s1_syu_block}ブロック</h2>
 
-        <div>
-        <h3>選挙区データ</h3>
-        <table>
+      <h3>選挙区データ</h3>
+      <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
+        <div className="text-center">
+          <p>人口</p>
+          <p className="text-center">{edges.s1_ttl_pop}人</p>
+        </div>
+        <div className="text-center mt-4 sm:mt-0">
+          <p>有権者数*推計</p>
+          <p className="text-center">{edges.s1_ttl_votes}人</p>
+       </div>
+      </div>
+
+      <div className="relative h-64 w-9/10 mx-auto my-4">
+          <HorizontalBar
+          data={chartData}
+          options={{
+              title:{
+                display:true,
+                text:`${edges.s1_syu_block}ブロックの年代別有権者数`,
+                fontSize:18
+              },
+              legend:{
+                display:false,
+                position:'top'
+              },
+              responsive: true,
+              maintainAspectRatio: false
+            }}
+          />
+        </div>
+
+
+     <div className="block md:flex mt-8">
+
+        <div className="mt-8 md:w-1/3 md:px-3">
+          <h3>議会・議員データ</h3>
+          <table className="border-2 mt-2 ml-8 md:ml-0">
           <tbody>
                 <tr>
-                    <td>人口</td>
-                    <td>{edges.s1_ttl_pop}</td>
+                    <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員定数</td>
+                    <td className="text-right w-40 px-2 border-b-2">{edges.s1_gikai_teisu}</td>
                 </tr>
                 <tr>
-                    <td>有権者数</td>
-                    <td>{edges.s1_ttl_votes}*推計</td>
+                    <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員報酬</td>
+                    <td className="text-right w-40 px-2 border-b-2">{edges.s1_housyu_y}円/年</td>
+                </tr>
+                <tr>
+                    <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員任期</td>
+                    <td className="text-right w-40 px-2 border-b-2">{edges.s1_g_ninki}</td>
                 </tr>
               </tbody>
           </table>
-      </div>
+        </div>
+
+        <div className="mt-8 md:w-1/3 md:px-3">
+          <h3>議会選挙データ</h3>
+          <table className="border-2 mt-2 ml-8 md:ml-0">
+          <tbody>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回投票率</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s1_giin_vrate}%</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s1_ef_vote}</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票数</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s1_last_vote}</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票率</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s1_last_toku_rate}%</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選有権者比率</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s1_last_yuu_rate}%</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">議員任期</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s1_g_ninki}</td>
+                </tr>
+          </tbody>
+          </table>
+        </div>
+
+         <div className="mt-8 md:w-1/3 md:px-3">
+            <div >該当選挙区都道府県</div>
+            <div className="flex flex-wrap mx-2 ml-8 md:ml-0">
+            {kenblock.edges.map(({ node }) => (
+                <div key={node.data.s1_code} className="mx-2">
+                    <h3>
+                    <Link to={`/senkyo/${node.data.s1_code}`}>
+                      {node.data.s1_pref}</Link>
+                    </h3>
+                </div>
+              ))}
+            </div>
+         </div>
+
+     </div>
 
 
-      <HorizontalBar
-      className="container"
-      data={chartData}
-      options={{
-          title:{
-            display:true,
-            text:`${edges.s1_syu_block}ブロックの年代別有権者数`,
-            fontSize:20
-          },
-          legend:{
-            display:true,
-            position:'top'
-          }
-        }}
-      />
 
-      <div>
-        <h3>議会・議員データ</h3>
-        <table>
-        <tbody>
-              <tr>
-                  <td>議員定数</td>
-                  <td>{edges.s1_gikai_teisu}</td>
-              </tr>
-              <tr>
-                  <td>議員報酬</td>
-                  <td>{edges.s1_housyu_y}円/年</td>
-              </tr>
-              <tr>
-                  <td>議員任期</td>
-                  <td>{edges.s1_g_ninki}</td>
-              </tr>
-            </tbody>
-        </table>
-      </div>
 
-      <div>
-        <h3>議会選挙データ</h3>
-        <table>
-        <tbody>
-              <tr>
-                  <td>前回投票率</td>
-                  <td>{edges.s1_giin_vrate}%</td>
-              </tr>
-              <tr>
-                  <td>前回有効投票数</td>
-                  <td>{edges.s1_ef_vote}</td>
-              </tr>
-              <tr>
-                  <td>最下位当選得票数</td>
-                  <td>{edges.s1_last_vote}</td>
-              </tr>
-              <tr>
-                  <td>最下位当選得票率</td>
-                  <td>{edges.s1_last_toku_rate}%</td>
-              </tr>
-              <tr>
-                  <td>最下位当選有権者比率</td>
-                  <td>{edges.s1_last_yuu_rate}%</td>
-              </tr>
-              <tr>
-                  <td>議員任期</td>
-                  <td>{edges.s1_g_ninki}</td>
-              </tr>
-        </tbody>
-        </table>
-      </div>
-
- 
-
-     <div>該当選挙区都道府県</div>
-     {kenblock.edges.map(({ node }) => (
-      <div key={node.data.s1_code}>
-          <h3>
-          <Link to={`/senkyo/${node.data.s1_code}`}>
-            {node.data.s1_pref}</Link>
-          </h3>
-      </div>
-            ))}
      
 
-     <div>選挙区トピックス</div>
+     <div className="mt-8">選挙区トピックス</div>
      {data.allMarkdownRemark.edges.map(({ node }) => (
       <div key={node.fields.slug}>
           <h3>
