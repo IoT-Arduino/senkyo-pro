@@ -5,7 +5,7 @@ export const footer = () => {
         <footer className="text-center bg-gray-300 py-2 px-2 mt-16">
           © {new Date().getFullYear()}
           {` `}
-          選挙Proドットコム
+          選挙データサイト
         </footer>
     )
 }
