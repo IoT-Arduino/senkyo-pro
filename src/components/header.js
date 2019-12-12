@@ -5,9 +5,9 @@ import React from "react"
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
       marginBottom: `1.45rem`,
     }}
+    className="bg-blue-500"
   >
     <div
       style={{
@@ -36,7 +36,7 @@ Header.propTypes = {
 }
 
 Header.defaultProps = {
-  siteTitle: ``,
+  siteTitle: `選挙Pro`,
 }
 
 export default Header

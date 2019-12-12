@@ -94,6 +94,10 @@ class senkyo1bTemplate extends Component  {
     const edges = data.allAirtable.edges[0].node.data
     const cityBlock = data.cityBlock
 
+    const cma_s1_ttl_pop = String(edges.s1_ttl_pop).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s1_ttl_votes = String(edges.s1_ttl_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s1_housyu_y = String(edges.s1_housyu_y).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+
     console.log(pageContext)
 
     return (
@@ -105,11 +109,11 @@ class senkyo1bTemplate extends Component  {
       <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
         <div className="text-center">
           <p>人口</p>
-          <p className="text-center">{edges.s1_ttl_pop}人</p>
+          <p className="text-center">{cma_s1_ttl_pop}人</p>
         </div>
         <div className="text-center mt-4 sm:mt-0">
           <p>有権者数*推計</p>
-          <p className="text-center">{edges.s1_ttl_votes}人</p>
+          <p className="text-center">{cma_s1_ttl_votes}人</p>
        </div>
       </div>
 
@@ -134,8 +138,8 @@ class senkyo1bTemplate extends Component  {
     </div>
 
     <div className="block md:flex mt-8">
-      <div className="mt-8 md:w-1/2 md:px-3">
-        <h3>県議会・議員データ</h3>
+      <div className="mt-8 md:w-2/5 md:px-3">
+        <h3>都道府県議会・議員データ</h3>
         <table  className="border-2 mt-2 ml-8 md:ml-0">
         <tbody>
               <tr>
@@ -144,7 +148,7 @@ class senkyo1bTemplate extends Component  {
               </tr>
               <tr>
                   <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員報酬</td>
-                  <td className="text-right w-40 px-2 border-b-2">{edges.s1_housyu_y}円/年</td>
+                  <td className="text-right w-40 px-2 border-b-2">{cma_s1_housyu_y}円/年</td>
               </tr>
               <tr>
                   <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員任期</td>
@@ -154,14 +158,15 @@ class senkyo1bTemplate extends Component  {
         </table>
       </div>
 
-    <div className="mt-8 md:w-1/2 md:px-3">
+    <div className="mt-8 md:w-3/5 md:px-3">
       <h3>傘下自治体(人口10万人以上)</h3>
       <div className="flex flex-wrap mx-2 ml-8 md:ml-0">
         {cityBlock.edges.map(({ node }) => (
           <div key={node.data.s2_code}
-          className="mx-2" >
+          className="mx-4 my-2 bg-white hover:bg-gray-200 border-2 font-bold py-2 px-4 rounded-full" >
               <h3>
-              <Link to={`/senkyo/${node.data.s2_code}`}>
+              <Link to={`/senkyo/${node.data.s2_code}`}
+              className="text-blue-500">
                 {node.data.s2_shiku_chouson}</Link>
               </h3>
           </div>

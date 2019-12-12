@@ -94,6 +94,12 @@ class senkyo1aTemplate extends Component  {
     const edges = data.allAirtable.edges[0].node.data
     const kenblock = data.kenblock
 
+    const cma_s1_ttl_pop = String(edges.s1_ttl_pop).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s1_ttl_votes = String(edges.s1_ttl_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s1_housyu_y = String(edges.s1_housyu_y).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s1_ef_vote = String(edges.s1_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s1_last_vote = String(edges.s1_last_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+
     console.log(kenblock)
 
     return (
@@ -105,11 +111,11 @@ class senkyo1aTemplate extends Component  {
       <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
         <div className="text-center">
           <p>人口</p>
-          <p className="text-center">{edges.s1_ttl_pop}人</p>
+          <p className="text-center">{cma_s1_ttl_pop}人</p>
         </div>
         <div className="text-center mt-4 sm:mt-0">
           <p>有権者数*推計</p>
-          <p className="text-center">{edges.s1_ttl_votes}人</p>
+          <p className="text-center">{cma_s1_ttl_votes}人</p>
        </div>
       </div>
 
@@ -145,7 +151,7 @@ class senkyo1aTemplate extends Component  {
                 </tr>
                 <tr>
                     <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員報酬</td>
-                    <td className="text-right w-40 px-2 border-b-2">{edges.s1_housyu_y}円/年</td>
+                    <td className="text-right w-40 px-2 border-b-2">{cma_s1_housyu_y}円/年</td>
                 </tr>
                 <tr>
                     <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員任期</td>
@@ -165,11 +171,11 @@ class senkyo1aTemplate extends Component  {
                 </tr>
                 <tr>
                     <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
-                    <td className="text-right w-24 px-2 border-b-2">{edges.s1_ef_vote}</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s1_ef_vote}</td>
                 </tr>
                 <tr>
                     <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票数</td>
-                    <td className="text-right w-24 px-2 border-b-2">{edges.s1_last_vote}</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s1_last_vote}</td>
                 </tr>
                 <tr>
                     <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票率</td>
@@ -191,9 +197,11 @@ class senkyo1aTemplate extends Component  {
             <div >該当選挙区都道府県</div>
             <div className="flex flex-wrap mx-2 ml-8 md:ml-0">
             {kenblock.edges.map(({ node }) => (
-                <div key={node.data.s1_code} className="mx-2">
+                <div key={node.data.s1_code} 
+                className="mx-4 my-2 bg-white hover:bg-gray-200 border-2 font-bold py-2 px-4 rounded-full">
                     <h3>
-                    <Link to={`/senkyo/${node.data.s1_code}`}>
+                    <Link to={`/senkyo/${node.data.s1_code}`}
+                     className="text-blue-500">
                       {node.data.s1_pref}</Link>
                     </h3>
                 </div>

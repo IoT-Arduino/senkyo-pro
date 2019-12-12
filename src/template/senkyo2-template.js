@@ -95,6 +95,16 @@ class senkyo2Template extends Component  {
     const s2_last_toku_rate 
     = Math.round(edges.s2_chou_toku_votes / edges.s2_chou_ef_vote *10000 ) /100
 
+    const cma_s2_ttl_pop = String(edges.s2_ttl_pop).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s2_mitsudo = String(edges.s2_mitsudo).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s2_ttl_votes = String(edges.s2_ttl_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s2_housyu_y = String(edges.s2_housyu_y).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s2_ef_vote = String(edges.s2_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s2_last_vote = String(edges.s2_last_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+
+    const cma_s2_chou_ef_vote = String(edges.s2_chou_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s2_chou_toku_votes = String(edges.s2_chou_toku_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+
     console.log(pageContext)
 
     return (
@@ -106,11 +116,15 @@ class senkyo2Template extends Component  {
       <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
         <div className="text-center">
           <p>人口</p>
-          <p className="text-center">{edges.s2_ttl_pop}人</p>
+          <p className="text-center">{cma_s2_ttl_pop}人</p>
+        </div>
+        <div className="text-centerr mt-4 sm:mt-0">
+          <p>人口密度</p>
+          <p className="text-center">{cma_s2_mitsudo}人</p>
         </div>
         <div className="text-center mt-4 sm:mt-0">
           <p>有権者数*推計</p>
-          <p className="text-center">{edges.s2_ttl_votes}人</p>
+          <p className="text-center">{cma_s2_ttl_votes}人</p>
        </div>
       </div>
 
@@ -146,7 +160,7 @@ class senkyo2Template extends Component  {
               </tr>
               <tr>
                   <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員報酬</td>
-                  <td className="text-right w-40 px-2 border-b-2">{edges.s2_housyu_y}円/年</td>
+                  <td className="text-right w-40 px-2 border-b-2">{cma_s2_housyu_y}円/年</td>
               </tr>
               <tr>
                   <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員任期</td>
@@ -166,11 +180,11 @@ class senkyo2Template extends Component  {
             </tr>
             <tr>
                 <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_ef_vote}</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s2_ef_vote}</td>
             </tr>
             <tr>
                 <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票数</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_last_vote}</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s2_last_vote}</td>
             </tr>
             <tr>
                 <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票率</td>
@@ -189,37 +203,43 @@ class senkyo2Template extends Component  {
     </div>
 
 
-      <div className="mt-8 md:w-1/3 md:px-3">
-      <h3>首長選挙データ</h3>
-      <table className="border-2 mt-2 ml-8 md:ml-0">
-      <tbody>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回投票率</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_vrate}%</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_ef_vote}</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票数</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_toku_votes}</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票率</td>
-                <td className="text-right w-24 px-2 border-b-2">{s2_last_toku_rate}%</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">連続在任期</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_re_elected}</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">首長任期</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_ninki}</td>
-            </tr>
-      </tbody>
-      </table>
-    </div>
+        { !edges.s2_chou_ef_vote ? (
+          <p></p>
+        ) : (
+          <div className="mt-8 md:w-1/3 md:px-3">
+          <h3>首長選挙データ</h3>
+          <table className="border-2 mt-2 ml-8 md:ml-0">
+          <tbody>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回投票率</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_vrate}%</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s2_chou_ef_vote}</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票数</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s2_chou_toku_votes}</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票率</td>
+                    <td className="text-right w-24 px-2 border-b-2">{s2_last_toku_rate}%</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">連続在任期</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_re_elected}</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">首長任期</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_ninki}</td>
+                </tr>
+          </tbody>
+          </table>
+        </div>
+        )}
+
+
       </div>
 
 

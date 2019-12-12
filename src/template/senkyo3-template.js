@@ -96,6 +96,14 @@ class senkyo3Template extends Component  {
 
     const s3_last_toku_rate 
     = Math.round(edges.s3_chou_toku_votes / edges.s3_chou_ef_vote *10000 ) /100
+
+    const cma_s3_ttl_pop = String(edges.s3_ttl_pop).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s3_ttl_votes = String(edges.s3_ttl_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s3_housyu_y = String(edges.s3_housyu_y).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s3_chou_ef_vote = String(edges.s3_chou_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s3_chou_toku_votes = String(edges.s3_chou_toku_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+
+
     console.log(cityBlock)
 
     return (
@@ -108,11 +116,11 @@ class senkyo3Template extends Component  {
       <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
         <div className="text-center">
           <p>人口</p>
-          <p className="text-center">{edges.s3_ttl_pop}人</p>
+          <p className="text-center">{cma_s3_ttl_pop}人</p>
         </div>
         <div className="text-center mt-4 sm:mt-0">
           <p>有権者数*推計</p>
-          <p className="text-center">{edges.s3_ttl_votes}人</p>
+          <p className="text-center">{cma_s3_ttl_votes}人</p>
        </div>
       </div>
 
@@ -138,6 +146,8 @@ class senkyo3Template extends Component  {
         <div className="block md:flex mt-8">
 
         <div className="mt-8 md:w-1/3 md:px-3">
+
+        <div>
           <h3>議会・議員データ</h3>
           <table className="border-2 mt-2 ml-8 md:ml-0">
           <tbody>
@@ -147,13 +157,13 @@ class senkyo3Template extends Component  {
                 </tr>
                 <tr>
                     <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員報酬</td>
-                    <td className="text-right w-40 px-2 border-b-2">{edges.s3_housyu_y}円/年</td>
+                    <td className="text-right w-40 px-2 border-b-2">{cma_s3_housyu_y}円/年</td>
                 </tr>
               </tbody>
           </table>
         </div>
 
-        <div className="mt-8 md:w-1/3 md:px-3">
+        <div className="mt-4">
           <h3>首長選挙データ</h3>
           <table className="border-2 mt-2 ml-8 md:ml-0">
           <tbody>
@@ -163,11 +173,11 @@ class senkyo3Template extends Component  {
                 </tr>
                 <tr>
                     <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
-                    <td className="text-right w-24 px-2 border-b-2">{edges.s3_chou_ef_vote}</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s3_chou_ef_vote}</td>
                 </tr>
                 <tr>
                     <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票数</td>
-                    <td className="text-right w-24 px-2 border-b-2">{edges.s3_chou_toku_votes}</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s3_chou_toku_votes}</td>
                 </tr>
                 <tr>
                     <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票率</td>
@@ -185,12 +195,14 @@ class senkyo3Template extends Component  {
           </table>
         </div>
 
-      <div className="mt-8 md:w-1/3 md:px-3">
+        </div>
+
+      <div className="mt-8 md:w-2/3 md:px-3">
           <div>傘下自治体</div>
           <div className="flex flex-wrap mx-2 ml-8 md:ml-0">
             {cityBlock.edges.map(({ node }) => (
               <div key={node.data.s3_code}
-              className="mx-2">
+              className="mx-4 my-2 bg-white hover:bg-gray-200 border-2 font-bold py-2 px-4 rounded-full">
                   <h3>
                   <Link to={`/senkyo/${node.data.s3_code}`}>
                     {node.data.s3_shiku_chouson}</Link>
