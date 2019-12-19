@@ -91,6 +91,11 @@ class senkyo10Template extends Component  {
           </table>
       </div>
 
+      <div>
+      <h3>議員数シェア（円グラフ）</h3>
+      
+      </div>
+
       <div className="mt-4">
       <h3>政党の財政</h3>
       <h4 className="mt-2">政党収入合計{cma_inTotal}</h4>

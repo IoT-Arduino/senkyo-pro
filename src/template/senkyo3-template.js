@@ -104,8 +104,6 @@ class senkyo3Template extends Component  {
     const cma_s3_chou_toku_votes = String(edges.s3_chou_toku_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
 
-    console.log(cityBlock)
-
     return (
       <Layout>
 
