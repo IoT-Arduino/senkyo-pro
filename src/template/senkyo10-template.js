@@ -1,7 +1,7 @@
 import React,{Component} from "react"
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
-import { Pie,HorizontalBar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 class senkyo10Template extends Component  {
 
@@ -20,6 +20,45 @@ class senkyo10Template extends Component  {
                      ]
               }
           ]
+        },
+        chartData2:{
+          labels: [],
+          datasets:[
+              {
+                  label:'Giinsuu',
+                    data:[],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)'
+                     ]
+              }
+          ]
+        },
+        chartData3:{
+          labels: [],
+          datasets:[
+              {
+                  label:'Giinsuu',
+                    data:[],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)'
+                     ]
+              }
+          ]
+        },
+        chartData4:{
+          labels: [],
+          datasets:[
+              {
+                  label:'Giinsuu',
+                    data:[],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)'
+                     ]
+              }
+          ]
         }
     }
   }
@@ -27,21 +66,40 @@ class senkyo10Template extends Component  {
   getChartData = () => {
     const { data } = this.props
     const edges = data.allAirtable.edges[0].node.data
+    const syugiTotal = parseInt(edges.s10_syu_shou,10) + parseInt(edges.s10_syu_hirei,10)
+    const sangiTotal = parseInt(edges.s10_san_shou,10) + parseInt(edges.s10_san_hirei,10)
+
     const shigiOther = 29839 - edges.s10_shigi_ttl
-    console.log(edges)
+    const kengiOther = 2609 - edges.s10_kengi_ttl
+    const syugiOther = 465 - parseInt(syugiTotal)
+    const sangiOther = 245 - parseInt(sangiTotal)
 
-    let shigi = []
+    console.log(syugiOther)
+
+    let seitouName = []
     let shigiSuu = []
+    let kengiSuu = []
+    let syugiSuu = []
+    let sangiSuu = []
 
-    shigi.push("自民党")
-    shigi.push("その他")
+    seitouName.push("自民党")
+    seitouName.push("その他")
 
     shigiSuu.push(parseInt(edges.s10_shigi_ttl))
     shigiSuu.push(parseInt(shigiOther))
 
+    kengiSuu.push(parseInt(edges.s10_kengi_ttl))
+    kengiSuu.push(parseInt(kengiOther))
+
+    syugiSuu.push(parseInt(syugiTotal))
+    syugiSuu.push(parseInt(syugiOther))
+
+    sangiSuu.push(parseInt(sangiTotal))
+    sangiSuu.push(parseInt(sangiOther))
+
     this.setState({
       chartData:{
-        labels: shigi,
+        labels: seitouName,
         datasets:[
             {
                 label:'Shigisuu',
@@ -53,6 +111,45 @@ class senkyo10Template extends Component  {
             }
         ]
       },
+      chartData2:{
+        labels: seitouName,
+        datasets:[
+            {
+                label:'Kenggisuu',
+                  data:kengiSuu,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)'
+                  ]
+            }
+        ]
+      },
+      chartData3:{
+        labels: seitouName,
+        datasets:[
+            {
+                label:'Syugisuu',
+                  data:syugiSuu,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)'
+                  ]
+            }
+        ]
+      },
+      chartData4:{
+        labels: seitouName,
+        datasets:[
+            {
+                label:'sangisuu',
+                  data:sangiSuu,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)'
+                  ]
+            }
+        ]
+      }
     })
 
 
@@ -64,7 +161,7 @@ class senkyo10Template extends Component  {
 
   render(){
     const { data,pageContext } = this.props
-    const { chartData } = this.state
+    const { chartData,chartData2,chartData3,chartData4 } = this.state
     const edges = data.allAirtable.edges[0].node.data
 
     // Giin Total
@@ -99,7 +196,7 @@ class senkyo10Template extends Component  {
     const cma_outTotal = String(outTotal).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
     console.log(pageContext)
-    console.log(chartData)
+    console.log(chartData4)
 
     return (
       <Layout>
@@ -147,14 +244,54 @@ class senkyo10Template extends Component  {
       </div>
 
       <div>
+
       <h3>議員数シェア（円グラフ）</h3>
-      <div className="relative h-64 w-9/10 mx-auto my-4">
-      <Pie
-        data={chartData}
+
+      {/* 
+            <div className="relative h-64 w-9/10 mx-auto my-14">
+          <Pie
+            data={chartData}
+            options={{
+                title:{
+                  display:true,
+                  text:`${edges.s10_seitou_name}の市区会議員シェア`,
+                  fontSize:18
+                },
+                legend:{
+                  display:false,
+                  position:'top'
+                },
+                responsive: true,
+                maintainAspectRatio: false
+              }}
+          />
+          <Pie
+            data={chartData2}
+            options={{
+                title:{
+                  display:true,
+                  text:`${edges.s10_seitou_name}の県議会議員シェア`,
+                  fontSize:18
+                },
+                legend:{
+                  display:false,
+                  position:'top'
+                },
+                responsive: true,
+                maintainAspectRatio: false
+              }}
+          />
+      </div>
+      
+      */}
+
+
+      <div className="relative h-64 w-9/10 mx-auto my-14">
+      <Pie data={chartData3}
         options={{
             title:{
               display:true,
-              text:`${edges.s10_seitou_name}の市区会議員シェア`,
+              text:`${edges.s10_seitou_name}の衆議院議員シェア`,
               fontSize:18
             },
             legend:{
@@ -165,7 +302,25 @@ class senkyo10Template extends Component  {
             maintainAspectRatio: false
           }}
       />
-    </div>
+      <Pie
+        data={chartData4}
+        options={{
+            title:{
+              display:true,
+              text:`${edges.s10_seitou_name}の参議院議員シェア`,
+              fontSize:18
+            },
+            legend:{
+              display:false,
+              position:'top'
+            },
+            responsive: true,
+            maintainAspectRatio: false
+          }}
+      />
+      
+      </div>
+
 
       </div>
 
