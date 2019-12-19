@@ -1,15 +1,70 @@
 import React,{Component} from "react"
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
+import { Pie,HorizontalBar } from 'react-chartjs-2';
 
 class senkyo10Template extends Component  {
+
+  constructor(props){
+    super(props)
+    this.state = {
+        chartData:{
+          labels: [],
+          datasets:[
+              {
+                  label:'Giinsuu',
+                    data:[],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)'
+                     ]
+              }
+          ]
+        }
+    }
+  }
+
+  getChartData = () => {
+    const { data } = this.props
+    const edges = data.allAirtable.edges[0].node.data
+    const shigiOther = 29839 - edges.s10_shigi_ttl
+    console.log(edges)
+
+    let shigi = []
+    let shigiSuu = []
+
+    shigi.push("自民党")
+    shigi.push("その他")
+
+    shigiSuu.push(parseInt(edges.s10_shigi_ttl))
+    shigiSuu.push(parseInt(shigiOther))
+
+    this.setState({
+      chartData:{
+        labels: shigi,
+        datasets:[
+            {
+                label:'Shigisuu',
+                  data:shigiSuu,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)'
+                  ]
+            }
+        ]
+      },
+    })
+
+
+  }
   
-  // componentDidMount(){
-  //   this.getChartData()
-  // }
+  componentDidMount(){
+    this.getChartData()
+  }
 
   render(){
     const { data,pageContext } = this.props
+    const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
 
     // Giin Total
@@ -44,7 +99,7 @@ class senkyo10Template extends Component  {
     const cma_outTotal = String(outTotal).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
     console.log(pageContext)
-    console.log(data)
+    console.log(chartData)
 
     return (
       <Layout>
@@ -93,7 +148,25 @@ class senkyo10Template extends Component  {
 
       <div>
       <h3>議員数シェア（円グラフ）</h3>
-      
+      <div className="relative h-64 w-9/10 mx-auto my-4">
+      <Pie
+        data={chartData}
+        options={{
+            title:{
+              display:true,
+              text:`${edges.s10_seitou_name}の市区会議員シェア`,
+              fontSize:18
+            },
+            legend:{
+              display:false,
+              position:'top'
+            },
+            responsive: true,
+            maintainAspectRatio: false
+          }}
+      />
+    </div>
+
       </div>
 
       <div className="mt-4">
