@@ -263,8 +263,6 @@ class senkyo10Template extends Component  {
         ]
       }
     })
-
-
   }
   
   componentDidMount(){

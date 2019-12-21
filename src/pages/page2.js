@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import { HorizontalBar,Pie } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
 

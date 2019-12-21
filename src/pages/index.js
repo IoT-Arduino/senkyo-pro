@@ -93,6 +93,7 @@ const IndexPage = (props) => {
             </div>
           ))}
         </div>
+        <Link to={`/seitou`}>政党情報一覧比較</Link>
       </div>
 
     </LayoutTop>
