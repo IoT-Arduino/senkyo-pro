@@ -1,7 +1,7 @@
 import React,{Component} from "react"
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
-import { Pie } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2'
 
 class senkyo10Template extends Component  {
 
@@ -59,6 +59,42 @@ class senkyo10Template extends Component  {
                      ]
               }
           ]
+        },
+        chartData5:{
+          labels: [],
+          datasets:[
+              {
+                  label:'Income',
+                    data:[],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 159, 64, 0.6)',
+                      'rgba(255, 99, 132, 0.6)'
+                     ]
+              }
+          ]
+        },
+        chartData6:{
+          labels: [],
+          datasets:[
+              {
+                  label:'Expense',
+                    data:[],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 159, 64, 0.6)',
+                      'rgba(255, 99, 132, 0.6)'
+                     ]
+              }
+          ]
         }
     }
   }
@@ -72,7 +108,7 @@ class senkyo10Template extends Component  {
     const shigiOther = 29839 - edges.s10_shigi_ttl
     const kengiOther = 2609 - edges.s10_kengi_ttl
     const syugiOther = 465 - parseInt(syugiTotal)
-    const sangiOther = 245 - parseInt(sangiTotal)
+    const sangiOther = 248 - parseInt(sangiTotal)
 
     console.log(syugiOther)
 
@@ -82,7 +118,7 @@ class senkyo10Template extends Component  {
     let syugiSuu = []
     let sangiSuu = []
 
-    seitouName.push("自民党")
+    seitouName.push(edges.s10_seitou_name)
     seitouName.push("その他")
 
     shigiSuu.push(parseInt(edges.s10_shigi_ttl))
@@ -96,6 +132,44 @@ class senkyo10Template extends Component  {
 
     sangiSuu.push(parseInt(sangiTotal))
     sangiSuu.push(parseInt(sangiOther))
+
+    let incomeLabel = []
+    let incomeAmount = []
+
+    incomeLabel.push("党費")
+    incomeLabel.push("寄付収入")
+    incomeLabel.push("事業収入")
+    incomeLabel.push("本部支部交付金収入")
+    incomeLabel.push("政党交付金収入")
+    incomeLabel.push("その他")
+
+    incomeAmount.push(parseInt(edges.s10_in_touhi))
+    incomeAmount.push(parseInt(edges.s10_in_kifu))
+    incomeAmount.push(parseInt(edges.s10_in_jigyou))
+    incomeAmount.push(parseInt(edges.s10_in_honshibu))
+    incomeAmount.push(parseInt(edges.s10_in_seitoukoufu))
+    incomeAmount.push(parseInt(edges.s10_in_other))
+
+    let expenseLabel = []
+    let expenseAmount =[]
+
+    expenseLabel.push("人件費")
+    expenseLabel.push("光熱費・備品費")
+    expenseLabel.push("事務所費")
+    expenseLabel.push("組織活動費")
+    expenseLabel.push("選挙関係費")
+    expenseLabel.push("機関紙費")
+    expenseLabel.push("宣伝費")
+    expenseLabel.push("その他支出")
+
+    expenseAmount.push(parseInt(edges.s10_out_jinkenhi))
+    expenseAmount.push(parseInt(edges.s10_out_other))
+    expenseAmount.push(parseInt(edges.s10_out_jimusho))
+    expenseAmount.push(parseInt(edges.s10_out_soshiki))
+    expenseAmount.push(parseInt(edges.s10_out_senkyo))
+    expenseAmount.push(parseInt(edges.s10_out_kikanshi))
+    expenseAmount.push(parseInt(edges.s10_out_senden))
+    expenseAmount.push(parseInt(edges.s10_out_other_2))
 
     this.setState({
       chartData:{
@@ -149,6 +223,44 @@ class senkyo10Template extends Component  {
                   ]
             }
         ]
+      },
+      chartData5:{
+        labels: incomeLabel,
+        datasets:[
+            {
+                label:'sangisuu',
+                  data:incomeAmount,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(255, 99, 132, 0.6)'
+                  ]
+            }
+        ]
+      },
+      chartData6:{
+        labels: expenseLabel,
+        datasets:[
+            {
+                label:'sangisuu',
+                  data:expenseAmount,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)'
+                  ]
+            }
+        ]
       }
     })
 
@@ -161,7 +273,7 @@ class senkyo10Template extends Component  {
 
   render(){
     const { data,pageContext } = this.props
-    const { chartData,chartData2,chartData3,chartData4 } = this.state
+    const { chartData,chartData2,chartData3,chartData4,chartData5,chartData6 } = this.state
     const edges = data.allAirtable.edges[0].node.data
 
     // Giin Total
@@ -243,12 +355,11 @@ class senkyo10Template extends Component  {
           </table>
       </div>
 
-      <div>
 
       <h3>議員数シェア（円グラフ）</h3>
+      <div className="flex flex-wrap flex-start">
 
-      {/* 
-            <div className="relative h-64 w-9/10 mx-auto my-14">
+        <div className="relative h-64 w-9/10 mx-auto my-14">
           <Pie
             data={chartData}
             options={{
@@ -265,6 +376,9 @@ class senkyo10Template extends Component  {
                 maintainAspectRatio: false
               }}
           />
+        </div>
+
+       <div className="relative h-64 w-9/10 mx-auto my-14">
           <Pie
             data={chartData2}
             options={{
@@ -283,50 +397,68 @@ class senkyo10Template extends Component  {
           />
       </div>
       
-      */}
-
-
       <div className="relative h-64 w-9/10 mx-auto my-14">
-      <Pie data={chartData3}
-        options={{
-            title:{
-              display:true,
-              text:`${edges.s10_seitou_name}の衆議院議員シェア`,
-              fontSize:18
-            },
-            legend:{
-              display:false,
-              position:'top'
-            },
-            responsive: true,
-            maintainAspectRatio: false
-          }}
-      />
-      <Pie
-        data={chartData4}
-        options={{
-            title:{
-              display:true,
-              text:`${edges.s10_seitou_name}の参議院議員シェア`,
-              fontSize:18
-            },
-            legend:{
-              display:false,
-              position:'top'
-            },
-            responsive: true,
-            maintainAspectRatio: false
-          }}
-      />
-      
+        <Pie data={chartData3}
+          options={{
+              title:{
+                display:true,
+                text:`${edges.s10_seitou_name}の衆議院議員シェア`,
+                fontSize:18
+              },
+              legend:{
+                display:false,
+                position:'top'
+              },
+              responsive: true,
+              maintainAspectRatio: false
+            }}
+        />
       </div>
 
+      <div className="relative h-64 w-9/10 mx-auto my-14">
+        <Pie
+          data={chartData4}
+          options={{
+              title:{
+                display:true,
+                text:`${edges.s10_seitou_name}の参議院議員シェア`,
+                fontSize:18
+              },
+              legend:{
+                display:false,
+                position:'top'
+              },
+              responsive: true,
+              maintainAspectRatio: false
+            }}
+        />
+      </div>
+      
 
       </div>
 
       <div className="mt-4">
       <h3>政党の財政</h3>
       <h4 className="mt-2">政党収入合計{cma_inTotal}</h4>
+
+      <div className="relative h-64 w-9/10 mx-auto my-14">
+        <Pie data={chartData5}
+          options={{
+              title:{
+                display:true,
+                text:`${edges.s10_seitou_name}の政党収入(項目別）`,
+                fontSize:18
+              },
+              legend:{
+                display:false,
+                position:'top'
+              },
+              responsive: true,
+              maintainAspectRatio: false
+            }}
+        />
+      </div>
+
         <table>
           <tbody>
                 <tr>
@@ -358,6 +490,23 @@ class senkyo10Template extends Component  {
 
       <h4 className="mt-2">政党支出合計{cma_outTotal}</h4>
 
+      <div className="relative h-64 w-9/10 mx-auto my-14">
+      <Pie data={chartData6}
+        options={{
+            title:{
+              display:true,
+              text:`${edges.s10_seitou_name}の政党支出(項目別）`,
+              fontSize:18
+            },
+            legend:{
+              display:false,
+              position:'top'
+            },
+            responsive: true,
+            maintainAspectRatio: false
+          }}
+      />
+    </div>
       <table>
       <tbody>
             <tr>
