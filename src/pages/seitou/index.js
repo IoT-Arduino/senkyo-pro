@@ -49,7 +49,43 @@ class SeitouIndex extends React.Component  {
           labels: [],
           datasets:[
               {
-                  label:'ShigiSuu',
+                  label:'KengiSuu',
+                    data:[],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 159, 64, 0.6)',
+                      'rgba(255, 99, 132, 0.6)'
+                     ]
+              }
+          ]
+        },
+        chartData4:{
+          labels: [],
+          datasets:[
+              {
+                  label:'SyugiSuu',
+                    data:[],
+                    backgroundColor:[
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 159, 64, 0.6)',
+                      'rgba(255, 99, 132, 0.6)'
+                     ]
+              }
+          ]
+        },
+        chartData5:{
+          labels: [],
+          datasets:[
+              {
+                  label:'SangiSuu',
                     data:[],
                     backgroundColor:[
                       'rgba(255, 99, 132, 0.6)',
@@ -112,7 +148,35 @@ class SeitouIndex extends React.Component  {
   KengiSuu.push(String(KengiOther))
   console.log(KengiSuu)
 
+  // 衆議院議員数
 
+  let SyugiSuu = []
+  let SyugiSeitouTotal = 0
+
+  edges.forEach(element => {
+   let SyuTotal = parseInt(element.node.data.s10_syu_hirei)+parseInt(element.node.data.s10_syu_shou)
+   SyugiSuu.push(SyuTotal)
+   SyugiSeitouTotal = parseInt(SyugiSeitouTotal) + parseInt(SyuTotal)
+ })
+
+ let SyugiOther = 465 - SyugiSeitouTotal
+ SyugiSuu.push(String(SyugiOther))
+ console.log(SyugiSuu)
+
+
+  //　参議院議員数
+  let SangiSuu = []
+  let SangiSeitouTotal = 0
+
+  edges.forEach(element => {
+   let SanTotal = parseInt(element.node.data.s10_san_hirei)+parseInt(element.node.data.s10_san_shou)
+   SangiSuu.push(SanTotal)
+   SangiSeitouTotal = parseInt(SangiSeitouTotal) + parseInt(SanTotal)
+  })
+
+  let SangiOther = 248 - SangiSeitouTotal
+  SangiSuu.push(String(SangiOther))
+  console.log(SangiSuu)
 
 
     this.setState({
@@ -169,7 +233,44 @@ class SeitouIndex extends React.Component  {
                    ]
             }
         ]
-      }
+      },
+      chartData4:{
+        labels: seitouName1,
+        datasets:[
+            {
+                label:'ShigiSuu',
+                  data:SyugiSuu,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(255, 99, 132, 0.6)'
+                   ]
+            }
+        ]
+      },
+      chartData5:{
+        labels: seitouName1,
+        datasets:[
+            {
+                label:'ShigiSuu',
+                  data:SangiSuu,
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(255, 99, 132, 0.6)'
+                   ]
+            }
+        ]
+      },
+
     })
   }
 
@@ -182,7 +283,7 @@ class SeitouIndex extends React.Component  {
 
   //  console.log(this.state)
   //  const { data } = this.props
-   const { chartData,chartData2,chartData3 } = this.state
+   const { chartData,chartData2,chartData3,chartData4,chartData5 } = this.state
    const s10 = this.props.data.s10
   //  const edges = data.s10.edges[0].node.data
 
@@ -211,12 +312,31 @@ class SeitouIndex extends React.Component  {
           />
         </div>
 
+        <div className="flex flex-wrap my-12">
+          <div className="relative h-64 w-9/10 mx-auto my-14">
+          <Pie data={chartData2}
+            options={{
+                title:{
+                  display:true,
+                  text:`市議会議員政党別割合`,
+                  fontSize:18
+                },
+                legend:{
+                  display:false,
+                  position:'top'
+                },
+                responsive: true,
+                maintainAspectRatio: false
+              }}
+          />
+        </div>
+
         <div className="relative h-64 w-9/10 mx-auto my-14">
-        <Pie data={chartData2}
+        <Pie data={chartData3}
           options={{
               title:{
                 display:true,
-                text:`市議会議員政党別割合`,
+                text:`県議会議員政党別割合`,
                 fontSize:18
               },
               legend:{
@@ -230,11 +350,11 @@ class SeitouIndex extends React.Component  {
       </div>
 
       <div className="relative h-64 w-9/10 mx-auto my-14">
-      <Pie data={chartData3}
+      <Pie data={chartData4}
         options={{
             title:{
               display:true,
-              text:`県議会議員政党別割合`,
+              text:`衆議院議員政党別割合`,
               fontSize:18
             },
             legend:{
@@ -246,6 +366,26 @@ class SeitouIndex extends React.Component  {
           }}
       />
     </div>
+
+    <div className="relative h-64 w-9/10 mx-auto my-14">
+    <Pie data={chartData5}
+      options={{
+          title:{
+            display:true,
+            text:`参議院議員政党別割合`,
+            fontSize:18
+          },
+          legend:{
+            display:false,
+            position:'top'
+          },
+          responsive: true,
+          maintainAspectRatio: false
+        }}
+    />
+  </div>
+        
+        </div>
 
         <div className="my-4 px-4 max-w-6xl mx-auto">
         <h2>政党データ</h2>
