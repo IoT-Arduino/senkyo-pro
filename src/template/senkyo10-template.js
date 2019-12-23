@@ -305,6 +305,8 @@ class senkyo10Template extends Component  {
 
     const cma_outTotal = String(outTotal).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
+    const s10 = this.props.data.s10
+
     console.log(pageContext)
     console.log(chartData4)
 
@@ -557,6 +559,20 @@ class senkyo10Template extends Component  {
       </div>
   ))}
 
+  <div className="my-4 px-4 max-w-6xl mx-auto">
+  <h2>他の政党データ</h2>
+  <div className="flex flex-wrap">
+    {s10.edges.map(({ node }) => (
+      <div key={node.data.s10_code}
+        className="mx-4 my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+      >
+          <Link to={`/seitou/${node.data.s10_code}`} className="text-white">
+            {node.data.s10_seitou_name}</Link>
+      </div>
+    ))}
+  </div>
+</div>
+
 
       </Layout>
     );
@@ -604,6 +620,19 @@ query($slug:String){
       }
     }
 
+    s10:allAirtable(
+      filter:  { table: {eq: "s10_seitou"}}
+      sort: {fields: data___s10_code, order: ASC} 
+      ) {
+      edges {
+        node {
+          data {
+            s10_code
+            s10_seitou_name
+          }
+        }
+      }
+    }
 
     allMarkdownRemark(filter: {frontmatter: {senkyo: {eq:  $slug}}}) {
       edges {

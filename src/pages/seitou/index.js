@@ -106,17 +106,28 @@ class SeitouIndex extends React.Component  {
     const { data } = this.props
     const edges = data.s10.edges
 
+    // 政党収入
+
     let seitouName = []
     let seitouName1 = []
     let incomeAmount = []
 
     edges.forEach(element => {
-      let incomeTotal =  element.node.data.s10_in_touhi + element.node.data.s10_in_kifu + element.node.data.s10_in_jigyou + element.node.data.s10_in_honshibu + element.node.data.s10_in_seitoukoufu + element.node.data.s10_in_other
+      let incomeTotal =  
+      parseInt(element.node.data.s10_in_touhi) 
+      + parseInt(element.node.data.s10_in_kifu) 
+      + parseInt(element.node.data.s10_in_jigyou) 
+      + parseInt(element.node.data.s10_in_honshibu) 
+      + parseInt(element.node.data.s10_in_seitoukoufu) 
+      + parseInt(element.node.data.s10_in_other)
+
       incomeAmount.push(incomeTotal)
       seitouName.push(element.node.data.s10_seitou_name)
       seitouName1.push(element.node.data.s10_seitou_name)
     }
     )
+
+    console.log(incomeAmount)
 
     seitouName1.push("Other")
 
@@ -184,7 +195,7 @@ class SeitouIndex extends React.Component  {
         labels: seitouName,
         datasets:[
             {
-                label:'Shigisuu',
+                label:'政党収入合計',
                   data:incomeAmount,
                   backgroundColor:[
                       'rgba(255, 99, 132, 0.6)',
@@ -400,6 +411,7 @@ class SeitouIndex extends React.Component  {
           ))}
         </div>
       </div>
+      
       </Layout>   
       )
     }
