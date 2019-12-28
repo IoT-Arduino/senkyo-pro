@@ -1,31 +1,61 @@
 import React,{Component} from "react"
-import { Pie } from 'react-chartjs-2';
+// import { Pie } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
+import Chart from "react-apexcharts";
 
 class Page2 extends Component  {
   
   constructor(props){
     super(props)
     this.state = {
-        chartData:{
-          labels: [],
-          datasets:[
-              {
-                  label:'Population',
-                    data:[],
-                    backgroundColor:[
-                      'rgba(255, 99, 132, 0.6)',
-                      'rgba(54, 162, 235, 0.6)',
-                      'rgba(255, 206, 86, 0.6)',
-                      'rgba(75, 192, 192, 0.6)',
-                      'rgba(153, 102, 255, 0.6)',
-                      'rgba(255, 159, 64, 0.6)',
-                      'rgba(255, 99, 132, 0.6)'
-                     ]
+        options: {
+          chart: {
+            // id: "basic-bar",
+            animations: {
+              enabled: true,
+              easing: 'easeinout',
+              speed: 800,
+              animateGradually: {
+                  enabled: true,
+                  delay: 150
+              },
+              dynamicAnimation: {
+                  enabled: true,
+                  speed: 350
               }
-          ]
-        }
+            }
+          },
+          xaxis: {
+            categories: []
+          },
+          colors: [
+            "#02E675",
+            "#FF9A00",
+            "#75E7FF",
+            "#002438",
+            "#785F9D",
+            "#FA6968",
+            "#2F4DFF"
+          ],
+          stroke: {
+            show: true,
+            width: 2,
+            colors: ["transparent"]
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              endingShape: 'rounded',
+            }
+          },
+        },
+        series: [
+          {
+            name: "series-1",
+            data: []
+          }
+        ]
     }
   }
 
@@ -38,47 +68,78 @@ class Page2 extends Component  {
     let Labels = []
     let population = []
 
-    Labels.push("90代以上")
-    Labels.push("80代")
-    Labels.push("70代")
-    Labels.push("60代")
-    Labels.push("50代")
-    Labels.push("40代")
-    Labels.push("30代")
-    Labels.push("20代")
     Labels.push("10代")
+    Labels.push("20代")
+    Labels.push("30代")
+    Labels.push("40代")
+    Labels.push("50代")
+    Labels.push("60代")
+    Labels.push("70代")
+    Labels.push("80代")
+    Labels.push("90代以上")
 
-    population.push(parseInt(edges.s2_v_nineties))
-    population.push(parseInt(edges.s2_v_eighties))
-    population.push(parseInt(edges.s2_v_seventies))
-    population.push(parseInt(edges.s2_v_sixties))
-    population.push(parseInt(edges.s2_v_fifties))
-    population.push(parseInt(edges.s2_v_forties))
-    population.push(parseInt(edges.s2_v_thirries))
-    population.push(parseInt(edges.s2_v_twenties))
     population.push(parseInt(edges.s2_v_teen))
+    population.push(parseInt(edges.s2_v_twenties))
+    population.push(parseInt(edges.s2_v_thirries))
+    population.push(parseInt(edges.s2_v_forties))
+    population.push(parseInt(edges.s2_v_fifties))
+    population.push(parseInt(edges.s2_v_sixties))
+    population.push(parseInt(edges.s2_v_seventies))
+    population.push(parseInt(edges.s2_v_eighties))
+    population.push(parseInt(edges.s2_v_nineties))
+
+    const newLabels = Labels.slice().reverse()
+    const newPopulation = population.slice().reverse()
 
     this.setState({
-      chartData:{
-        labels: Labels,
-        datasets:[
-            {
-                label:'Population',
-                  data:population,
-                  backgroundColor:[
-                    'rgba(255, 99, 132, 0.6)',
-                    'rgba(54, 162, 235, 0.6)',
-                    'rgba(255, 206, 86, 0.6)',
-                    'rgba(75, 192, 192, 0.6)',
-                    'rgba(153, 102, 255, 0.6)',
-                    'rgba(255, 159, 64, 0.6)',
-                    'rgba(255, 99, 132, 0.6)',
-                    'rgba(54, 162, 235, 0.6)',
-                    'rgba(255, 206, 86, 0.6)'
-                  ]
+      options: {
+        chart: {
+          // id: "basic-bar",
+          animations: {
+            enabled: false,
+            easing: 'easeinout',
+            speed: 800,
+            animateGradually: {
+                enabled: true,
+                delay: 150
+            },
+            dynamicAnimation: {
+                enabled: true,
+                speed: 350
             }
-        ]
+          }
+        },
+        xaxis: {
+          categories: newLabels
+        },
+        colors: [
+          "#785F9D",
+          "#02E675",
+          "#FF9A00",
+          "#75E7FF",
+          "#002438",
+          "#785F9D",
+          "#FA6968",
+          "#2F4DFF"
+        ],
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"]
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            endingShape: 'rounded',
+          }
+        },
       },
+      series: [
+        {
+          name: "series-1",
+          data: newPopulation
+        }
+      ]
     })
 
   }
@@ -90,7 +151,7 @@ class Page2 extends Component  {
 
   render(){
     const { data,pageContext } = this.props
-    const { chartData } = this.state
+    // const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
     const s2_last_toku_rate 
     = Math.round(edges.s2_chou_toku_votes / edges.s2_chou_ef_vote *10000 ) /100
@@ -126,26 +187,6 @@ class Page2 extends Component  {
           <p>有権者数*推計</p>
           <p className="text-center">{cma_s2_ttl_votes}人</p>
        </div>
-      </div>
-
-
-      <div className="relative h-64 w-9/10 mx-auto my-4">
-        <Pie
-        data={chartData}
-        options={{
-            title:{
-              display:true,
-              text:`${edges.s2_shiku_chouson}の年代別有権者数`,
-              fontSize:18
-            },
-            legend:{
-              display:false,
-              position:'top'
-            },
-            responsive: true,
-            maintainAspectRatio: false
-          }}
-        />
       </div>
 
       <div className="block md:flex mt-8">
@@ -242,6 +283,14 @@ class Page2 extends Component  {
 
       </div>
 
+      <div className="mixed-chart">
+        <Chart
+            options={this.state.options}
+            series={this.state.series}
+            type="bar"
+            width="500"
+          />
+      </div>
 
 
      <div className="mt-8">選挙区トピックス</div>

@@ -83,7 +83,6 @@ class senkyo1aTemplate extends Component  {
 
   }
   
-
   componentDidMount(){
     this.getChartData()
   }
@@ -121,21 +120,21 @@ class senkyo1aTemplate extends Component  {
 
       <div className="relative h-64 w-9/10 mx-auto my-4">
           <HorizontalBar
-          data={chartData}
-          options={{
-              title:{
-                display:true,
-                text:`${edges.s1_syu_block}ブロックの年代別有権者数`,
-                fontSize:18
-              },
-              legend:{
-                display:false,
-                position:'top'
-              },
-              responsive: true,
-              maintainAspectRatio: false
-            }}
-          />
+            data={chartData}
+            options={{
+                title:{
+                  display:true,
+                  text:`${edges.s1_syu_block}ブロックの年代別有権者数`,
+                  fontSize:18
+                },
+                legend:{
+                  display:false,
+                  position:'top'
+                },
+                responsive: true,
+                maintainAspectRatio: false
+              }}
+            />
         </div>
 
 
@@ -211,10 +210,7 @@ class senkyo1aTemplate extends Component  {
 
      </div>
 
-
-
-
-     
+    
 
      <div className="mt-8">選挙区トピックス</div>
      {data.allMarkdownRemark.edges.map(({ node }) => (

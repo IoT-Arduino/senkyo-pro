@@ -1,7 +1,9 @@
 import React,{Component} from "react"
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
+
 import { Pie } from 'react-chartjs-2'
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 class senkyo10Template extends Component  {
 
@@ -74,7 +76,8 @@ class senkyo10Template extends Component  {
                       'rgba(153, 102, 255, 0.6)',
                       'rgba(255, 159, 64, 0.6)',
                       'rgba(255, 99, 132, 0.6)'
-                     ]
+                     ],
+                     datalabels: {  color: '#FFCE56' }
               }
           ]
         },
@@ -92,7 +95,8 @@ class senkyo10Template extends Component  {
                       'rgba(153, 102, 255, 0.6)',
                       'rgba(255, 159, 64, 0.6)',
                       'rgba(255, 99, 132, 0.6)'
-                     ]
+                     ],
+                     datalabels: {  color: '#FFCE56' }
               }
           ]
         }
@@ -238,7 +242,8 @@ class senkyo10Template extends Component  {
                     'rgba(153, 102, 255, 0.6)',
                     'rgba(255, 159, 64, 0.6)',
                     'rgba(255, 99, 132, 0.6)'
-                  ]
+                  ],
+                  datalabels: {  color: '#777' }
             }
         ]
       },
@@ -258,7 +263,8 @@ class senkyo10Template extends Component  {
                     'rgba(255, 99, 132, 0.6)',
                     'rgba(54, 162, 235, 0.6)',
                     'rgba(255, 206, 86, 0.6)'
-                  ]
+                  ],
+                  datalabels: {  color: '#777' }
             }
         ]
       }
@@ -317,39 +323,39 @@ class senkyo10Template extends Component  {
 
       <div className="mt-4">
         <h3>政党議員数</h3>
-        <table>
+        <table className="border-2 mt-2">
           <tbody>
                 <tr>
-                    <td>市区町村議会議員数</td>
-                    <td>{edges.s10_shigi_ttl}人</td>
+                    <td className="px-2 bg-gray-200 border-b-2">市区町村議会議員数</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s10_shigi_ttl}人</td>
                 </tr>
                 <tr>
-                    <td>県議会議員数</td>
-                    <td>{edges.s10_kengi_ttl}人</td>
+                    <td className="px-2 bg-gray-200 border-b-2">県議会議員数</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s10_kengi_ttl}人</td>
                 </tr>
                 <tr>
-                    <td>衆議院議員数（小選挙区）</td>
-                    <td>{edges.s10_syu_shou}人</td>
+                    <td className="px-2 bg-gray-200 border-b-2">衆議院議員数（小選挙区）</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s10_syu_shou}人</td>
                 </tr>
                 <tr>
-                    <td>衆議院議員数（比例区）</td>
-                    <td>{edges.s10_syu_hirei}人</td>
+                    <td className="px-2 bg-gray-200 border-b-2">衆議院議員数（比例区）</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s10_syu_hirei}人</td>
                 </tr>
                 <tr>
-                    <td>衆議院議員数（合計）</td>
-                    <td>{syuTotal}人</td>
+                    <td className="px-2 bg-gray-200 border-b-2">衆議院議員数（合計）</td>
+                    <td className="text-right w-24 px-2 border-b-2">{syuTotal}人</td>
                 </tr>
                 <tr>
-                    <td>参議院議員数（小選挙区）</td>
-                    <td>{edges.s10_san_shou}人</td>
+                    <td className="px-2 bg-gray-200 border-b-2">参議院議員数（小選挙区）</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s10_san_shou}人</td>
                 </tr>
                 <tr>
-                    <td>参議院議員数（比例区）</td>
-                    <td>{edges.s10_san_hirei}人</td>
+                    <td className="px-2 bg-gray-200 border-b-2">参議院議員数（比例区）</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s10_san_hirei}人</td>
                 </tr>
                 <tr>
-                    <td>参議院議員数（合計）</td>
-                    <td>{sanTotal}人</td>
+                    <td className="px-2 bg-gray-200 border-b-2">参議院議員数（合計）</td>
+                    <td className="text-right w-24 px-2 border-b-2">{sanTotal}人</td>
                 </tr>
             </tbody>
           </table>
@@ -396,46 +402,50 @@ class senkyo10Template extends Component  {
               }}
           />
       </div>
-      
-      <div className="relative h-64 w-9/10 mx-auto my-14">
-        <Pie data={chartData3}
-          options={{
-              title:{
-                display:true,
-                text:`${edges.s10_seitou_name}の衆議院議員シェア`,
-                fontSize:18
-              },
-              legend:{
-                display:false,
-                position:'top'
-              },
-              responsive: true,
-              maintainAspectRatio: false
-            }}
-        />
       </div>
 
-      <div className="relative h-64 w-9/10 mx-auto my-14">
-        <Pie
-          data={chartData4}
-          options={{
-              title:{
-                display:true,
-                text:`${edges.s10_seitou_name}の参議院議員シェア`,
-                fontSize:18
-              },
-              legend:{
-                display:false,
-                position:'top'
-              },
-              responsive: true,
-              maintainAspectRatio: false
-            }}
-        />
+      <div className="flex flex-wrap flex-start">
+        <div className="relative h-64 w-9/10 mx-auto my-14">
+          <Pie data={chartData3}
+            options={{
+                title:{
+                  display:true,
+                  text:`${edges.s10_seitou_name}の衆議院議員シェア`,
+                  fontSize:18
+                },
+                legend:{
+                  display:false,
+                  position:'top'
+                },
+                responsive: true,
+                maintainAspectRatio: false
+              }}
+          />
+        </div>
+
+        <div className="relative h-64 w-9/10 mx-auto my-14">
+          <Pie
+            data={chartData4}
+            options={{
+                title:{
+                  display:true,
+                  text:`${edges.s10_seitou_name}の参議院議員シェア`,
+                  fontSize:18
+                },
+                legend:{
+                  display:false,
+                  position:'top'
+                },
+                responsive: true,
+                maintainAspectRatio: false
+              }}
+          />
+        </div>
       </div>
       
+      
 
-      </div>
+
 
       <div className="mt-4">
       <h3>政党の財政</h3>
@@ -450,40 +460,50 @@ class senkyo10Template extends Component  {
                 fontSize:18
               },
               legend:{
-                display:false,
-                position:'top'
+                display:true,
+                position:'bottom',
+                labels:{
+                  boxWidth:15,
+                  padding:5
+                }
               },
+              plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    color: '#36A2EB',
+                    display:"auto"
+               }},
               responsive: true,
               maintainAspectRatio: false
             }}
         />
       </div>
 
-        <table>
+        <table className="border-2 mt-2">
           <tbody>
                 <tr>
-                    <td>党費</td>
-                    <td>{cma_s10_in_touhi}</td>
+                    <td className="px-2 bg-gray-200 border-b-2">党費</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_touhi}</td>
                 </tr>
                 <tr>
-                    <td>寄付収入</td>
-                    <td>{cma_s10_in_kifu}</td>
+                    <td className="px-2 bg-gray-200 border-b-2">寄付収入</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_kifu}</td>
                 </tr>
                     <tr>
-                    <td>事業収入</td>
-                    <td>{cma_s10_in_jigyou}</td>
+                    <td className="px-2 bg-gray-200 border-b-2">事業収入</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_jigyou}</td>
                 </tr>
                 <tr>
-                    <td>本部支部交付金収入</td>
-                    <td>{cma_s10_in_honshibu}</td>
+                    <td className="px-2 bg-gray-200 border-b-2">本部支部交付金収入</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_honshibu}</td>
                 </tr>
                 <tr>
-                    <td>政党交付金収入</td>
-                    <td>{cma_s10_in_seitoukoufu}</td>
+                    <td className="px-2 bg-gray-200 border-b-2">政党交付金収入</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_seitoukoufu}</td>
                 </tr>
                 <tr>
-                    <td>その他収入</td>
-                    <td>{cma_s10_in_other}</td>
+                    <td className="px-2 bg-gray-200 border-b-2">その他収入</td>
+                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_other}</td>
                 </tr>
           </tbody>
         </table>
@@ -499,47 +519,57 @@ class senkyo10Template extends Component  {
               fontSize:18
             },
             legend:{
-              display:false,
-              position:'top'
+              display:true,
+              position:'bottom',
+              labels:{
+                boxWidth:15,
+                padding:5
+              }
             },
+            plugins: {
+              // Change options for ALL labels of THIS CHART
+              datalabels: {
+                  color: '#36A2EB',
+                  display:"auto"
+             }},
             responsive: true,
             maintainAspectRatio: false
           }}
       />
     </div>
-      <table>
+      <table className="border-2 mt-2">
       <tbody>
             <tr>
-                <td>人件費</td>
-                <td>{cma_s10_out_jinkenhi}</td>
+                <td className="px-2 bg-gray-200 border-b-2">人件費</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_jinkenhi}</td>
             </tr>
             <tr>
-                <td>光熱費・備品費</td>
-                <td>{cma_s10_out_other}</td>
+                <td className="px-2 bg-gray-200 border-b-2">光熱費・備品費</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_other}</td>
             </tr>
                 <tr>
-                <td>事務所費</td>
-                <td>{cma_s10_out_jimusho}</td>
+                <td className="px-2 bg-gray-200 border-b-2">事務所費</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_jimusho}</td>
             </tr>
             <tr>
-                <td>組織活動費</td>
-                <td>{cma_s10_out_soshiki}</td>
+                <td className="px-2 bg-gray-200 border-b-2">組織活動費</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_soshiki}</td>
             </tr>
             <tr>
-                <td>選挙関係費</td>
-                <td>{cma_s10_out_senkyo}</td>
+                <td className="px-2 bg-gray-200 border-b-2">選挙関係費</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_senkyo}</td>
             </tr>
             <tr>
-                <td>機関紙費</td>
-                <td>{cma_s10_out_kikanshi}</td>
+                <td className="px-2 bg-gray-200 border-b-2">機関紙費</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_kikanshi}</td>
             </tr>
             <tr>
-                <td>宣伝費</td>
-                <td>{cma_s10_out_senden}</td>
+                <td className="px-2 bg-gray-200 border-b-2">宣伝費</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_senden}</td>
             </tr>
             <tr>
-                <td>その他支出</td>
-                <td>{cma_s10_out_other_2}</td>
+                <td className="px-2 bg-gray-200 border-b-2">その他支出</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_other_2}</td>
             </tr>
       </tbody>
     </table>

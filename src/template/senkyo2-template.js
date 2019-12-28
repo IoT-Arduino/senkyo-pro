@@ -75,7 +75,8 @@ class senkyo2Template extends Component  {
                     'rgba(255, 99, 132, 0.6)',
                     'rgba(54, 162, 235, 0.6)',
                     'rgba(255, 206, 86, 0.6)'
-                  ]
+                  ],
+                  // datalabels: {  color: '#FFCE56' }
             }
         ]
       },
@@ -131,21 +132,27 @@ class senkyo2Template extends Component  {
 
       <div className="relative h-64 w-9/10 mx-auto my-4">
         <HorizontalBar
-        data={chartData}
-        options={{
-            title:{
-              display:true,
-              text:`${edges.s2_shiku_chouson}の年代別有権者数`,
-              fontSize:18
-            },
-            legend:{
-              display:false,
-              position:'top'
-            },
-            responsive: true,
-            maintainAspectRatio: false
-          }}
-        />
+          data={chartData}
+          options={{
+              title:{
+                display:true,
+                text:`${edges.s2_shiku_chouson}の年代別有権者数`,
+                fontSize:18
+              },
+              legend:{
+                display:false,
+                position:'top'
+              },
+              // plugins: {
+              //   // Change options for ALL labels of THIS CHART
+              //   datalabels: {
+              //       color: '#36A2EB',
+              //       display:'auto'
+              //   }},
+              responsive: true,
+              maintainAspectRatio: false
+            }}
+          />
       </div>
 
       <div className="block md:flex mt-8">
@@ -245,15 +252,16 @@ class senkyo2Template extends Component  {
 
 
      <div className="mt-8">選挙区トピックス</div>
-     {data.allMarkdownRemark.edges.map(({ node }) => (
-      <div key={node.fields.slug}>
-          <h3>
-          <Link to={`/posts/${node.fields.slug}`}>
-            {node.frontmatter.title}</Link>
-            <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
-          </h3>
-          <p>{node.excerpt}</p>
-      </div>
+      {data.allMarkdownRemark.edges.map(({ node }) => (
+        <div key={node.fields.slug}>
+            <h3>
+            <Link to={`/posts/${node.fields.slug}`}>
+              {node.frontmatter.title}</Link>
+              <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
+            </h3>
+            <p>{node.excerpt}</p>
+        </div>
+        
   ))}
 
 
@@ -312,9 +320,6 @@ query($slug:String!){
         }
       }
     }
-
-
-
 
 
     allMarkdownRemark(filter: {frontmatter: {senkyo: {eq:  $slug}}}) {

@@ -1,8 +1,10 @@
 import React from "react"
-import { HorizontalBar,Pie } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
+
+import { HorizontalBar,Pie } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 class SeitouIndex extends React.Component  {
 
@@ -315,7 +317,11 @@ class SeitouIndex extends React.Component  {
               },
               legend:{
                 display:false,
-                position:'top'
+                position:'bottom',
+                labels:{
+                  boxWidth:15,
+                  padding:5
+                }
               },
               responsive: true,
               maintainAspectRatio: false
@@ -324,7 +330,7 @@ class SeitouIndex extends React.Component  {
         </div>
 
         <div className="flex flex-wrap my-12">
-          <div className="relative h-64 w-9/10 mx-auto my-14">
+          <div className="relative h-64 w-10/10 mx-auto my-14">
           <Pie data={chartData2}
             options={{
                 title:{
@@ -336,13 +342,19 @@ class SeitouIndex extends React.Component  {
                   display:false,
                   position:'top'
                 },
+                plugins: {
+                  // Change options for ALL labels of THIS CHART
+                  datalabels: {
+                      color: '#777',
+                      display:"auto"
+                 }},
                 responsive: true,
                 maintainAspectRatio: false
               }}
           />
         </div>
 
-        <div className="relative h-64 w-9/10 mx-auto my-14">
+        <div className="relative h-64 w-10/10 mx-auto my-14">
         <Pie data={chartData3}
           options={{
               title:{
@@ -354,13 +366,22 @@ class SeitouIndex extends React.Component  {
                 display:false,
                 position:'top'
               },
+              plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    color: '#777',
+                    display:"auto"
+               }},
               responsive: true,
               maintainAspectRatio: false
             }}
         />
       </div>
+      </div>
 
-      <div className="relative h-64 w-9/10 mx-auto my-14">
+      <div className="flex flex-wrap my-12">
+
+      <div className="relative h-64 w-10/10 mx-auto my-14">
       <Pie data={chartData4}
         options={{
             title:{
@@ -372,13 +393,19 @@ class SeitouIndex extends React.Component  {
               display:false,
               position:'top'
             },
+            plugins: {
+              // Change options for ALL labels of THIS CHART
+              datalabels: {
+                  color: '#777',
+                  display:"auto"
+             }},
             responsive: true,
             maintainAspectRatio: false
           }}
       />
     </div>
 
-    <div className="relative h-64 w-9/10 mx-auto my-14">
+    <div className="relative h-64 w-10/10 mx-auto my-14">
     <Pie data={chartData5}
       options={{
           title:{
@@ -390,11 +417,21 @@ class SeitouIndex extends React.Component  {
             display:false,
             position:'top'
           },
+          plugins: {
+            // Change options for ALL labels of THIS CHART
+            datalabels: {
+                color: '#777',
+                display:"auto"
+           }},
           responsive: true,
           maintainAspectRatio: false
         }}
     />
   </div>
+      
+
+
+
         
         </div>
 

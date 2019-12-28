@@ -12,28 +12,56 @@ const IndexPage = (props) => {
   const s10 = props.data.s10
   const news = props.data.allMarkdownRemark
 
+  console.log(news)
+
   return (
     <LayoutTop>
       <SEO title="Home" />
 
-      <div className="my-2 px-4 max-w-6xl mx-auto">
-        <h2>選挙区トピックス</h2>
-        {news.edges.map(({ node }) => (
-        <div key={node.fields.slug}
-        >
-            <h3>
-            <Link to={`/posts/${node.fields.slug}`}>
-              {node.frontmatter.title}</Link>
-              <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
-            </h3>
-            <p>{node.excerpt}</p>
+      <div className="sm:flex py-2 max-w-6xl mx-auto"> 
+
+        <div className="my-2 px-4 sm:w-3/5">
+          <h2>選挙区トピックス</h2>
+          {news.edges.map(({ node }) => (
+          <div key={node.fields.slug}
+            className="my-2"
+          >
+              <h3>
+              <Link to={`/posts/${node.fields.slug}`}>
+                {node.frontmatter.title}</Link>
+                <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
+              </h3>
+              <p>{node.excerpt}</p>
+          </div>
+          ))}
         </div>
-        ))}
+
+        <div className="my-4 px-4 sm:w-2/5">
+          <Link to={`/seitou`}>政党情報一覧比較</Link>
+          <h2>各政党データ</h2>
+          <div className="flex flex-wrap">
+            {s10.edges.map(({ node }) => (
+              <div key={node.data.s10_code}
+                className="mx-4 my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+              >
+                  <Link to={`/seitou/${node.data.s10_code}`} className="text-white">
+                    {node.data.s10_seitou_name}</Link>
+              </div>
+            ))}
+          </div>
+
+
       </div>
+      
+      
+      </div>
+
+
+
 
       <div className="my-0 mx-0 bg-gray-200">
 
-      <div className=" px-4 py-2 max-w-6xl mx-auto">
+      <div className="px-4 py-2 max-w-6xl mx-auto">
         <div className="my-2">
           <h2>衆議院比例ブロック</h2>
           <div className="flex flex-wrap">
@@ -79,21 +107,6 @@ const IndexPage = (props) => {
         </div>
       </div>
 
-      </div>
-
-      <div className="my-4 px-4 max-w-6xl mx-auto">
-        <h2>政党データ</h2>
-        <div className="flex flex-wrap">
-          {s10.edges.map(({ node }) => (
-            <div key={node.data.s10_code}
-              className="mx-4 my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-            >
-                <Link to={`/seitou/${node.data.s10_code}`} className="text-white">
-                  {node.data.s10_seitou_name}</Link>
-            </div>
-          ))}
-        </div>
-        <Link to={`/seitou`}>政党情報一覧比較</Link>
       </div>
 
     </LayoutTop>
@@ -171,10 +184,10 @@ query{
           }
         }
 
-        allMarkdownRemark(limit: 4, sort: {fields: frontmatter___date, order: DESC}) {
+        allMarkdownRemark(limit: 6, sort: {fields: frontmatter___date, order: DESC}) {
           edges {
             node {
-              excerpt
+              excerpt(format: PLAIN, truncate: true, pruneLength: 60)
               fields {
                 slug
               }
