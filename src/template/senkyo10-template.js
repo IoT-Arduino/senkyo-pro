@@ -319,11 +319,11 @@ class senkyo10Template extends Component  {
     return (
       <Layout>
 
-      <h2>{edges.s10_seitou_name}</h2>
+      <h1>{edges.s10_seitou_name}のデータ</h1>
 
       <div className="mt-4">
-        <h3>政党議員数</h3>
-        <table className="border-2 mt-2">
+        <h2 className="mb-4">政党議員数</h2>
+        <table className="border-2 mt-2 mx-auto mb-8">
           <tbody>
                 <tr>
                     <td className="px-2 bg-gray-200 border-b-2">市区町村議会議員数</td>
@@ -359,10 +359,11 @@ class senkyo10Template extends Component  {
                 </tr>
             </tbody>
           </table>
+
       </div>
 
 
-      <h3>議員数シェア（円グラフ）</h3>
+      <h2 className="my-6">議員数シェア（円グラフ）</h2>
       <div className="flex flex-wrap flex-start">
 
         <div className="relative h-64 w-9/10 mx-auto my-14">
@@ -382,6 +383,7 @@ class senkyo10Template extends Component  {
                 maintainAspectRatio: false
               }}
           />
+          
         </div>
 
        <div className="relative h-64 w-9/10 mx-auto my-14">
@@ -445,18 +447,86 @@ class senkyo10Template extends Component  {
       
       
 
+     <div>
+
+     {edges.s10_code == "seitou180" || edges.s10_code == "seitou170" ? 
+       <div className="mt-8 mb-8">
+        <h2>政党の財政(収入と支出)</h2>
+        <div className="my-4 px-4">{edges.s10_seitou_name}の政党収支データは平成３１年分政治資金収支報告の概要の公開後データ更新予定です。</div>
+        </div>
+        :
+        <div className="mt-8 mb-8">
+        <h2>政党の財政(収入と支出)</h2>
+
+        <div className="relative h-64 w-9/10 mx-auto my-14">
+          <Pie data={chartData5}
+            options={{
+                title:{
+                  display:true,
+                  text:`${edges.s10_seitou_name}の政党収入(項目別）`,
+                  fontSize:18
+                },
+                legend:{
+                  display:true,
+                  position:'bottom',
+                  labels:{
+                    boxWidth:15,
+                    padding:5
+                  }
+                },
+                plugins: {
+                  // Change options for ALL labels of THIS CHART
+                  datalabels: {
+                      color: '#36A2EB',
+                      display:"auto"
+                  }},
+                responsive: true,
+                maintainAspectRatio: false
+              }}
+          />
+        </div>
+
+          <table className="border-2 my-8 mx-auto">
+            <tbody>
+                  <tr>
+                      <td className="px-2 bg-gray-200 border-b-2">党費</td>
+                      <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_touhi}</td>
+                  </tr>
+                  <tr>
+                      <td className="px-2 bg-gray-200 border-b-2">寄付収入</td>
+                      <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_kifu}</td>
+                  </tr>
+                      <tr>
+                      <td className="px-2 bg-gray-200 border-b-2">事業収入</td>
+                      <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_jigyou}</td>
+                  </tr>
+                  <tr>
+                      <td className="px-2 bg-gray-200 border-b-2">本部支部交付金収入</td>
+                      <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_honshibu}</td>
+                  </tr>
+                  <tr>
+                      <td className="px-2 bg-gray-200 border-b-2">政党交付金収入</td>
+                      <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_seitoukoufu}</td>
+                  </tr>
+                  <tr>
+                      <td className="px-2 bg-gray-200 border-b-2">その他収入</td>
+                      <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_other}</td>
+                  </tr>
+                  <tr>
+                    <td className="px-2 bg-gray-200 border-b-2">収入合計</td>
+                    <td className="text-right w-24 px-2 border-b-2"> {cma_inTotal}</td>
+                </tr>
+            </tbody>
+          </table>
 
 
-      <div className="mt-4">
-      <h3>政党の財政</h3>
-      <h4 className="mt-2">政党収入合計{cma_inTotal}</h4>
 
-      <div className="relative h-64 w-9/10 mx-auto my-14">
-        <Pie data={chartData5}
+        <div className="relative h-64 w-9/10 mx-auto my-14">
+        <Pie data={chartData6}
           options={{
               title:{
                 display:true,
-                text:`${edges.s10_seitou_name}の政党収入(項目別）`,
+                text:`${edges.s10_seitou_name}の政党支出(項目別）`,
                 fontSize:18
               },
               legend:{
@@ -472,112 +542,65 @@ class senkyo10Template extends Component  {
                 datalabels: {
                     color: '#36A2EB',
                     display:"auto"
-               }},
+                }},
               responsive: true,
               maintainAspectRatio: false
             }}
         />
       </div>
+        <table className="border-2 my-8 mx-auto">
+        <tbody>
+              <tr>
+                  <td className="px-2 bg-gray-200 border-b-2">人件費</td>
+                  <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_jinkenhi}</td>
+              </tr>
+              <tr>
+                  <td className="px-2 bg-gray-200 border-b-2">光熱費・備品費</td>
+                  <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_other}</td>
+              </tr>
+                  <tr>
+                  <td className="px-2 bg-gray-200 border-b-2">事務所費</td>
+                  <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_jimusho}</td>
+              </tr>
+              <tr>
+                  <td className="px-2 bg-gray-200 border-b-2">組織活動費</td>
+                  <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_soshiki}</td>
+              </tr>
+              <tr>
+                  <td className="px-2 bg-gray-200 border-b-2">選挙関係費</td>
+                  <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_senkyo}</td>
+              </tr>
+              <tr>
+                  <td className="px-2 bg-gray-200 border-b-2">機関紙費</td>
+                  <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_kikanshi}</td>
+              </tr>
+              <tr>
+                  <td className="px-2 bg-gray-200 border-b-2">宣伝費</td>
+                  <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_senden}</td>
+              </tr>
+              <tr>
+                  <td className="px-2 bg-gray-200 border-b-2">その他支出</td>
+                  <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_other_2}</td>
+              </tr>
+              <tr>
+                <td className="px-2 bg-gray-200 border-b-2">政党支出合計</td>
+                <td className="text-right w-24 px-2 border-b-2">{cma_outTotal}</td>
+            </tr>
+        </tbody>
+      </table>
 
-        <table className="border-2 mt-2">
-          <tbody>
-                <tr>
-                    <td className="px-2 bg-gray-200 border-b-2">党費</td>
-                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_touhi}</td>
-                </tr>
-                <tr>
-                    <td className="px-2 bg-gray-200 border-b-2">寄付収入</td>
-                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_kifu}</td>
-                </tr>
-                    <tr>
-                    <td className="px-2 bg-gray-200 border-b-2">事業収入</td>
-                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_jigyou}</td>
-                </tr>
-                <tr>
-                    <td className="px-2 bg-gray-200 border-b-2">本部支部交付金収入</td>
-                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_honshibu}</td>
-                </tr>
-                <tr>
-                    <td className="px-2 bg-gray-200 border-b-2">政党交付金収入</td>
-                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_seitoukoufu}</td>
-                </tr>
-                <tr>
-                    <td className="px-2 bg-gray-200 border-b-2">その他収入</td>
-                    <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_other}</td>
-                </tr>
-          </tbody>
-        </table>
-
-      <h4 className="mt-2">政党支出合計{cma_outTotal}</h4>
-
-      <div className="relative h-64 w-9/10 mx-auto my-14">
-      <Pie data={chartData6}
-        options={{
-            title:{
-              display:true,
-              text:`${edges.s10_seitou_name}の政党支出(項目別）`,
-              fontSize:18
-            },
-            legend:{
-              display:true,
-              position:'bottom',
-              labels:{
-                boxWidth:15,
-                padding:5
-              }
-            },
-            plugins: {
-              // Change options for ALL labels of THIS CHART
-              datalabels: {
-                  color: '#36A2EB',
-                  display:"auto"
-             }},
-            responsive: true,
-            maintainAspectRatio: false
-          }}
-      />
-    </div>
-      <table className="border-2 mt-2">
-      <tbody>
-            <tr>
-                <td className="px-2 bg-gray-200 border-b-2">人件費</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_jinkenhi}</td>
-            </tr>
-            <tr>
-                <td className="px-2 bg-gray-200 border-b-2">光熱費・備品費</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_other}</td>
-            </tr>
-                <tr>
-                <td className="px-2 bg-gray-200 border-b-2">事務所費</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_jimusho}</td>
-            </tr>
-            <tr>
-                <td className="px-2 bg-gray-200 border-b-2">組織活動費</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_soshiki}</td>
-            </tr>
-            <tr>
-                <td className="px-2 bg-gray-200 border-b-2">選挙関係費</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_senkyo}</td>
-            </tr>
-            <tr>
-                <td className="px-2 bg-gray-200 border-b-2">機関紙費</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_kikanshi}</td>
-            </tr>
-            <tr>
-                <td className="px-2 bg-gray-200 border-b-2">宣伝費</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_senden}</td>
-            </tr>
-            <tr>
-                <td className="px-2 bg-gray-200 border-b-2">その他支出</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_other_2}</td>
-            </tr>
-      </tbody>
-    </table>
-
-      </div>
+        </div>
+     
+          }
+   
+     
+     </div>
 
 
-     <div className="mt-8">政党トピックス</div>
+      <div className="mt-8">
+      {data.allMarkdownRemark.edges.length>0 ? <h3>政党トピックス</h3> : <p> </p>}
+     </div>
+
      {data.allMarkdownRemark.edges.map(({ node }) => (
       <div key={node.fields.slug}>
           <h3>
@@ -589,18 +612,23 @@ class senkyo10Template extends Component  {
       </div>
   ))}
 
-  <div className="my-4 px-4 max-w-6xl mx-auto">
-  <h2>他の政党データ</h2>
+  <div className="my-4 max-w-6xl mx-auto">
+  <h2>他の国政政党データ</h2>
   <div className="flex flex-wrap">
     {s10.edges.map(({ node }) => (
       <div key={node.data.s10_code}
-        className="mx-4 my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        className="mx-4 my-2 bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
       >
           <Link to={`/seitou/${node.data.s10_code}`} className="text-white">
             {node.data.s10_seitou_name}</Link>
       </div>
     ))}
   </div>
+
+  <div className="w-3/5 mx-4 my-2 bg-white-500 hover:bg-blue-200 text-center font-bold py-2 px-4 rounded-full border-blue border-2">
+    <Link to={`/seitou`} className="text-gray">国政政党情報一覧比較</Link>
+  </div>
+
 </div>
 
 
@@ -651,7 +679,7 @@ query($slug:String){
     }
 
     s10:allAirtable(
-      filter:  { table: {eq: "s10_seitou"}}
+      filter:  { table: {eq: "s10_seitou"},data: {s10_code: {ne:  $slug}}}
       sort: {fields: data___s10_code, order: ASC} 
       ) {
       edges {

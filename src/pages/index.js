@@ -21,7 +21,7 @@ const IndexPage = (props) => {
       <div className="sm:flex py-2 max-w-6xl mx-auto"> 
 
         <div className="my-2 px-4 sm:w-3/5">
-          <h2>選挙区トピックス</h2>
+          <h2>選挙区・国政政党データトピックス</h2>
           {news.edges.map(({ node }) => (
           <div key={node.fields.slug}
             className="my-2"
@@ -37,8 +37,8 @@ const IndexPage = (props) => {
         </div>
 
         <div className="my-4 px-4 sm:w-2/5">
-          <Link to={`/seitou`}>政党情報一覧比較</Link>
-          <h2>各政党データ</h2>
+
+          <h3>国政政党データ</h3>
           <div className="flex flex-wrap">
             {s10.edges.map(({ node }) => (
               <div key={node.data.s10_code}
@@ -50,6 +50,9 @@ const IndexPage = (props) => {
             ))}
           </div>
 
+          <div className="mx-4 my-2 bg-white-500 hover:bg-blue-200 text-center font-bold py-2 px-4 rounded-full border-blue border-2">
+            <Link to={`/seitou`} className="text-blue">国政政党情報一覧比較</Link>
+          </div>
 
       </div>
       

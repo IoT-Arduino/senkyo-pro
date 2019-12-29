@@ -249,9 +249,11 @@ class senkyo2Template extends Component  {
 
       </div>
 
+      
+      <div className="mt-8">
+      {data.allMarkdownRemark.edges.length>0 ? <h3>選挙区トピックス</h3> : <p> </p>}
+     </div>
 
-
-     <div className="mt-8">選挙区トピックス</div>
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <div key={node.fields.slug}>
             <h3>
@@ -325,7 +327,7 @@ query($slug:String!){
     allMarkdownRemark(filter: {frontmatter: {senkyo: {eq:  $slug}}}) {
       edges {
         node {
-          excerpt
+          excerpt(format: PLAIN, truncate: true, pruneLength: 60)
           fields{
             slug
           }

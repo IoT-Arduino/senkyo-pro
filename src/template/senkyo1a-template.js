@@ -99,7 +99,7 @@ class senkyo1aTemplate extends Component  {
     const cma_s1_ef_vote = String(edges.s1_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
     const cma_s1_last_vote = String(edges.s1_last_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
-    console.log(kenblock)
+    console.log(data.allMarkdownRemark.edges)
 
     return (
       <Layout>
@@ -212,7 +212,10 @@ class senkyo1aTemplate extends Component  {
 
     
 
-     <div className="mt-8">選挙区トピックス</div>
+     <div className="mt-8">
+      {data.allMarkdownRemark.edges.length>0 ? <h3>選挙区トピックス</h3> : <p> </p>}
+     </div>
+
      {data.allMarkdownRemark.edges.map(({ node }) => (
       <div key={node.fields.slug}>
           <h3>
@@ -223,7 +226,6 @@ class senkyo1aTemplate extends Component  {
           <p>{node.excerpt}</p>
       </div>
       ))}
-
 
       </Layout>
     );
@@ -292,7 +294,7 @@ query($slug:String!){
     allMarkdownRemark(filter: {frontmatter: {senkyo: {eq:  $slug}}}) {
       edges {
         node {
-          excerpt
+          excerpt(format: PLAIN, truncate: true, pruneLength: 60)
           fields{
             slug
           }

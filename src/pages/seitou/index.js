@@ -304,7 +304,9 @@ class SeitouIndex extends React.Component  {
     return (
       <Layout>
         <SEO title="Page two" />
-        <h1>政党情報一覧</h1>
+        <h1 className="my-4">国政政党情報一覧</h1>
+        <h2>政党収入比較</h2>
+        <div className="mx-8 mt-2 sm:px-8 text-xs">平成３０年分政治資金収支報告の概要（総務省）をもとに作成。<br />れいわ新選組とNHKから国民を守る党のデータは、平成３１年分の資料が公開後データ更新予定です。</div>
 
         <div className="relative h-64 w-9/10 mx-auto my-4">
           <HorizontalBar
@@ -326,10 +328,14 @@ class SeitouIndex extends React.Component  {
               responsive: true,
               maintainAspectRatio: false
             }}
+            className="mb-8"
           />
+
+
         </div>
 
-        <div className="flex flex-wrap my-12">
+        <h2 className="mt-10">政党別議員割合</h2>
+        <div className="flex flex-wrap my-8">
           <div className="relative h-64 w-10/10 mx-auto my-14">
           <Pie data={chartData2}
             options={{
@@ -430,13 +436,11 @@ class SeitouIndex extends React.Component  {
   </div>
       
 
-
-
         
         </div>
 
         <div className="my-4 px-4 max-w-6xl mx-auto">
-        <h2>政党データ</h2>
+        <h2 className="my-4">各政党データへのリンク</h2>
         <div className="flex flex-wrap">
           {s10.edges.map(({ node }) => (
             <div key={node.data.s10_code}
