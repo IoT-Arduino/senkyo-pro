@@ -364,7 +364,7 @@ class senkyo10Template extends Component  {
 
 
       <h2 className="my-6">議員数シェア（円グラフ）</h2>
-      <div className="flex flex-wrap flex-start">
+      <div className="flex flex-wrap flex-start my-8">
 
         <div className="relative h-64 w-9/10 mx-auto my-14">
           <Pie
@@ -406,7 +406,7 @@ class senkyo10Template extends Component  {
       </div>
       </div>
 
-      <div className="flex flex-wrap flex-start">
+      <div className="flex flex-wrap flex-start my-8">
         <div className="relative h-64 w-9/10 mx-auto my-14">
           <Pie data={chartData3}
             options={{
@@ -513,8 +513,8 @@ class senkyo10Template extends Component  {
                       <td className="text-right w-24 px-2 border-b-2">{cma_s10_in_other}</td>
                   </tr>
                   <tr>
-                    <td className="px-2 bg-gray-200 border-b-2">収入合計</td>
-                    <td className="text-right w-24 px-2 border-b-2"> {cma_inTotal}</td>
+                    <td className="px-2 bg-gray-400 border-b-2">収入合計</td>
+                    <td className="text-right w-24 px-2 border-b-2 bg-gray-400"> {cma_inTotal}</td>
                 </tr>
             </tbody>
           </table>
@@ -583,8 +583,8 @@ class senkyo10Template extends Component  {
                   <td className="text-right w-24 px-2 border-b-2">{cma_s10_out_other_2}</td>
               </tr>
               <tr>
-                <td className="px-2 bg-gray-200 border-b-2">政党支出合計</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_outTotal}</td>
+                <td className="px-2 bg-gray-400 border-b-2">政党支出合計</td>
+                <td className="text-right w-24 px-2 border-b-2 bg-gray-400">{cma_outTotal}</td>
             </tr>
         </tbody>
       </table>
