@@ -1,9 +1,12 @@
 import React from 'react';
-import layout from '../components/layout'
+import Layout from '../components/layout'
+import SEO from "../components/seo"
+
 
 const page2 = () => {
   return (
-    <layout>
+    <Layout>
+    <SEO title="Home" />
       
 <div>
 選挙区データ
@@ -84,7 +87,7 @@ http://www.soumu.go.jp/main_content/000656633.pdf
 
 
 
-    </layout>
+    </Layout>
   );
 }
 
