@@ -4,18 +4,16 @@ import { graphql } from 'gatsby'
 
 
 const PostTemplate =  ({ data: post,pageContext }) =>{
-  console.log(pageContext)
+  console.log(post)
   return(
 
       <Layout>
           <h1>{post.markdownRemark.frontmatter.title}</h1>
-          <h4>{post.markdownRemark.timeToRead} {post.markdownRemark.timeToRead > 1 ? "minute" : "minutes" }</h4>
-          <div dangerouslySetInnerHTML={{ __html: post.markdownRemark.html}}   />
+          <p>{post.markdownRemark.frontmatter.date}</p>
+          <div dangerouslySetInnerHTML={{ __html: post.markdownRemark.html}}  
+             className="my-10" />
 
-          <div>{post.allMarkdownRemark.edges[0].node.frontmatter.title}</div>
-          <div>{post.allMarkdownRemark.edges[1].node.frontmatter.title}</div>
-
-      </Layout>
+     </Layout>
   )
   }
 export const query = graphql`
@@ -28,6 +26,7 @@ query($slug:String!){
       timeToRead
       frontmatter{
           title
+          date
         }
       }
       allMarkdownRemark(filter: {frontmatter: {category: {eq: "senkyo"}}}) {

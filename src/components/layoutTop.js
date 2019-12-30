@@ -26,18 +26,11 @@ const LayoutTop = ({ children }) => {
   `)
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
+        <main className="flex-grow">{children}</main>
         <Footer />
-      </div>
-    </>
+    </div>
   )
 }
 
