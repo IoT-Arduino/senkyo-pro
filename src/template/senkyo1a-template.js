@@ -2,6 +2,7 @@ import React,{Component} from "react"
 import { HorizontalBar } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
+import Topics from '../components/topics'
 
 class senkyo1aTemplate extends Component  {
   
@@ -210,24 +211,9 @@ class senkyo1aTemplate extends Component  {
 
      </div>
 
-    
+    <Topics topics={data.allMarkdownRemark.edges}/>
 
-     <div className="mt-8">
-      {data.allMarkdownRemark.edges.length>0 ? <h3>選挙区トピックス</h3> : <p> </p>}
-     </div>
-
-     {data.allMarkdownRemark.edges.map(({ node }) => (
-      <div key={node.fields.slug}>
-          <h3>
-          <Link to={`/posts/${node.fields.slug}`}>
-            {node.frontmatter.title}</Link>
-            <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
-          </h3>
-          <p>{node.excerpt}</p>
-      </div>
-      ))}
-
-      </Layout>
+    </Layout>
     );
    }
 

@@ -56,17 +56,19 @@ const IndexPage = (props) => {
 
       </div>
       
-      
       </div>
 
-
-
-
       <div className="my-0 mx-0 bg-gray-200">
+      
+      <div className="max-w-6xl mx-auto">
+        <h2 className="px-4 pb-2 pt-4 w-40 font-bold text-gray-700 border-bt w-40 rounded">
+        選挙区データ
+        </h2>
+      </div>
 
       <div className="px-4 py-2 max-w-6xl mx-auto">
         <div className="my-2">
-          <h2>衆議院比例ブロック</h2>
+          <h3>衆議院比例ブロック</h3>
           <div className="flex flex-wrap">
             {s1a.edges.map(({ node }) => (
               <div key={node.data.s1_code}
@@ -81,7 +83,7 @@ const IndexPage = (props) => {
         </div>
 
         <div className="my-2">
-          <h2>都道府県</h2>
+          <h3>都道府県</h3>
           <div className="flex flex-wrap">
             {s1b.edges.map(({ node }) => (
               <div key={node.data.s1_code}
@@ -96,7 +98,7 @@ const IndexPage = (props) => {
         </div>
 
         <div className="my-2">
-          <h2>政令指定都市</h2>
+          <h3>政令指定都市</h3>
           <div className="flex flex-wrap">
             {s3.edges.map(({ node }) => (
               <div key={node.data.s3_code}
