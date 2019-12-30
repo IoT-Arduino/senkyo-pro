@@ -1,387 +1,91 @@
-import React,{Component} from "react"
-// import { Pie } from 'react-chartjs-2';
-import { Link,graphql } from 'gatsby'
-import Layout from '../components/layout'
-import Chart from "react-apexcharts";
+import React from 'react';
+import layout from '../components/layout'
 
-class Page2 extends Component  {
-  
-  constructor(props){
-    super(props)
-    this.state = {
-        options: {
-          chart: {
-            // id: "basic-bar",
-            animations: {
-              enabled: true,
-              easing: 'easeinout',
-              speed: 800,
-              animateGradually: {
-                  enabled: true,
-                  delay: 150
-              },
-              dynamicAnimation: {
-                  enabled: true,
-                  speed: 350
-              }
-            }
-          },
-          xaxis: {
-            categories: []
-          },
-          colors: [
-            "#02E675",
-            "#FF9A00",
-            "#75E7FF",
-            "#002438",
-            "#785F9D",
-            "#FA6968",
-            "#2F4DFF"
-          ],
-          stroke: {
-            show: true,
-            width: 2,
-            colors: ["transparent"]
-          },
-          plotOptions: {
-            bar: {
-              horizontal: true,
-              endingShape: 'rounded',
-            }
-          },
-        },
-        series: [
-          {
-            name: "series-1",
-            data: []
-          }
-        ]
-    }
-  }
-
-  getChartData = () => {
-
-    const { data } = this.props
-    const edges = data.allAirtable.edges[0].node.data
-    console.log(edges)
-
-    let Labels = []
-    let population = []
-
-    Labels.push("10代")
-    Labels.push("20代")
-    Labels.push("30代")
-    Labels.push("40代")
-    Labels.push("50代")
-    Labels.push("60代")
-    Labels.push("70代")
-    Labels.push("80代")
-    Labels.push("90代以上")
-
-    population.push(parseInt(edges.s2_v_teen))
-    population.push(parseInt(edges.s2_v_twenties))
-    population.push(parseInt(edges.s2_v_thirries))
-    population.push(parseInt(edges.s2_v_forties))
-    population.push(parseInt(edges.s2_v_fifties))
-    population.push(parseInt(edges.s2_v_sixties))
-    population.push(parseInt(edges.s2_v_seventies))
-    population.push(parseInt(edges.s2_v_eighties))
-    population.push(parseInt(edges.s2_v_nineties))
-
-    const newLabels = Labels.slice().reverse()
-    const newPopulation = population.slice().reverse()
-
-    this.setState({
-      options: {
-        chart: {
-          // id: "basic-bar",
-          animations: {
-            enabled: false,
-            easing: 'easeinout',
-            speed: 800,
-            animateGradually: {
-                enabled: true,
-                delay: 150
-            },
-            dynamicAnimation: {
-                enabled: true,
-                speed: 350
-            }
-          }
-        },
-        xaxis: {
-          categories: newLabels
-        },
-        colors: [
-          "#785F9D",
-          "#02E675",
-          "#FF9A00",
-          "#75E7FF",
-          "#002438",
-          "#785F9D",
-          "#FA6968",
-          "#2F4DFF"
-        ],
-        stroke: {
-          show: true,
-          width: 2,
-          colors: ["transparent"]
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            endingShape: 'rounded',
-          }
-        },
-      },
-      series: [
-        {
-          name: "series-1",
-          data: newPopulation
-        }
-      ]
-    })
-
-  }
-  
-
-  componentDidMount(){
-    this.getChartData()
-  }
-
-  render(){
-    const { data,pageContext } = this.props
-    // const { chartData } = this.state
-    const edges = data.allAirtable.edges[0].node.data
-    const s2_last_toku_rate 
-    = Math.round(edges.s2_chou_toku_votes / edges.s2_chou_ef_vote *10000 ) /100
-
-    const cma_s2_ttl_pop = String(edges.s2_ttl_pop).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-    const cma_s2_mitsudo = String(edges.s2_mitsudo).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-    const cma_s2_ttl_votes = String(edges.s2_ttl_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-    const cma_s2_housyu_y = String(edges.s2_housyu_y).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-    const cma_s2_ef_vote = String(edges.s2_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-    const cma_s2_last_vote = String(edges.s2_last_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-
-    const cma_s2_chou_ef_vote = String(edges.s2_chou_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-    const cma_s2_chou_toku_votes = String(edges.s2_chou_toku_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-
-    console.log(pageContext)
-
-    return (
-      <Layout>
-
-      <h2 className="text-center mb-4">{edges.s2_shiku_chouson}</h2>
-
-      <h3>選挙区データ</h3>
-      <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
-        <div className="text-center">
-          <p>人口</p>
-          <p className="text-center">{cma_s2_ttl_pop}人</p>
-        </div>
-        <div className="text-centerr mt-4 sm:mt-0">
-          <p>人口密度</p>
-          <p className="text-center">{cma_s2_mitsudo}人</p>
-        </div>
-        <div className="text-center mt-4 sm:mt-0">
-          <p>有権者数*推計</p>
-          <p className="text-center">{cma_s2_ttl_votes}人</p>
-       </div>
-      </div>
-
-      <div className="block md:flex mt-8">
-
-        <div className="mt-8 md:w-1/3 md:px-3">
-        <h3>議会・議員データ</h3>
-        <table  className="border-2 mt-2 ml-8 md:ml-0">
-        <tbody>
-              <tr>
-                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員定数</td>
-                  <td className="text-right w-40 px-2 border-b-2">{edges.s2_giinteisuu}</td>
-              </tr>
-              <tr>
-                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員報酬</td>
-                  <td className="text-right w-40 px-2 border-b-2">{cma_s2_housyu_y}円/年</td>
-              </tr>
-              <tr>
-                  <td className="w-2/5 px-2 bg-gray-200 border-b-2">議員任期</td>
-                  <td className="text-right w-40 px-2 border-b-2">{edges.s2_g_ninki}</td>
-              </tr>
-            </tbody>
-        </table>
-      </div>
-
-      <div className="mt-8 md:w-1/3 md:px-3">
-      <h3>議会選挙データ</h3>
-      <table className="border-2 mt-2 ml-8 md:ml-0">
-      <tbody>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回投票率</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_giin_vrate}%</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s2_ef_vote}</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票数</td>
-                <td className="text-right w-24 px-2 border-b-2">{cma_s2_last_vote}</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選得票率</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_last_toku_rate}%</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">最下位当選有権者比率</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_last_yuu_rate}%</td>
-            </tr>
-            <tr>
-                <td className="w-2/3 px-2 bg-gray-200 border-b-2">議員任期</td>
-                <td className="text-right w-24 px-2 border-b-2">{edges.s2_g_ninki}</td>
-            </tr>
-      </tbody>
-      </table>
-    </div>
+const page2 = () => {
+  return (
+    <layout>
+      
+<div>
+選挙区データ
 
 
-        { !edges.s2_chou_ef_vote ? (
-          <p></p>
-        ) : (
-          <div className="mt-8 md:w-1/3 md:px-3">
-          <h3>首長選挙データ</h3>
-          <table className="border-2 mt-2 ml-8 md:ml-0">
-          <tbody>
-                <tr>
-                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回投票率</td>
-                    <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_vrate}%</td>
-                </tr>
-                <tr>
-                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">前回有効投票数</td>
-                    <td className="text-right w-24 px-2 border-b-2">{cma_s2_chou_ef_vote}</td>
-                </tr>
-                <tr>
-                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票数</td>
-                    <td className="text-right w-24 px-2 border-b-2">{cma_s2_chou_toku_votes}</td>
-                </tr>
-                <tr>
-                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票率</td>
-                    <td className="text-right w-24 px-2 border-b-2">{s2_last_toku_rate}%</td>
-                </tr>
-                <tr>
-                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">連続在任期</td>
-                    <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_re_elected}</td>
-                </tr>
-                <tr>
-                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">首長任期</td>
-                    <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_ninki}</td>
-                </tr>
-          </tbody>
-          </table>
-        </div>
-        )}
+１）対象地方自治体（選挙区）
+
+　　・衆議院比例ブロック、都道府県、政令指定都市、政令指定都市の区、特別区、市町村（人口10万人以上）
+
+　　対象としていない選挙区
+　　・衆議院小選挙区
+　　・県議会選挙の選挙区域
+　　・市町村（人口10万人未満）
 
 
-      </div>
+２）有権者数
 
-      <div className="mixed-chart">
-        <Chart
-            options={this.state.options}
-            series={this.state.series}
-            type="bar"
-            width="500"
-          />
-      </div>
+　　平成30年1月1日住民基本台帳年齢階級別人口（市区町村別）（日本人住民）
+　　https://www.soumu.go.jp/menu_news/s-news/01gyosei02_02000177.html 
 
-
-     <div className="mt-8">選挙区トピックス</div>
-     {data.allMarkdownRemark.edges.map(({ node }) => (
-      <div key={node.fields.slug}>
-          <h3>
-          <Link to={`/posts/${node.fields.slug}`}>
-            {node.frontmatter.title}</Link>
-            <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
-          </h3>
-          <p>{node.excerpt}</p>
-      </div>
-  ))}
+　　*年代別有権者数　10代のデータについては、18歳と19歳のみを対象とする為に、元データにある、
+　　　15歳から19歳の区分データの2/5としている。　
+　　　
+　　*したがって、実際の有権者数（選挙人数）とは厳密には異なります。
 
 
-      </Layout>
-    );
-   }
+３）地方公共団体の議会の議員（市区会議員、県議会議員）の議員報酬
 
+　　平成２９年4月1日地方公務員給与実態調査結果(総務省）を参照。　
+　　https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/kyuuyo/h29_kyuuyo_1.html 
+　　
+　
+
+４）投票数、開票数
+
+　　各地方自治体のホームページ等を参照。
+
+</div>
+
+<div>
+政党別データの根拠資料について
+
+
+「議員数」
+
+１）市区会議員と県会議員
+
+総務省の地方公共団体の議会の議員及び長の所属党派別人員調等（平成３０年１２月３１日現在） の資料を参考
+https://www.soumu.go.jp/main_content/000608468.pdf 
+
+２）国会議員
+
+最新の選挙開票時の議席数（その後、入党、離党等により人員の増減がありますので現状と乖離があります。）
+
+
+
+「収支データ」
+
+
+平成３０年分政治資金収支報告の概要（総務大臣届出分）
+http://www.soumu.go.jp/main_content/000656633.pdf
+
+１）収入について
+
+上記資料、３　政党本部の収支規模から作成。ただし、収入合計から借入金を除いています。
+
+
+２）支出について
+
+一部小項目について集約表記しています。
+
+光熱費と備品・消耗品費　=>　光熱費・備品費　に集約
+
+政資パーティ、その他、調査研究費、寄付交付金、その他の経費　=>　その他支出　に集約
+
+
+</div>
+
+
+
+    </layout>
+  );
 }
 
-export default Page2
-
-
-export const query = graphql`
-
-{
-    allAirtable(filter: {data: {s2_code: {eq: "141011"}},table: {eq: "s2_shiku"}}) {
-      edges {
-        node {
-          data {
-            s2_bosyu
-            s2_chou_ef_vote
-            s2_chou_ninki
-            s2_chou_re_elected
-            s2_chou_toku_votes
-            s2_chou_vrate
-            s2_code
-            s2_filter_code
-            s2_ef_vote
-            s2_link_flag
-            s2_g_ninki
-            s2_giin_vrate
-            s2_giinteisuu
-            s2_housyu_m
-            s2_housyu_y
-            s2_houtei_toku
-            s2_last_toku_rate
-            s2_last_vote
-            s2_last_yuu_rate
-            s2_menseki
-            s2_mitsudo
-            s2_pref
-            s2_shiku
-            s2_shiku_chouson
-            s2_ttl_pop
-            s2_ttl_votes
-            s2_v_eighties
-            s2_v_fifties
-            s2_v_forties
-            s2_v_nineties
-            s2_v_seventies
-            s2_v_sixties
-            s2_v_teen
-            s2_v_thirries
-            s2_v_twenties
-          }
-        }
-      }
-    }
-
-
-
-    allMarkdownRemark(filter: {frontmatter: {senkyo: {eq: "141011"}}}) {
-      edges {
-        node {
-          excerpt
-          fields{
-            slug
-          }
-          frontmatter {
-            title
-            date
-            category
-            senkyo
-          }
-        }
-      }
-    }
-
-  }
-
-
-`
+export default page2;
