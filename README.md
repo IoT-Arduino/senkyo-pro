@@ -3,17 +3,17 @@
   選挙区・国政政党データサイト（β）
 </h1>
 
-## 💫 DemoSite
+## 💫 DemoSiteのアドレスと内容
 
 [選挙区・国政政党データサイト（β）](https://senkyo-pro.netlify.com/)
 
-###　選挙区（衆議院比例ブロック、参議院比例、政令指定都市、地方自治体（有権者数10万人以上）毎の各種データ。
+### 選挙区（衆議院比例ブロック、参議院比例、政令指定都市、地方自治体（有権者数10万人以上）毎の各種データ
 - 人口、年代別有権者数（棒グラフ）
 - 議会議員データ（議員定数、議員報酬、議員任期）
 - 議会選挙データ（前回投票率、前回有効投票数、最下位当選得票数、最下位当選得票率、最下位当選有権者比率）、議員任期
 - 首長選挙データ（前回投票率、前回有効投票数、当選者得票数、当選者得票率、連続在任期、首長任期）
 
-###　国政政党データ
+### 国政政党データ
 - 国政政党情報比較（収入比較：棒グラフ、政党別議員数割合：円グラフ）
 - 政党議員数（市区町村議会議員数、県議会議員数、衆議院議員数、参議院議員数）
 - 議員数シェア（円グラフ）
@@ -29,18 +29,18 @@ src/
 　├ components/  
 　├ images/ 
 　├ posts/ 
-　├ pages/
+　├ pages/  
 　├ template/  
 　   ├ blog-template.js  
 　   ├ post-template.js  
 　   ├ senkyo10-template.js  
-　   ├ senkyo1a-template.js 
-　   ├ senkyo1b-template.js   
-　   ├ senkyo2-template.js    
-　   └ senkyo3-template.js   
-gatsby-node.js
-gatsby-config.js 
-README.MD  
+　   ├ senkyo1a-template.js  
+　   ├ senkyo1b-template.js  
+　   ├ senkyo2-template.js      
+　   └ senkyo3-template.js  
+gatsby-node.js  
+gatsby-config.js   
+README.MD    
 
 
 1.  **`src/components`**: header.js,seo.js,layout.js,topics.js 等
