@@ -24,8 +24,9 @@
 
 ## 🧐 プログラム・フォルダ構成
 
-AirTableのデータベースから、各地方自治体毎の選挙区情報のページを自動作成。
-数値データのグラフ表示はChart.jsを使用。CSSはtailwindcssを使用。
+AirTableのデータベースから、各地方自治体毎の選挙区情報のページを自動作成。  
+数値データのグラフ表示はChart.jsを使用。  
+CSSはtailwindcssを使用。  
 
 src/  
 　├ components/  
@@ -43,8 +44,8 @@ src/
 gatsby-node.js  
 gatsby-config.js   
 README.MD    
-
-
+  
+  
 1.  **`src/components`**: header.js,seo.js,layout.js,topics.js 等
 
 2.  **`src/images`**: 画像ファイルを保存するフォルダ。
@@ -58,8 +59,8 @@ README.MD
 6.  **`gatsby-node.js`**: ページの自動生成の定義情報等。
 
 7.  **`gatsby-config.js`**: プラグインの設定情報等。
-
-
+  
+  
 ## GatsbyPlugins  
 
 * [gatsby-plugin-prefetch-google-fonts](https://www.gatsbyjs.org/packages/gatsby-plugin-prefetch-google-fonts/?=gatsby%20google%20fonts)
