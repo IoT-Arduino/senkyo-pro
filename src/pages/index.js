@@ -113,6 +113,12 @@ const IndexPage = (props) => {
 
       </div>
 
+      <div>
+       <p className="mx-5 my-10">
+       <a href="https://senkyo-pro.netlify.com/page2/">各種データの根拠資料について</a>
+       </p>
+      </div>
+
     </LayoutTop>
   )
 
