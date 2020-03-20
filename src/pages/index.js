@@ -12,8 +12,6 @@ const IndexPage = (props) => {
   const s10 = props.data.s10
   const news = props.data.allMarkdownRemark
 
-  console.log(news)
-
   return (
     <LayoutTop>
       <SEO title="Home" />
@@ -24,12 +22,13 @@ const IndexPage = (props) => {
           <h2 className="font-bold text-gray-700">選挙区・国政政党データトピックス</h2>
           {news.edges.map(({ node }) => (
           <div key={node.fields.slug}
-            className="my-2"
+            className="my-2 p-2"
           >
-              <h3>
+              <h3 className="my-1 hover:bg-blue-100">
               <Link to={`/posts/${node.fields.slug}`}>
-                {node.frontmatter.title}</Link>
+                {node.frontmatter.title}
                 <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
+                </Link>
               </h3>
               <p>{node.excerpt}</p>
           </div>
