@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/layout'
 import { graphql } from 'gatsby'
+import styles from "../styles/posts.module.css"
 
 
 const PostTemplate =  ({ data: post,pageContext }) =>{
@@ -8,11 +9,12 @@ const PostTemplate =  ({ data: post,pageContext }) =>{
   return(
 
       <Layout>
-          <h1>{post.markdownRemark.frontmatter.title}</h1>
-          <p>{post.markdownRemark.frontmatter.date}</p>
-          <div dangerouslySetInnerHTML={{ __html: post.markdownRemark.html}}  
-             className="my-10" />
-
+       <div className={styles.post}>
+        <h1>{post.markdownRemark.frontmatter.title}</h1>
+        <p>{post.markdownRemark.frontmatter.date}</p>
+        <div dangerouslySetInnerHTML={{ __html: post.markdownRemark.html}}  
+            className="my-10" />
+       </div>
      </Layout>
   )
   }
