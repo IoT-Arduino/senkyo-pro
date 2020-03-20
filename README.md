@@ -1,97 +1,86 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
+
 <h1 align="center">
-  Gatsby's default starter
+  選挙区・国政政党データサイト（β）
 </h1>
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+## 💫 DemoSite
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+[選挙区・国政政党データサイト（β）](https://senkyo-pro.netlify.com/)
 
-## 🚀 Quick start
+###　選挙区（衆議院比例ブロック、参議院比例、政令指定都市、地方自治体（有権者数10万人以上）毎の各種データ。
+- 人口、年代別有権者数（棒グラフ）
+- 議会議員データ（議員定数、議員報酬、議員任期）
+- 議会選挙データ（前回投票率、前回有効投票数、最下位当選得票数、最下位当選得票率、最下位当選有権者比率）、議員任期
+- 首長選挙データ（前回投票率、前回有効投票数、当選者得票数、当選者得票率、連続在任期、首長任期）
 
-1.  **Create a Gatsby site.**
+###　国政政党データ
+- 国政政党情報比較（収入比較：棒グラフ、政党別議員数割合：円グラフ）
+- 政党議員数（市区町村議会議員数、県議会議員数、衆議院議員数、参議院議員数）
+- 議員数シェア（円グラフ）
+- 政党の財政（項目別政党収入：円グラフ、項目別政党支出：円グラフ）
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+## 🧐 プログラム・フォルダ構成
 
-1.  **Start developing.**
+AirTableのデータベースから、各地方自治体毎の選挙区情報のページを自動作成。
+数値データのグラフ表示はChart.jsを使用。CSSはtailwindcssを使用。
 
-    Navigate into your new site’s directory and start it up.
+src/  
+　├ components/  
+　├ images/ 
+　├ posts/ 
+　├ pages/
+　├ template/  
+　   ├ blog-template.js  
+　   ├ post-template.js  
+　   ├ senkyo10-template.js  
+　   ├ senkyo1a-template.js 
+　   ├ senkyo1b-template.js   
+　   ├ senkyo2-template.js    
+　   └ senkyo3-template.js   
+gatsby-node.js
+gatsby-config.js 
+README.MD  
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
 
-1.  **Open the source code and start editing!**
+1.  **`src/components`**: header.js,seo.js,layout.js,topics.js 等
 
-    Your site is now running at `http://localhost:8000`!
+2.  **`src/images`**: 画像ファイルを保存するフォルダ。
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+3.  **`src/posts`**: ブログポストのマークダウンデータファイル。
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+4.  **`src/pages`**: 各ページの定義ファイル。
 
-## 🧐 What's inside?
+5.  **`src/template`**: 選挙区ページのテンプレートファイル。Airtableデータベースと連携。
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+6.  **`gatsby-node.js`**: ページの自動生成の定義情報等。
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+7.  **`gatsby-config.js`**: プラグインの設定情報等。
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+## GatsbyPlugins  
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+* [gatsby-plugin-prefetch-google-fonts](https://www.gatsbyjs.org/packages/gatsby-plugin-prefetch-google-fonts/?=gatsby%20google%20fonts)
+* [gatsby-source-airtable](https://www.gatsbyjs.org/packages/gatsby-source-airtable/)
+* [gatsby-plugin-react-helmet](https://www.gatsbyjs.org/packages/gatsby-plugin-react-helmet/?=gatsby-plugin-react-helmet)
+* [gatsby-plugin-postcss](https://www.gatsbyjs.org/packages/gatsby-plugin-postcss/)
+* [gatsby-plugin-purgecss](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss/)
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+## References 
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+* [Gatsby.js Official](https://www.gatsbyjs.org/)
+* [Airtable](https://www.airtable.com/)
+* [tailwindcss](https://tailwindcss.com/)
+* [tailwind CheetSheet](https://nerdcave.com/tailwind-cheat-sheet)
+* [Chart.js](https://www.chartjs.org/)
+* [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2)
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+## 🚀 Deploy
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+dotenv File is required for API access key of Airtable.
 
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
 
-12. **`README.md`**: A text file containing useful reference information about your project.
 
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
