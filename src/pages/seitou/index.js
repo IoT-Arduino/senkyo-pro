@@ -130,8 +130,11 @@ class SeitouIndex extends React.Component  {
     )
 
     console.log(incomeAmount)
-
     seitouName1.push("Other")
+
+
+
+    
 
     // 市議会議員数
     let ShigiSuu = []
@@ -145,7 +148,6 @@ class SeitouIndex extends React.Component  {
     let ShigiOther = 29839 - shigiSeitouTotal
 
     ShigiSuu.push(String(ShigiOther))
-    console.log(ShigiSuu)
 
    // 県議会議員数
    let KengiSuu = []
@@ -159,7 +161,6 @@ class SeitouIndex extends React.Component  {
   let KengiOther = 2609 - kengiSeitouTotal
 
   KengiSuu.push(String(KengiOther))
-  console.log(KengiSuu)
 
   // 衆議院議員数
 
@@ -174,7 +175,6 @@ class SeitouIndex extends React.Component  {
 
  let SyugiOther = 465 - SyugiSeitouTotal
  SyugiSuu.push(String(SyugiOther))
- console.log(SyugiSuu)
 
 
   //　参議院議員数
@@ -189,7 +189,6 @@ class SeitouIndex extends React.Component  {
 
   let SangiOther = 248 - SangiSeitouTotal
   SangiSuu.push(String(SangiOther))
-  console.log(SangiSuu)
 
 
     this.setState({
@@ -294,12 +293,8 @@ class SeitouIndex extends React.Component  {
 
   render(){
 
-  //  console.log(this.state)
-  //  const { data } = this.props
    const { chartData,chartData2,chartData3,chartData4,chartData5 } = this.state
    const s10 = this.props.data.s10
-  //  const edges = data.s10.edges[0].node.data
-
 
     return (
       <Layout>
