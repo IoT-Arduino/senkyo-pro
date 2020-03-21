@@ -6,6 +6,7 @@ import SEO from "../../components/seo"
 import { HorizontalBar,Pie } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
+
 class SeitouIndex extends React.Component  {
 
   constructor(props){
@@ -129,12 +130,13 @@ class SeitouIndex extends React.Component  {
     }
     )
 
-    console.log(incomeAmount)
     seitouName1.push("Other")
-
-
-
     
+    console.log(seitouName)
+    console.log(incomeAmount)
+
+
+
 
     // 市議会議員数
     let ShigiSuu = []
@@ -455,13 +457,14 @@ class SeitouIndex extends React.Component  {
 
 export default SeitouIndex
 
-
 export const query = graphql`
 
 query{
         s10:allAirtable(
           filter:  { table: {eq: "s10_seitou"}}
-          sort: {fields: data___s10_code, order: ASC} 
+
+          sort: {fields: data___s10_in_total, order: DESC} 
+
           ) {
           edges {
             node {
@@ -488,6 +491,7 @@ query{
                 s10_in_kifu
                 s10_in_jigyou
                 s10_in_honshibu
+                s10_in_total
               }
             }
           }
