@@ -5,8 +5,8 @@ const Topics = ({topics}) => {
 
     return (
         <>
-        <div>
-            <div className="mt-8">
+        <div className="my-8 px-4">
+            <div className="mt-8 mb-1">
                 {topics.length>0 ? <h3>選挙区Topics</h3> : <p> </p>}
             </div>
 

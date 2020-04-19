@@ -105,11 +105,9 @@ class senkyo3Template extends Component  {
     const cma_s3_chou_ef_vote = String(edges.s3_chou_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
     const cma_s3_chou_toku_votes = String(edges.s3_chou_toku_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
-
     return (
       <Layout>
 
-      
       <h2 className="text-center mb-4">{edges.s3_shiku_chouson}　(政令指定都市)</h2>
 
       <h3>選挙区データ</h3>

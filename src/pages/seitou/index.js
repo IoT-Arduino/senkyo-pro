@@ -132,11 +132,6 @@ class SeitouIndex extends React.Component  {
 
     seitouName1.push("Other")
     
-    console.log(seitouName)
-    console.log(incomeAmount)
-
-
-
 
     // 市議会議員数
     let ShigiSuu = []

@@ -26,18 +26,13 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          paddingTop: 0,
-        }}
-      >
+    <div>
+      <Header siteTitle={data.site.siteMetadata.title} className="sm:text-xl text-2xl"/>
+      <div>
         <main className="py-3 px-3 max-w-6xl mx-auto">{children}</main>
         <Footer />
       </div>
-    </>
+    </div>
   )
 }
 

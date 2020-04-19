@@ -1,56 +1,68 @@
+
 .post h1 {
-    padding: 1rem;
-    color: #4299E1;
-    font-weight: 600;
-    border-bottom: 6px #ddd solid;
-    border-radius: 2px;
-    font-size: 2rem;
+  padding: 1rem;
+  color: #4299e1;
+  font-weight: 600;
+  border-bottom: 6px #ddd solid;
+  border-radius: 2px;
+  font-size: 2rem;
 }
 
 .post h2 {
-    padding: 1rem 1rem;/*上下 左右の余白*/
-    color: #494949;/*文字色*/
-    background:rgba(230,255,230,0.8);/*背景透明に*/
-    background: #f4f4f4;/*背景色*/
-    border-left: solid 5px #4299E1;/*左線*/
-    border-bottom: solid 1px #4299E1;
-    border-bottom: solid 1px #ccc;
-    font-weight:600;
-    margin-top:30px;
-    margin-bottom:25px;
-    font-size:1.5rem;
+  padding: 1rem 1rem; /*上下 左右の余白*/
+  color: #494949; /*文字色*/
+  background: rgba(230, 255, 230, 0.8); /*背景透明に*/
+  background: #f4f4f4; /*背景色*/
+  border-left: solid 5px #4299e1; /*左線*/
+  border-bottom: solid 1px #4299e1;
+  border-bottom: solid 1px #ccc;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
 }
 
 .post h3 {
-    position: relative;
-    margin-top:50px;
-    margin-bottom:30px;
-    font-size:1.25rem;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-size: 1.25rem;
 }
 
 .post h3:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    width: 100%;
-    height: 7px;
-    background: repeating-linear-gradient(
-      -45deg,
-      #4299E1,
-      #4299E1 2px,
-      #fff 2px,
-      #fff 4px
-    );
-  }
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 7px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #4299e1,
+    #4299e1 2px,
+    #fff 2px,
+    #fff 4px
+  );
+}
 
-  .post h4 {
-    text-decoration-line: underline;
-    margin: 40px 0 5px;
-  }
+.post h4 {
+  text-decoration-line: underline;
+  margin: 40px 0 5px;
+}
 
 .post p {
-    font-size: 1.1rem;
-    padding: 0.5rem;
-    margin-bottom: 15px;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  margin-bottom: 15px;
+}
+
+
+@media screen and (max-width:640px){
+  .post h1 {
+    font-size: 1.5rem;
+  }
+
+  .post h2 {
+    font-size: 1.2rem;
+  }
 }

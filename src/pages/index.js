@@ -19,7 +19,6 @@ const IndexPage = props => {
       <SEO title="Home" />
 
       <div className="sm:flex py-2 max-w-6xl mx-auto">
-      
         <div className="my-2 px-4 sm:w-3/5">
           <h2 className="font-bold text-gray-700">
             選挙区・国政政党データトピックス
@@ -41,7 +40,6 @@ const IndexPage = props => {
         </div>
 
         <div className="my-4 px-4 sm:w-2/5">
-
           <h3 className="font-bold text-gray-700">国政政党データ</h3>
           <div className="flex flex-wrap">
             {s10.edges.map(({ node }) => (
@@ -66,9 +64,8 @@ const IndexPage = props => {
           </div>
 
           <div className="my-10 mr-6 relative h-64">
-            <IncomeChart data={s10i} ></IncomeChart>
+            <IncomeChart data={s10i}></IncomeChart>
           </div>
-
         </div>
       </div>
 
@@ -122,7 +119,7 @@ const IndexPage = props => {
       </div>
 
       <div>
-        <p className="mx-10 my-10">
+        <p className="mx-20 my-10">
           <a href="https://senkyo-pro.netlify.com/page2/">
             各種データの根拠資料について
           </a>

@@ -8,14 +8,16 @@ const PostTemplate =  ({ data: post,pageContext }) =>{
   console.log(post)
   return(
 
-      <Layout>
-       <div className={styles.post}>
-        <h1>{post.markdownRemark.frontmatter.title}</h1>
-        <p>{post.markdownRemark.frontmatter.date}</p>
-        <div dangerouslySetInnerHTML={{ __html: post.markdownRemark.html}}  
-            className="my-10" />
-       </div>
-     </Layout>
+    <Layout>
+      <div className="px-2 max-w-5xl mx-auto mb-40">
+        <div className={styles.post}>
+          <h1>{post.markdownRemark.frontmatter.title}</h1>
+          <p>{post.markdownRemark.frontmatter.date}</p>
+          <div dangerouslySetInnerHTML={{ __html: post.markdownRemark.html}}  
+              className="my-0" />
+        </div>
+      </div>
+    </Layout>
   )
   }
 export const query = graphql`

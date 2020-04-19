@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { HorizontalBar } from "react-chartjs-2"
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 export default class incomeChart extends Component {
   constructor(props) {
@@ -93,7 +94,7 @@ export default class incomeChart extends Component {
               position: "bottom",
               labels: {
                 boxWidth: 15,
-                padding: 5,
+                padding: 25,
               },
             },
             responsive: true,
