@@ -4,7 +4,7 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 
 import { HorizontalBar,Pie } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+// import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 class SeitouIndex extends React.Component  {

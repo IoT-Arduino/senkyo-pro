@@ -5,7 +5,7 @@ import styles from "../styles/posts.module.css"
 
 
 const PostTemplate =  ({ data: post,pageContext }) =>{
-  console.log(post)
+
   return(
 
     <Layout>

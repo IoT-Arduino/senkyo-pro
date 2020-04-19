@@ -1,6 +1,6 @@
 import React,{Component} from "react"
 import { HorizontalBar } from 'react-chartjs-2';
-import { Link,graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 
 import Topics from '../components/topics'
@@ -145,12 +145,6 @@ class senkyo2Template extends Component  {
                 display:false,
                 position:'top'
               },
-              // plugins: {
-              //   // Change options for ALL labels of THIS CHART
-              //   datalabels: {
-              //       color: '#36A2EB',
-              //       display:'auto'
-              //   }},
               responsive: true,
               maintainAspectRatio: false
             }}

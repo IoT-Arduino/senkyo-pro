@@ -100,8 +100,6 @@ class senkyo1aTemplate extends Component  {
     const cma_s1_ef_vote = String(edges.s1_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
     const cma_s1_last_vote = String(edges.s1_last_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
-    console.log(data.allMarkdownRemark.edges)
-
     return (
       <Layout>
 

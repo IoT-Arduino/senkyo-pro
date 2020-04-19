@@ -3,7 +3,7 @@ import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
 
 import { Pie } from 'react-chartjs-2'
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+// import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 class senkyo10Template extends Component  {
 
