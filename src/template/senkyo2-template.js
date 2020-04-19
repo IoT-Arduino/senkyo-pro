@@ -94,7 +94,7 @@ class senkyo2Template extends Component  {
     const { data } = this.props
     const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
-    const s2_last_toku_rate 
+    const s2_chou_toku_rate 
     = Math.round(edges.s2_chou_toku_votes / edges.s2_chou_ef_vote *10000 ) /100
 
     const cma_s2_ttl_pop = String(edges.s2_ttl_pop).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
@@ -224,7 +224,7 @@ class senkyo2Template extends Component  {
                 </tr>
                 <tr>
                     <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票率</td>
-                    <td className="text-right w-24 px-2 border-b-2">{s2_last_toku_rate}%</td>
+                    <td className="text-right w-24 px-2 border-b-2">{s2_chou_toku_rate}%</td>
                 </tr>
                 <tr>
                     <td className="w-2/3 px-2 bg-gray-200 border-b-2">連続在任期</td>

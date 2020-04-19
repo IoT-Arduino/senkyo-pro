@@ -60,7 +60,7 @@ query($skip:Int!,$limit:Int!){
   allMarkdownRemark(
     skip:$skip
     limit:$limit
-    sort:{fields:[frontmatter___date],order:ASC}
+    sort:{fields:[frontmatter___date],order:DESC}
   ){
     totalCount
     edges{
