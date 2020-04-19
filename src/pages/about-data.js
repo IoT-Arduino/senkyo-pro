@@ -6,7 +6,7 @@ import styles from "../styles/posts.module.css"
 const page2 = () => {
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="各種データについて" />
 
       <div className={styles.post}>
         <div>

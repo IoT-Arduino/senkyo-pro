@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
-
+import SEO from "../components/seo"
 import { Pie } from "react-chartjs-2"
 // import ChartDataLabels from 'chartjs-plugin-datalabels';
 
@@ -379,6 +379,7 @@ class senkyo10Template extends Component {
 
     return (
       <Layout>
+      　<SEO title={edges.s10_seitou_name+"の議員数シェアと収支データ"} />
         <h1>{edges.s10_seitou_name}のデータ</h1>
 
         <div className="mt-4">

@@ -2,13 +2,14 @@ import React from 'react'
 import Layout from '../components/layout'
 import { graphql } from 'gatsby'
 import styles from "../styles/posts.module.css"
-
+import SEO from "../components/seo"
 
 const PostTemplate =  ({ data: post }) =>{
 
   return(
 
     <Layout>
+      <SEO title={post.markdownRemark.frontmatter.title} />
       <div className="px-2 max-w-5xl mx-auto mb-40">
         <div className={styles.post}>
           <h1>{post.markdownRemark.frontmatter.title}</h1>

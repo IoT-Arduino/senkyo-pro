@@ -1,6 +1,7 @@
 import React,{Component} from "react"
 import { HorizontalBar } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
+import SEO from "../components/seo"
 import Layout from '../components/layout'
 import Topics from '../components/topics'
 
@@ -101,7 +102,7 @@ class senkyo1aTemplate extends Component  {
 
     return (
       <Layout>
-
+      <SEO title={edges.s1_syu_block+"ブロック選挙区情報"} />
       <h2 className="text-center mb-4">衆議院比例{edges.s1_syu_block}ブロック</h2>
 
       <h3>選挙区データ</h3>

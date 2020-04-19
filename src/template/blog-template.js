@@ -1,7 +1,6 @@
 import React from 'react'
-
 import {Link,graphql} from 'gatsby'
-
+import SEO from "../components/seo"
 import Layout from '../components/layout'
 
 
@@ -12,9 +11,10 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout>
+        <SEO title="選挙区記事一覧" />
         <div>
         <h1 style={{display:'inlineBlock',borderBottom:'1px solid'}}>選挙区記事一覧</h1>
-                <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
+                <h4 className="text-right mr-5">{data.allMarkdownRemark.totalCount} Posts</h4>
                 {data.allMarkdownRemark.edges.map(({ node }) => (
                     <div key={node.id} className="my-10">
                         <h3>

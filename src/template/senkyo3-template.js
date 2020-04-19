@@ -2,7 +2,7 @@ import React,{Component} from "react"
 import { HorizontalBar } from 'react-chartjs-2';
 import { Link,graphql } from 'gatsby'
 import Layout from '../components/layout'
-
+import SEO from "../components/seo"
 import Topics from '../components/topics'
 
 class senkyo3Template extends Component  {
@@ -106,7 +106,7 @@ class senkyo3Template extends Component  {
 
     return (
       <Layout>
-
+      <SEO title={edges.s3_shiku_chouson+"選挙区情報"} />
       <h2 className="text-center mb-4">{edges.s3_shiku_chouson}　(政令指定都市)</h2>
 
       <h3>選挙区データ</h3>
