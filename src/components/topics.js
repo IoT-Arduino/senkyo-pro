@@ -6,8 +6,12 @@ const Topics = ({topics}) => {
     return (
         <>
         <div className="my-8 px-4">
-            <div className="mt-8 mb-1">
-                {topics.length>0 ? <h3>選挙区Topics</h3> : <p> </p>}
+            <div className="mt-8 mb-30">
+                {topics.length>0 ? <h3>選挙区Topics</h3> : 
+                    <div>
+                    <h3>選挙区Topics</h3><p>(ここに、選挙区の記事が表示されます)</p>
+                    </div>
+                }
             </div>
 
             {topics.map(({ node }) => (

@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import styles from "../styles/posts.module.css"
 
 
-const PostTemplate =  ({ data: post,pageContext }) =>{
+const PostTemplate =  ({ data: post }) =>{
 
   return(
 

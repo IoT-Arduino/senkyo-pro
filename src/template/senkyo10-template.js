@@ -274,7 +274,7 @@ class senkyo10Template extends Component  {
   }
 
   render(){
-    const { data,pageContext } = this.props
+    const { data } = this.props
     const { chartData,chartData2,chartData3,chartData4,chartData5,chartData6 } = this.state
     const edges = data.allAirtable.edges[0].node.data
 
@@ -444,7 +444,7 @@ class senkyo10Template extends Component  {
 
      <div>
 
-     {edges.s10_code == "seitou180" || edges.s10_code == "seitou170" ? 
+     {edges.s10_code === "seitou180" || edges.s10_code === "seitou170" ? 
        <div className="mt-8 mb-8">
         <h2>政党の財政(収入と支出)</h2>
         <div className="my-4 px-4">{edges.s10_seitou_name}の政党収支データは平成３１年分政治資金収支報告の概要の公開後データ更新予定です。</div>

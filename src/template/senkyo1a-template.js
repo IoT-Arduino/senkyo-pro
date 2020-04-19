@@ -208,7 +208,7 @@ class senkyo1aTemplate extends Component  {
 
      </div>
 
-    <Topics topics={data.allMarkdownRemark.edges}/>
+    <Topics topics={data.allMarkdownRemark.edges} className="mb-30"/>
 
     </Layout>
     );

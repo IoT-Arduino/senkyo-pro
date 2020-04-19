@@ -26,10 +26,10 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Header siteTitle={data.site.siteMetadata.title} className="sm:text-xl text-2xl"/>
       <div>
-        <main className="py-3 px-3 max-w-6xl mx-auto">{children}</main>
+        <main className="py-3 px-3 max-w-6xl mx-auto flex-grow mb-30">{children}</main>
         <Footer />
       </div>
     </div>

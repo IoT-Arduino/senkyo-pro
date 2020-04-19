@@ -35,7 +35,6 @@ class senkyo2Template extends Component  {
 
     const { data } = this.props
     const edges = data.allAirtable.edges[0].node.data
-    console.log(edges)
 
     let Labels = []
     let population = []
@@ -92,7 +91,7 @@ class senkyo2Template extends Component  {
   }
 
   render(){
-    const { data,pageContext } = this.props
+    const { data } = this.props
     const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
     const s2_last_toku_rate 
