@@ -34,7 +34,6 @@ class senkyo1aTemplate extends Component  {
 
     const { data } = this.props
     const edges = data.allAirtable.edges[0].node.data
-    console.log(edges)
 
     let Labels = []
     let population = []

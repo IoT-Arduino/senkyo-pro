@@ -108,8 +108,6 @@ class senkyo2Template extends Component  {
     const cma_s2_chou_ef_vote = String(edges.s2_chou_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
     const cma_s2_chou_toku_votes = String(edges.s2_chou_toku_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
-    console.log(pageContext)
-
     return (
       <Layout>
 

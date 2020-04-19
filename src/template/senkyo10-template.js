@@ -114,8 +114,6 @@ class senkyo10Template extends Component  {
     const syugiOther = 465 - parseInt(syugiTotal)
     const sangiOther = 248 - parseInt(sangiTotal)
 
-    console.log(syugiOther)
-
     let seitouName = []
     let shigiSuu = []
     let kengiSuu = []
@@ -312,9 +310,6 @@ class senkyo10Template extends Component  {
     const cma_outTotal = String(outTotal).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
     const s10 = this.props.data.s10
-
-    console.log(pageContext)
-    console.log(chartData4)
 
     return (
       <Layout>

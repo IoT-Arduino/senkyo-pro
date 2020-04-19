@@ -100,8 +100,6 @@ class senkyo1bTemplate extends Component  {
     const cma_s1_ttl_votes = String(edges.s1_ttl_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
     const cma_s1_housyu_y = String(edges.s1_housyu_y).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
 
-    console.log(pageContext)
-
     return (
       <Layout>
 
