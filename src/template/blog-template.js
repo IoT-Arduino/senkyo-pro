@@ -13,14 +13,14 @@ export default ({ data, pageContext }) => {
     <Layout>
         <SEO title="選挙区記事一覧" />
         <div>
-        <h1 style={{display:'inlineBlock',borderBottom:'1px solid'}}>選挙区記事一覧</h1>
+        <h1 style={{display:'inlineBlock',borderBottom:'1px solid grey'}}>選挙区記事一覧</h1>
                 <h4 className="text-right mr-5">{data.allMarkdownRemark.totalCount} Posts</h4>
                 {data.allMarkdownRemark.edges.map(({ node }) => (
-                    <div key={node.id} className="my-10">
+                    <div key={node.id} className="mt-5 mb-10">
                         <h3>
                         <Link to={`/posts${node.fields.slug}`}>
                           {node.frontmatter.title}</Link>
-                          <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
+                          <span style={{ color:'#bbb'}} className="block md:inline-block"> {" "}  {node.frontmatter.date}</span>
                         </h3>
                         <p className="px-5 my-2">{node.excerpt}</p>
                     </div>
@@ -71,7 +71,7 @@ query($skip:Int!,$limit:Int!){
         id
         frontmatter{
           title
-          date(formatString:"MMMM Do, YYYY")
+          date
         }
         excerpt
       }

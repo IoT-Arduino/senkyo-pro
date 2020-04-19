@@ -19,7 +19,8 @@ const Topics = ({topics}) => {
                     <h3>
                     <Link to={`/posts/${node.fields.slug}`}>
                       {node.frontmatter.title}</Link>
-                      <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
+
+                      <span style={{ color:'#bbb'}} className="block md:inline-block">{" "} {node.frontmatter.date}</span>
                     </h3>
                     <p>{node.excerpt}</p>
                 </div>

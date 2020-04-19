@@ -28,20 +28,20 @@ const IndexPage = props => {
               <h3 className="my-1 hover:bg-blue-100">
                 <Link to={`/posts/${node.fields.slug}`}>
                   {node.frontmatter.title}
-                  <span style={{ color: "#bbb" }}>
+                  <span style={{ color: "#bbb" }} className="block md:inline-block">
                     {" "}
-                    - {node.frontmatter.date}
+                     {node.frontmatter.date}
                   </span>
                 </Link>
               </h3>
               <p>{node.excerpt}</p>
             </div>
           ))}
-          <div className="mx-4 my-2 bg-white-500 hover:bg-blue-200 text-center font-bold py-2 px-4 rounded-full border-blue border-2">
-          <Link to={`/blog`} className="text-blue">
-            選挙区・政党記事一覧
-          </Link>
-        </div>
+          <div className="mx-4 mt-5 mb-10 bg-white-500 hover:bg-blue-200 text-center font-bold py-2 px-4 rounded-full border-blue border-2">
+            <Link to={`/blog`} className="text-blue">
+              選挙区・政党記事一覧
+            </Link>
+          </div>
         </div>
 
         <div className="my-4 px-4 sm:w-2/5">
@@ -125,10 +125,9 @@ const IndexPage = props => {
 
       <div className="max-w-6xl mx-auto">
         <p className="mx-10 my-10">
-         <Link to="about-data">各種データの根拠資料について</Link>
+          <Link to="about-data">各種データの根拠資料について</Link>
         </p>
       </div>
-
     </LayoutTop>
   )
 }

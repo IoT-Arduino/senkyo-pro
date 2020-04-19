@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styles from "../styles/posts.module.css"
 
-const page2 = () => {
+const AboutData = () => {
   return (
     <Layout>
       <SEO title="各種データについて" />
@@ -18,7 +18,6 @@ const page2 = () => {
             対象としていない選挙区 :
             衆議院小選挙区,県議会選挙の選挙区域,市町村（人口10万人未満）
           </p>
-          　　
           <h3>２）有権者数</h3>
           <a href="https://www.soumu.go.jp/menu_news/s-news/01gyosei02_02000177.html">
             参考データ：平成30年1月1日住民基本台帳年齢階級別人口（市区町村別）（日本人住民）
@@ -62,4 +61,4 @@ const page2 = () => {
   )
 }
 
-export default page2
+export default AboutData
