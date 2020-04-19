@@ -28,9 +28,12 @@ const IndexPage = props => {
               <h3 className="my-1 hover:bg-blue-100">
                 <Link to={`/posts/${node.fields.slug}`}>
                   {node.frontmatter.title}
-                  <span style={{ color: "#bbb" }} className="block md:inline-block">
+                  <span
+                    style={{ color: "#bbb" }}
+                    className="block md:inline-block"
+                  >
                     {" "}
-                     {node.frontmatter.date}
+                    {node.frontmatter.date}
                   </span>
                 </Link>
               </h3>

@@ -5,10 +5,16 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     title: `選挙区・政党データサイト(β)`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: `選挙区（衆議院比例ブロック、参議院比例ブロック、都道府県、政令都市　等）のデータおよび国政政党のデータポータルサイト`,
     author: `@Maruo`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GOOGLE_TRACKING_ID,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
