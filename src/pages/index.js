@@ -37,6 +37,11 @@ const IndexPage = props => {
               <p>{node.excerpt}</p>
             </div>
           ))}
+          <div className="mx-4 my-2 bg-white-500 hover:bg-blue-200 text-center font-bold py-2 px-4 rounded-full border-blue border-2">
+          <Link to={`/blog`} className="text-blue">
+            選挙区・政党記事一覧
+          </Link>
+        </div>
         </div>
 
         <div className="my-4 px-4 sm:w-2/5">
@@ -201,7 +206,7 @@ export const query = graphql`
     }
 
     allMarkdownRemark(
-      limit: 6
+      limit: 5
       sort: { fields: frontmatter___date, order: DESC }
     ) {
       edges {

@@ -195,7 +195,7 @@ class senkyo3Template extends Component  {
         </div>
 
       <div className="mt-8 md:w-2/3 md:px-3">
-          <div>傘下自治体</div>
+          <h3>傘下自治体</h3>
           <div className="flex flex-wrap mx-2 ml-8 md:ml-0">
             {cityBlock.edges.map(({ node }) => (
               <div key={node.data.s3_code}

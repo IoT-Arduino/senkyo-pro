@@ -191,7 +191,7 @@ class senkyo1aTemplate extends Component  {
         </div>
 
          <div className="mt-8 md:w-1/3 md:px-3">
-            <div >該当選挙区都道府県</div>
+            <h3>該当選挙区都道府県</h3>
             <div className="flex flex-wrap mx-2 ml-8 md:ml-0">
             {kenblock.edges.map(({ node }) => (
                 <div key={node.data.s1_code} 
@@ -208,7 +208,7 @@ class senkyo1aTemplate extends Component  {
 
      </div>
 
-    <Topics topics={data.allMarkdownRemark.edges} className="mb-30"/>
+    <Topics topics={data.allMarkdownRemark.edges}/>
 
     </Layout>
     );

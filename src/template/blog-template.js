@@ -13,16 +13,16 @@ export default ({ data, pageContext }) => {
   return (
     <Layout>
         <div>
-        <h1 style={{display:'inlineBlock',borderBottom:'1px solid'}}>記事リスト</h1>
+        <h1 style={{display:'inlineBlock',borderBottom:'1px solid'}}>選挙区記事一覧</h1>
                 <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
                 {data.allMarkdownRemark.edges.map(({ node }) => (
-                    <div key={node.id}>
+                    <div key={node.id} className="my-10">
                         <h3>
                         <Link to={`/posts${node.fields.slug}`}>
                           {node.frontmatter.title}</Link>
                           <span style={{ color:'#bbb'}}> - {node.frontmatter.date}</span>
                         </h3>
-                        <p>{node.excerpt}</p>
+                        <p className="px-5 my-2">{node.excerpt}</p>
                     </div>
                 ))}
 
@@ -32,7 +32,7 @@ export default ({ data, pageContext }) => {
                   alignItems:'center',
                   justifyContent:'space-around',
                   maxWidth:300,
-                  maargin:'0 auto',
+                  margin:'10px auto'
                 }}>
                 {!isFirstPage && (
                    <Link to={prevPage} rel="prev">
@@ -78,5 +78,5 @@ query($skip:Int!,$limit:Int!){
     }
   }
 }
-
 `
+
