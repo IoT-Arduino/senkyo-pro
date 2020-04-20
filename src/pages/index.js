@@ -128,7 +128,7 @@ const IndexPage = props => {
 
       <div className="max-w-6xl mx-auto">
         <p className="mx-10 my-10">
-          <Link to="about-data">各種データの根拠資料について</Link>
+          <Link to="/aboutData">各種データの根拠資料について</Link>
         </p>
       </div>
     </LayoutTop>

@@ -9,6 +9,7 @@ class senkyo1aTemplate extends Component  {
   
   constructor(props){
     super(props)
+
     this.state = {
         chartData:{
           labels: [],
@@ -29,6 +30,7 @@ class senkyo1aTemplate extends Component  {
           ]
         }
     }
+    
   }
 
   getChartData = () => {
@@ -118,24 +120,23 @@ class senkyo1aTemplate extends Component  {
       </div>
 
       <div className="relative h-64 w-9/10 mx-auto my-4">
-          <HorizontalBar
-            data={chartData}
-            options={{
-                title:{
-                  display:true,
-                  text:`${edges.s1_syu_block}ブロックの年代別有権者数`,
-                  fontSize:18
-                },
-                legend:{
-                  display:false,
-                  position:'top'
-                },
-                responsive: true,
-                maintainAspectRatio: false
-              }}
-            />
-        </div>
-
+        <HorizontalBar
+        data={chartData}
+        options={{
+            title:{
+              display:true,
+              text:`${edges.s1_syu_block}ブロックの年代別有権者数`,
+              fontSize:18
+            },
+            legend:{
+              display:false,
+              position:'top'
+            },
+            responsive: true,
+            maintainAspectRatio: false
+          }}
+        />
+      </div>
 
      <div className="block md:flex mt-8">
 
