@@ -85,8 +85,8 @@ export default class incomeChart extends Component {
           options={{
             title: {
               display: true,
-              text: `政党の収入比較`,
-              fontSize: 18,
+              text: `　政党の収入比較（単位千円）`,
+              fontSize: 16,
             },
             legend: {
               display: false,
@@ -94,6 +94,24 @@ export default class incomeChart extends Component {
               labels: {
                 boxWidth: 15,
                 padding: 25,
+              },
+            },
+            scales: {
+              xAxes: [
+                {
+                  ticks: {
+                    callback: function(label, index, labels) {
+                      return label
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    },
+                  },
+                },
+              ],
+            },
+            plugins: {
+              datalabels: {
+                display: false,
               },
             },
             responsive: true,

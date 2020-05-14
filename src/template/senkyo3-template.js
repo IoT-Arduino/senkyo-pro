@@ -134,6 +134,37 @@ class senkyo3Template extends Component  {
               display:false,
               position:'top'
             },
+            scales: {
+              xAxes: [
+                {
+                  ticks: {
+                    callback: function(label, index, labels) {
+                      return label
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    },
+                  },
+                },
+              ],
+            },
+            plugins: {
+              datalabels: {
+                display: true,
+                color: "#777",
+                anchor: "end",
+                align: "start",
+                offset: -50,
+                font: {
+                  weight: "bold",
+                  size: "11",
+                },
+                formatter: value => {
+                  return value
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                },
+              },
+            },
             responsive: true,
             maintainAspectRatio: false
           }}
