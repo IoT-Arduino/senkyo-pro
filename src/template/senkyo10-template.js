@@ -141,43 +141,107 @@ class senkyo10Template extends Component {
     sangiSuu.push(parseInt(sangiTotal))
     sangiSuu.push(parseInt(sangiOther))
 
+    // 収入・支出用　ソート、合計Functions
+
+    function sortItems(a,b){
+      const lowDataA = parseInt(a[1]);
+      const lowDataB = parseInt(b[1]);
+    
+      let comparison = 0;
+      if (lowDataA > lowDataB) {
+        comparison = -1;
+      } else if (lowDataA < lowDataB) {
+        comparison = 1;
+      }
+      return comparison;
+    }
+
+    //　配列value合計計算（datalabel 少ないもの表示しない為）
+    const calcSum  = function(arr) {
+      return arr.reduce(function(prev, current, i, arr) {
+          return prev+current;
+      });
+    };
+
+
+    // 収入値　処理
+    let incomeLabelOrg = []
+    let incomeAmountOrg = []
     let incomeLabel = []
     let incomeAmount = []
 
-    incomeLabel.push("党費")
-    incomeLabel.push("寄付収入")
-    incomeLabel.push("事業収入")
-    incomeLabel.push("本部支部交付金収入")
-    incomeLabel.push("政党交付金収入")
-    incomeLabel.push("その他")
+    incomeLabelOrg.push("党費")
+    incomeLabelOrg.push("寄付収入")
+    incomeLabelOrg.push("事業収入")
+    incomeLabelOrg.push("本部支部交付金収入")
+    incomeLabelOrg.push("政党交付金収入")
 
-    incomeAmount.push(parseInt(edges.s10_in_touhi))
-    incomeAmount.push(parseInt(edges.s10_in_kifu))
-    incomeAmount.push(parseInt(edges.s10_in_jigyou))
-    incomeAmount.push(parseInt(edges.s10_in_honshibu))
-    incomeAmount.push(parseInt(edges.s10_in_seitoukoufu))
+    incomeAmountOrg.push(parseInt(edges.s10_in_touhi))
+    incomeAmountOrg.push(parseInt(edges.s10_in_kifu))
+    incomeAmountOrg.push(parseInt(edges.s10_in_jigyou))
+    incomeAmountOrg.push(parseInt(edges.s10_in_honshibu))
+    incomeAmountOrg.push(parseInt(edges.s10_in_seitoukoufu))
+
+    // 収入ソート処理（その他以外）
+    let incomeSortArray = []
+
+    for(let i=0; i < incomeLabelOrg.length ;i++){
+      const item = [incomeLabelOrg[i],incomeAmountOrg[i]]
+      incomeSortArray.push(item)
+    }
+
+    incomeSortArray.sort(sortItems)
+
+    incomeSortArray.forEach(item => {
+      incomeLabel.push(item[0])
+      incomeAmount.push(item[1])
+    })
+
+    incomeLabel.push("その他")
     incomeAmount.push(parseInt(edges.s10_in_other))
 
+
+　　//　支出値　処理
+    let expenseLabelOrg = []
+    let expenseAmountOrg = []
     let expenseLabel = []
     let expenseAmount = []
 
-    expenseLabel.push("人件費")
-    expenseLabel.push("光熱費・備品費")
-    expenseLabel.push("事務所費")
-    expenseLabel.push("組織活動費")
-    expenseLabel.push("選挙関係費")
-    expenseLabel.push("機関紙費")
-    expenseLabel.push("宣伝費")
-    expenseLabel.push("その他支出")
+    expenseLabelOrg.push("人件費")
+    expenseLabelOrg.push("光熱費・備品費")
+    expenseLabelOrg.push("事務所費")
+    expenseLabelOrg.push("組織活動費")
+    expenseLabelOrg.push("選挙関係費")
+    expenseLabelOrg.push("機関紙費")
+    expenseLabelOrg.push("宣伝費")
 
-    expenseAmount.push(parseInt(edges.s10_out_jinkenhi))
-    expenseAmount.push(parseInt(edges.s10_out_other))
-    expenseAmount.push(parseInt(edges.s10_out_jimusho))
-    expenseAmount.push(parseInt(edges.s10_out_soshiki))
-    expenseAmount.push(parseInt(edges.s10_out_senkyo))
-    expenseAmount.push(parseInt(edges.s10_out_kikanshi))
-    expenseAmount.push(parseInt(edges.s10_out_senden))
+    expenseAmountOrg.push(parseInt(edges.s10_out_jinkenhi))
+    expenseAmountOrg.push(parseInt(edges.s10_out_other))
+    expenseAmountOrg.push(parseInt(edges.s10_out_jimusho))
+    expenseAmountOrg.push(parseInt(edges.s10_out_soshiki))
+    expenseAmountOrg.push(parseInt(edges.s10_out_senkyo))
+    expenseAmountOrg.push(parseInt(edges.s10_out_kikanshi))
+    expenseAmountOrg.push(parseInt(edges.s10_out_senden))
+
+    // 支出ソート処理（その他以外）
+    let expenseSortArray = []
+
+    for(let i=0; i < expenseLabelOrg.length ;i++){
+      const item = [expenseLabelOrg[i],expenseAmountOrg[i]]
+      expenseSortArray.push(item)
+    }
+
+    expenseSortArray.sort(sortItems)
+
+    expenseSortArray.forEach(item => {
+      expenseLabel.push(item[0])
+      expenseAmount.push(item[1])
+    })
+
+    expenseLabel.push("その他支出")
     expenseAmount.push(parseInt(edges.s10_out_other_2))
+
+
 
     this.setState({
       chartData: {
@@ -188,7 +252,7 @@ class senkyo10Template extends Component {
             data: shigiSuu,
             backgroundColor: [
               "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
+              "rgba(204, 204, 204, 0.6)",
             ],
           },
         ],
@@ -201,7 +265,7 @@ class senkyo10Template extends Component {
             data: kengiSuu,
             backgroundColor: [
               "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
+              "rgba(204, 204, 204, 0.6)",
             ],
           },
         ],
@@ -214,7 +278,7 @@ class senkyo10Template extends Component {
             data: syugiSuu,
             backgroundColor: [
               "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
+              "rgba(204, 204, 204, 0.6)",
             ],
           },
         ],
@@ -227,7 +291,7 @@ class senkyo10Template extends Component {
             data: sangiSuu,
             backgroundColor: [
               "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
+              "rgba(204, 204, 204, 0.6)",
             ],
           },
         ],
@@ -244,8 +308,7 @@ class senkyo10Template extends Component {
               "rgba(255, 206, 86, 0.6)",
               "rgba(75, 192, 192, 0.6)",
               "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)",
+              "rgba(204, 204, 204, 0.6)"
             ],
             datalabels: { color: "#777" },
           },
@@ -265,8 +328,7 @@ class senkyo10Template extends Component {
               "rgba(153, 102, 255, 0.6)",
               "rgba(255, 159, 64, 0.6)",
               "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
+              "rgba(204, 204, 204, 0.6)"
             ],
             datalabels: { color: "#777" },
           },
@@ -297,7 +359,7 @@ class senkyo10Template extends Component {
               //　パーセント表示にする計算式
               const devided =((value / shigiJapanTotal) * 100).toFixed(1)
  
-              if (context.dataIndex == 0) {
+              if (context.dataIndex === 0) {
                 return devided + " %"
               } else {
                 return ""
@@ -333,7 +395,7 @@ class senkyo10Template extends Component {
               //　パーセント表示にする計算式
               const devided =((value / kengiJapanTotal) * 100).toFixed(1)
  
-              if (context.dataIndex == 0) {
+              if (context.dataIndex === 0) {
                 return devided + " %"
               } else {
                 return ""
@@ -369,7 +431,7 @@ class senkyo10Template extends Component {
               //　パーセント表示にする計算式
               const devided =((value / SyugiJapanTotal) * 100).toFixed(1)
  
-              if (context.dataIndex == 0) {
+              if (context.dataIndex === 0) {
                 return devided + " %"
               } else {
                 return ""
@@ -405,10 +467,90 @@ class senkyo10Template extends Component {
               //　パーセント表示にする計算式
               const devided =((value / SangiJapanTotal) * 100).toFixed(1)
  
-              if (context.dataIndex == 0) {
+              if (context.dataIndex === 0) {
                 return devided + " %"
               } else {
                 return ""
+              }
+            },
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+      options5:{
+        title: {
+          display: true,
+          text: `${edges.s10_seitou_name}の政党収入(項目別）`,
+          fontSize: 18,
+        },
+        legend: {
+          display: true,
+          position: "bottom",
+          labels: {
+            boxWidth: 15,
+            padding: 5,
+          },
+        },
+        plugins: {
+          datalabels: {
+            color: "#777",
+            display: true,
+            anchor: "end",
+            align: "start",
+            offset: 10,
+            font: {
+              weight: "bold",
+              size: "15",
+            },
+            formatter: value => {
+              const sum = calcSum(incomeAmount)
+              const devided = parseInt(value/sum * 100)
+              const newValue = (value/100000).toFixed(1)
+              if (devided < 5) {
+                return ""
+              } else {
+                return newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"億円"
+              }
+            },
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+      options6: {
+        title: {
+          display: true,
+          text: `${edges.s10_seitou_name}の政党支出(項目別）`,
+          fontSize: 18,
+        },
+        legend: {
+          display: true,
+          position: "bottom",
+          labels: {
+            boxWidth: 15,
+            padding: 5,
+          },
+        },
+        plugins: {
+          datalabels: {
+            color: "#777",
+            display: true,
+            anchor: "end",
+            align: "start",
+            offset: -10,
+            font: {
+              weight: "bold",
+              size: "15",
+            },
+            formatter: value => {
+              const sum = calcSum(expenseAmount)
+              const devided = parseInt(value/sum * 100)
+              const newValue = (value/100000).toFixed(1)
+              if (devided < 5) {
+                return ""
+              } else {
+                return newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"億円"
               }
             },
           },
@@ -435,7 +577,9 @@ class senkyo10Template extends Component {
       options,
       options2,
       options3,
-      options4
+      options4,
+      options5,
+      options6
     } = this.state
     const edges = data.allAirtable.edges[0].node.data
 
@@ -654,29 +798,7 @@ class senkyo10Template extends Component {
               <div className="relative h-64 w-9/10 mx-auto my-14">
                 <Pie
                   data={chartData5}
-                  options={{
-                    title: {
-                      display: true,
-                      text: `${edges.s10_seitou_name}の政党収入(項目別）`,
-                      fontSize: 18,
-                    },
-                    legend: {
-                      display: true,
-                      position: "bottom",
-                      labels: {
-                        boxWidth: 15,
-                        padding: 5,
-                      },
-                    },
-                    plugins: {
-                      datalabels: {
-                        color: "#36A2EB",
-                        display: "auto",
-                      },
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
-                  }}
+                  options={options5}
                 />
               </div>
 
@@ -735,30 +857,7 @@ class senkyo10Template extends Component {
               <div className="relative h-64 w-9/10 mx-auto my-14">
                 <Pie
                   data={chartData6}
-                  options={{
-                    title: {
-                      display: true,
-                      text: `${edges.s10_seitou_name}の政党支出(項目別）`,
-                      fontSize: 18,
-                    },
-                    legend: {
-                      display: true,
-                      position: "bottom",
-                      labels: {
-                        boxWidth: 15,
-                        padding: 5,
-                      },
-                    },
-                    plugins: {
-                      // Change options for ALL labels of THIS CHART
-                      datalabels: {
-                        color: "#36A2EB",
-                        display: "auto",
-                      },
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
-                  }}
+                  options={options6}
                 />
               </div>
               <table className="border-2 my-8 mx-auto">
