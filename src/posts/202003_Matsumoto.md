@@ -18,6 +18,6 @@
 
 開票結果等選挙に関する詳細は以下のリンクからご覧いただけます。
 
-令和2年（2020年）3月15日 松本市長選挙
+令和2年（2020年）3月15日 松本市長選挙  
 http://www.city.matsumoto.nagano.jp/shisei/senkyo/sityousokuhou.html
 

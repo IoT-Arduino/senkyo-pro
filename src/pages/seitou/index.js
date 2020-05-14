@@ -128,8 +128,6 @@ class SeitouIndex extends React.Component {
     let totalMinusKofukin = []
     let seitouKoufukin = []
 
-    console.log(edges)
-
     edges.forEach(element => {
       let incomeTotal =
         parseInt(element.node.data.s10_in_touhi) +

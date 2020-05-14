@@ -19,9 +19,9 @@
 
 開票結果等選挙に関する詳細は以下のリンクからご覧いただけます。
 
-令和元年12月8日執行　小金井市長選挙　投開票結果
+令和元年12月8日執行　小金井市長選挙　投開票結果  
 https://www.city.koganei.lg.jp/smph/shisei/466/info/20191208sicyosigiho.html 
 
 
-小金井市選挙管理委員会事務局
+小金井市選挙管理委員会事務局  
 https://www.city.koganei.lg.jp/shisei/466/senkanniinn.html 

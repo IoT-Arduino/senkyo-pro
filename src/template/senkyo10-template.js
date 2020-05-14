@@ -98,7 +98,7 @@ class senkyo10Template extends Component {
             datalabels: { color: "#FFCE56" },
           },
         ],
-      },
+      }
     }
   }
 
@@ -110,10 +110,15 @@ class senkyo10Template extends Component {
     const sangiTotal =
       parseInt(edges.s10_san_shou, 10) + parseInt(edges.s10_san_hirei, 10)
 
-    const shigiOther = 29839 - edges.s10_shigi_ttl
-    const kengiOther = 2609 - edges.s10_kengi_ttl
-    const syugiOther = 465 - parseInt(syugiTotal)
-    const sangiOther = 248 - parseInt(sangiTotal)
+    const shigiJapanTotal = 29839
+    const kengiJapanTotal = 2609
+    const SyugiJapanTotal = 465
+    const SangiJapanTotal = 248
+
+    const shigiOther = shigiJapanTotal - edges.s10_shigi_ttl
+    const kengiOther = kengiJapanTotal - edges.s10_kengi_ttl
+    const syugiOther = SyugiJapanTotal - parseInt(syugiTotal)
+    const sangiOther = SangiJapanTotal - parseInt(sangiTotal)
 
     let seitouName = []
     let shigiSuu = []
@@ -267,6 +272,150 @@ class senkyo10Template extends Component {
           },
         ],
       },
+      options:{
+        title: {
+          display: true,
+          text: `${edges.s10_seitou_name}の市区会議員シェア`,
+          fontSize: 18,
+        },
+        legend: {
+          display: false,
+          position: "top",
+        },
+        plugins: {
+          datalabels: {
+            color: "#777",
+            display: true,
+            anchor: "end",
+            align: "start",
+            offset: 10,
+            font: {
+              weight: "bold",
+              size: "25",
+            },
+            formatter: (value,context) => {
+              //　パーセント表示にする計算式
+              const devided =((value / shigiJapanTotal) * 100).toFixed(1)
+ 
+              if (context.dataIndex == 0) {
+                return devided + " %"
+              } else {
+                return ""
+              }
+            },
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+      options2:{
+        title: {
+          display: true,
+          text: `${edges.s10_seitou_name}の県議会議員シェア`,
+          fontSize: 18,
+        },
+        legend: {
+          display: false,
+          position: "top",
+        },
+        plugins: {
+          datalabels: {
+            color: "#777",
+            display: true,
+            anchor: "end",
+            align: "start",
+            offset: 10,
+            font: {
+              weight: "bold",
+              size: "25",
+            },
+            formatter: (value,context) => {
+              //　パーセント表示にする計算式
+              const devided =((value / kengiJapanTotal) * 100).toFixed(1)
+ 
+              if (context.dataIndex == 0) {
+                return devided + " %"
+              } else {
+                return ""
+              }
+            },
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+      options3:{
+        title: {
+          display: true,
+          text: `${edges.s10_seitou_name}の衆議院議員シェア`,
+          fontSize: 18,
+        },
+        legend: {
+          display: false,
+          position: "top",
+        },
+        plugins: {
+          datalabels: {
+            color: "#777",
+            display: true,
+            anchor: "end",
+            align: "start",
+            offset: 10,
+            font: {
+              weight: "bold",
+              size: "25",
+            },
+            formatter: (value,context) => {
+              //　パーセント表示にする計算式
+              const devided =((value / SyugiJapanTotal) * 100).toFixed(1)
+ 
+              if (context.dataIndex == 0) {
+                return devided + " %"
+              } else {
+                return ""
+              }
+            },
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+      options4:{
+        title: {
+          display: true,
+          text: `${edges.s10_seitou_name}の参議院議員シェア`,
+          fontSize: 18,
+        },
+        legend: {
+          display: false,
+          position: "top",
+        },
+        plugins: {
+          datalabels: {
+            color: "#777",
+            display: true,
+            anchor: "end",
+            align: "start",
+            offset: 10,
+            font: {
+              weight: "bold",
+              size: "25",
+            },
+            formatter: (value,context) => {
+              //　パーセント表示にする計算式
+              const devided =((value / SangiJapanTotal) * 100).toFixed(1)
+ 
+              if (context.dataIndex == 0) {
+                return devided + " %"
+              } else {
+                return ""
+              }
+            },
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+      }
     })
   }
 
@@ -283,6 +432,10 @@ class senkyo10Template extends Component {
       chartData4,
       chartData5,
       chartData6,
+      options,
+      options2,
+      options3,
+      options4
     } = this.state
     const edges = data.allAirtable.edges[0].node.data
 
@@ -457,38 +610,14 @@ class senkyo10Template extends Component {
           <div className="relative h-64 w-9/10 mx-auto my-14">
             <Pie
               data={chartData}
-              options={{
-                title: {
-                  display: true,
-                  text: `${edges.s10_seitou_name}の市区会議員シェア`,
-                  fontSize: 18,
-                },
-                legend: {
-                  display: false,
-                  position: "top",
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-              }}
+              options={options}
             />
           </div>
 
           <div className="relative h-64 w-9/10 mx-auto my-14">
             <Pie
               data={chartData2}
-              options={{
-                title: {
-                  display: true,
-                  text: `${edges.s10_seitou_name}の県議会議員シェア`,
-                  fontSize: 18,
-                },
-                legend: {
-                  display: false,
-                  position: "top",
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-              }}
+              options={options2}
             />
           </div>
         </div>
@@ -497,38 +626,14 @@ class senkyo10Template extends Component {
           <div className="relative h-64 w-9/10 mx-auto my-14">
             <Pie
               data={chartData3}
-              options={{
-                title: {
-                  display: true,
-                  text: `${edges.s10_seitou_name}の衆議院議員シェア`,
-                  fontSize: 18,
-                },
-                legend: {
-                  display: false,
-                  position: "top",
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-              }}
+              options={options3}
             />
           </div>
 
           <div className="relative h-64 w-9/10 mx-auto my-14">
             <Pie
               data={chartData4}
-              options={{
-                title: {
-                  display: true,
-                  text: `${edges.s10_seitou_name}の参議院議員シェア`,
-                  fontSize: 18,
-                },
-                legend: {
-                  display: false,
-                  position: "top",
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-              }}
+              options={options4}
             />
           </div>
         </div>
@@ -564,7 +669,6 @@ class senkyo10Template extends Component {
                       },
                     },
                     plugins: {
-                      // Change options for ALL labels of THIS CHART
                       datalabels: {
                         color: "#36A2EB",
                         display: "auto",
@@ -619,7 +723,7 @@ class senkyo10Template extends Component {
                     </td>
                   </tr>
                   <tr>
-                    <td className="px-2 bg-gray-400 border-b-2">収入合計</td>
+                    <td className="px-2 bg-gray-400 border-b-2">政党収入合計（千円）</td>
                     <td className="text-right w-24 px-2 border-b-2 bg-gray-400">
                       {" "}
                       {cma_inTotal}
@@ -711,7 +815,7 @@ class senkyo10Template extends Component {
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-400 border-b-2">
-                      政党支出合計
+                      政党支出合計（千円）
                     </td>
                     <td className="text-right w-24 px-2 border-b-2 bg-gray-400">
                       {cma_outTotal}

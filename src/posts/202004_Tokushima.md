@@ -18,6 +18,6 @@
 
 開票結果等選挙に関する詳細は以下のリンクからご覧いただけます。
 
-令和2年（2020年）4月6日 徳島市長選挙
+令和2年（2020年）4月6日 徳島市長選挙  
 https://www.city.tokushima.tokushima.jp/smph/shisei/senkyo/senkyo_oshirase/sityousennkyo.html
 

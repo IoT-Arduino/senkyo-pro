@@ -234,9 +234,7 @@ class senkyo2Template extends Component  {
     </div>
 
 
-        { !edges.s2_chou_ef_vote ? (
-          <p></p>
-        ) : (
+        { edges.s2_chou_ef_vote>0 ? (
           <div className="mt-8 md:w-1/3 md:px-3">
           <h3>首長選挙データ</h3>
           <table className="border-2 mt-2 ml-8 md:ml-0">
@@ -268,7 +266,28 @@ class senkyo2Template extends Component  {
           </tbody>
           </table>
         </div>
-        )}
+
+        ) : edges.s2_chou_ef_vote === 0 ? (
+          <div className="mt-8 md:w-1/3 md:px-3">
+          <h3>首長選挙データ</h3>
+          <table className="border-2 mt-2 ml-8 md:ml-0">
+          <tbody>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">当選者得票数</td>
+                    <td className="text-right w-34 px-2 border-b-2">無投票当選</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">連続在任期</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_re_elected}</td>
+                </tr>
+                <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">首長任期</td>
+                    <td className="text-right w-24 px-2 border-b-2">{edges.s2_chou_ninki}</td>
+                </tr>
+          </tbody>
+          </table>
+        </div>
+        ) : (<p></p>) }
 
 
       </div>

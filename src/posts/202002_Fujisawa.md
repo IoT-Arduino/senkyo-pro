@@ -18,6 +18,6 @@
 
 開票結果等選挙に関する詳細は以下のリンクからご覧いただけます。
 
-令和2年（2020年）2月16日 藤沢市長選挙
+令和2年（2020年）2月16日 藤沢市長選挙  
 https://www.city.fujisawa.kanagawa.jp/senkan/kurashi/senkyo/joho/20200216.html
 
