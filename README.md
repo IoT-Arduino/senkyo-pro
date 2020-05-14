@@ -21,7 +21,7 @@
 - 議員数シェア（円グラフ）
 - 政党の財政（項目別政党収入：円グラフ、項目別政党支出：円グラフ）
 
-[各種データの根拠資料について](https://senkyo-pro.netlify.com/page2/)
+[各種データの根拠資料について](https://senkyo-pro.netlify.app/aboutData)
 
 
 
