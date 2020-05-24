@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import LayoutTop from "../components/layoutTop"
 import SEO from "../components/seo"
-import IncomeChart from "../components/incomeChart"
+import IncomeChart from "../components/charts/incomeChart"
 
 const IndexPage = props => {
   const s1a = props.data.s1a

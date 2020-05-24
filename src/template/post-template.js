@@ -10,7 +10,7 @@ const PostTemplate =  ({ data: post }) =>{
 
     <Layout>
       <SEO title={post.markdownRemark.frontmatter.title} />
-      <div className="px-2 max-w-5xl mx-auto mb-40">
+      <div className="max-w-6xl mx-auto mb-40">
         <div className={styles.post}>
           <h1>{post.markdownRemark.frontmatter.title}</h1>
           <p>{post.markdownRemark.frontmatter.date}</p>

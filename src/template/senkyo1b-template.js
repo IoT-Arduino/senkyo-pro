@@ -1,96 +1,111 @@
 import React, { Component } from "react"
-import { HorizontalBar } from "react-chartjs-2"
+// import { HorizontalBar } from "react-chartjs-2"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-
 import Topics from "../components/topics"
 
+import S1aChart from "../components/charts/populationChart.js"
+
 class senkyo1bTemplate extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      chartData: {
-        labels: [],
-        datasets: [
-          {
-            label: "Population",
-            data: [],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)",
-            ],
-          },
-        ],
-      },
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     chartData: {
+  //       labels: [],
+  //       datasets: [
+  //         {
+  //           label: "Population",
+  //           data: [],
+  //           backgroundColor: [
+  //             "rgba(255, 99, 132, 0.6)",
+  //             "rgba(54, 162, 235, 0.6)",
+  //             "rgba(255, 206, 86, 0.6)",
+  //             "rgba(75, 192, 192, 0.6)",
+  //             "rgba(153, 102, 255, 0.6)",
+  //             "rgba(255, 159, 64, 0.6)",
+  //             "rgba(255, 99, 132, 0.6)",
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   }
+  // }
 
-  getChartData = () => {
-    const { data } = this.props
-    const edges = data.allAirtable.edges[0].node.data
+  // getChartData = () => {
+  //   const { data } = this.props
+  //   const edges = data.allAirtable.edges[0].node.data
 
-    let Labels = []
-    let population = []
+  //   let Labels = []
+  //   let population = []
 
-    Labels.push("90代以上")
-    Labels.push("80代")
-    Labels.push("70代")
-    Labels.push("60代")
-    Labels.push("50代")
-    Labels.push("40代")
-    Labels.push("30代")
-    Labels.push("20代")
-    Labels.push("10代")
+  //   Labels.push("90代以上")
+  //   Labels.push("80代")
+  //   Labels.push("70代")
+  //   Labels.push("60代")
+  //   Labels.push("50代")
+  //   Labels.push("40代")
+  //   Labels.push("30代")
+  //   Labels.push("20代")
+  //   Labels.push("10代")
 
-    population.push(parseInt(edges.s1_v_nineties))
-    population.push(parseInt(edges.s1_v_eighties))
-    population.push(parseInt(edges.s1_v_seventies))
-    population.push(parseInt(edges.s1_v_sixties))
-    population.push(parseInt(edges.s1_v_fifties))
-    population.push(parseInt(edges.s1_v_forties))
-    population.push(parseInt(edges.s1_v_thirries))
-    population.push(parseInt(edges.s1_v_twenties))
-    population.push(parseInt(edges.s1_v_teen))
+  //   population.push(parseInt(edges.s1_v_nineties))
+  //   population.push(parseInt(edges.s1_v_eighties))
+  //   population.push(parseInt(edges.s1_v_seventies))
+  //   population.push(parseInt(edges.s1_v_sixties))
+  //   population.push(parseInt(edges.s1_v_fifties))
+  //   population.push(parseInt(edges.s1_v_forties))
+  //   population.push(parseInt(edges.s1_v_thirries))
+  //   population.push(parseInt(edges.s1_v_twenties))
+  //   population.push(parseInt(edges.s1_v_teen))
 
-    this.setState({
-      chartData: {
-        labels: Labels,
-        datasets: [
-          {
-            label: "Population",
-            data: population,
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-            ],
-          },
-        ],
-      },
-    })
-  }
+  //   this.setState({
+  //     chartData: {
+  //       labels: Labels,
+  //       datasets: [
+  //         {
+  //           label: "Population",
+  //           data: population,
+  //           backgroundColor: [
+  //             "rgba(255, 99, 132, 0.6)",
+  //             "rgba(54, 162, 235, 0.6)",
+  //             "rgba(255, 206, 86, 0.6)",
+  //             "rgba(75, 192, 192, 0.6)",
+  //             "rgba(153, 102, 255, 0.6)",
+  //             "rgba(255, 159, 64, 0.6)",
+  //             "rgba(255, 99, 132, 0.6)",
+  //             "rgba(54, 162, 235, 0.6)",
+  //             "rgba(255, 206, 86, 0.6)",
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   })
+  // }
 
-  componentDidMount() {
-    this.getChartData()
-  }
+  // componentDidMount() {
+  //   this.getChartData()
+  // }
 
   render() {
     const { data } = this.props
-    const { chartData } = this.state
+    // const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
     const cityBlock = data.cityBlock
+
+    // propsでわたすchartデータ用
+    // const s1a = data.allAirtable
+    const population = [
+      edges.s1_v_nineties,
+      edges.s1_v_eighties,
+      edges.s1_v_seventies,
+      edges.s1_v_sixties,
+      edges.s1_v_fifties,
+      edges.s1_v_forties,
+      edges.s1_v_thirries,
+      edges.s1_v_twenties,
+      edges.s1_v_teen,
+    ]
 
     const cma_s1_ttl_pop = String(edges.s1_ttl_pop).replace(
       /(\d)(?=(\d\d\d)+$)/g,
@@ -105,11 +120,18 @@ class senkyo1bTemplate extends Component {
       "$1,"
     )
 
-    const s1_chou_toku_rate 
-    = Math.round(edges.s1_chou_toku_votes / edges.s1_chou_ef_vote *10000 ) /100
+    const s1_chou_toku_rate =
+      Math.round((edges.s1_chou_toku_votes / edges.s1_chou_ef_vote) * 10000) /
+      100
 
-    const cma_s1_chou_ef_vote = String(edges.s1_chou_ef_vote).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
-    const cma_s1_chou_toku_votes = String(edges.s1_chou_toku_votes).replace(/(\d)(?=(\d\d\d)+$)/g, '$1,')
+    const cma_s1_chou_ef_vote = String(edges.s1_chou_ef_vote).replace(
+      /(\d)(?=(\d\d\d)+$)/g,
+      "$1,"
+    )
+    const cma_s1_chou_toku_votes = String(edges.s1_chou_toku_votes).replace(
+      /(\d)(?=(\d\d\d)+$)/g,
+      "$1,"
+    )
 
     return (
       <Layout>
@@ -129,53 +151,11 @@ class senkyo1bTemplate extends Component {
         </div>
 
         <div className="relative h-64 w-9/10 mx-auto my-4">
-          <HorizontalBar
-            data={chartData}
-            options={{
-              title: {
-                display: true,
-                text: `${edges.s1_pref}の年代別有権者数`,
-                fontSize: 18,
-              },
-              legend: {
-                display: false,
-                position: "top",
-              },
-              scales: {
-                xAxes: [
-                  {
-                    ticks: {
-                      callback: function(label, index, labels) {
-                        return label
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                      },
-                    },
-                  },
-                ],
-              },
-              plugins: {
-                datalabels: {
-                  display: true,
-                  color: "#777",
-                  anchor: "end",
-                  align: "start",
-                  offset: -50,
-                  font: {
-                    weight: "bold",
-                    size: "11",
-                  },
-                  formatter: value => {
-                    return value
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  },
-                },
-              },
-              responsive: true,
-              maintainAspectRatio: false,
-            }}
-          />
+          <S1aChart
+            // data={s1a}
+            title={edges.s1_pref}
+            population={population}
+          ></S1aChart>
         </div>
 
         <div className="block md:flex mt-8">
@@ -211,7 +191,7 @@ class senkyo1bTemplate extends Component {
             </table>
           </div>
 
-          { edges.s1_chou_ef_vote > 0 ? (
+          {edges.s1_chou_ef_vote > 0 ? (
             <div className="mt-8 md:w-1/3 md:px-3">
               <h3>首長選挙データ</h3>
               <table className="border-2 mt-2 ml-8 md:ml-0">
@@ -269,37 +249,39 @@ class senkyo1bTemplate extends Component {
             </div>
           ) : edges.s1_chou_ef_vote === 0 ? (
             <div className="mt-8 md:w-1/3 md:px-3">
-            <h3>首長選挙データ</h3>
-            <table className="border-2 mt-2 ml-8 md:ml-0">
-              <tbody>
-                <tr>
-                  <td className="w-2/3 px-2 bg-gray-200 border-b-2">
-                    当選者得票数
-                  </td>
-                  <td className="text-right w-34 px-2 border-b-2">
-                    無投票当選
-                  </td>
-                </tr>
-                <tr>
-                  <td className="w-2/3 px-2 bg-gray-200 border-b-2">
-                    連続在任期
-                  </td>
-                  <td className="text-right w-34 px-2 border-b-2">
-                    {edges.s1_chou_re_elected}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="w-2/3 px-2 bg-gray-200 border-b-2">
-                    首長任期
-                  </td>
-                  <td className="text-right w-34 px-2 border-b-2">
-                    {edges.s1_chou_ninki}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          ): (<p></p>)}
+              <h3>首長選挙データ</h3>
+              <table className="border-2 mt-2 ml-8 md:ml-0">
+                <tbody>
+                  <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">
+                      当選者得票数
+                    </td>
+                    <td className="text-right w-34 px-2 border-b-2">
+                      無投票当選
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">
+                      連続在任期
+                    </td>
+                    <td className="text-right w-34 px-2 border-b-2">
+                      {edges.s1_chou_re_elected}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="w-2/3 px-2 bg-gray-200 border-b-2">
+                      首長任期
+                    </td>
+                    <td className="text-right w-34 px-2 border-b-2">
+                      {edges.s1_chou_ninki}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p></p>
+          )}
 
           <div className="mt-8 md:w-3/5 md:px-3">
             <h3>傘下自治体(人口10万人以上)</h3>

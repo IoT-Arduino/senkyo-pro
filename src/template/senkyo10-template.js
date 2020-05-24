@@ -3,63 +3,40 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Pie } from "react-chartjs-2"
+// ↓　必要なので削除しないこと。
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 class senkyo10Template extends Component {
   constructor(props) {
     super(props)
+
+    const datasetsOption = [
+      {
+        label: "Giinsuu",
+        data: [],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.6)",
+          "rgba(54, 162, 235, 0.6)",
+        ],
+      },
+    ]
+
     this.state = {
       chartData: {
         labels: [],
-        datasets: [
-          {
-            label: "Giinsuu",
-            data: [],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-            ],
-          },
-        ],
+        datasets: datasetsOption,
       },
       chartData2: {
         labels: [],
-        datasets: [
-          {
-            label: "Giinsuu",
-            data: [],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-            ],
-          },
-        ],
+        datasets: datasetsOption,
       },
       chartData3: {
         labels: [],
-        datasets: [
-          {
-            label: "Giinsuu",
-            data: [],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-            ],
-          },
-        ],
+        datasets: datasetsOption,
       },
       chartData4: {
         labels: [],
-        datasets: [
-          {
-            label: "Giinsuu",
-            data: [],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-            ],
-          },
-        ],
+        datasets: datasetsOption,
       },
       chartData5: {
         labels: [],

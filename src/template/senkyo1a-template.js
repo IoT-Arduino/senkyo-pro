@@ -1,97 +1,113 @@
 import React, { Component } from "react"
-import { HorizontalBar } from "react-chartjs-2"
+// import { HorizontalBar } from "react-chartjs-2"
 import { Link, graphql } from "gatsby"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import Topics from "../components/topics"
 
+import S1aChart from "../components/charts/populationChart.js"
+
 class senkyo1aTemplate extends Component {
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
 
-    this.state = {
-      chartData: {
-        labels: [],
-        datasets: [
-          {
-            label: "Population",
-            data: [],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)",
-            ],
-          },
-        ],
-      },
-    }
-  }
+  //   this.state = {
+  //     chartData: {
+  //       labels: [],
+  //       datasets: [
+  //         {
+  //           label: "Population",
+  //           data: [],
+  //           backgroundColor: [
+  //             "rgba(255, 99, 132, 0.6)",
+  //             "rgba(54, 162, 235, 0.6)",
+  //             "rgba(255, 206, 86, 0.6)",
+  //             "rgba(75, 192, 192, 0.6)",
+  //             "rgba(153, 102, 255, 0.6)",
+  //             "rgba(255, 159, 64, 0.6)",
+  //             "rgba(255, 99, 132, 0.6)",
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   }
+  // }
 
-  getChartData = () => {
-    const { data } = this.props
-    const edges = data.allAirtable.edges[0].node.data
+  // getChartData = () => {
+  //   const { data } = this.props
+  //   const edges = data.allAirtable.edges[0].node.data
 
-    let Labels = []
-    let population = []
+  //   let Labels = []
+  //   let population = []
 
-    Labels.push("90代以上")
-    Labels.push("80代")
-    Labels.push("70代")
-    Labels.push("60代")
-    Labels.push("50代")
-    Labels.push("40代")
-    Labels.push("30代")
-    Labels.push("20代")
-    Labels.push("10代")
+  //   Labels.push("90代以上")
+  //   Labels.push("80代")
+  //   Labels.push("70代")
+  //   Labels.push("60代")
+  //   Labels.push("50代")
+  //   Labels.push("40代")
+  //   Labels.push("30代")
+  //   Labels.push("20代")
+  //   Labels.push("10代")
 
-    population.push(parseInt(edges.s1_v_nineties))
-    population.push(parseInt(edges.s1_v_eighties))
-    population.push(parseInt(edges.s1_v_seventies))
-    population.push(parseInt(edges.s1_v_sixties))
-    population.push(parseInt(edges.s1_v_fifties))
-    population.push(parseInt(edges.s1_v_forties))
-    population.push(parseInt(edges.s1_v_thirries))
-    population.push(parseInt(edges.s1_v_twenties))
-    population.push(parseInt(edges.s1_v_teen))
+  //   population.push(parseInt(edges.s1_v_nineties))
+  //   population.push(parseInt(edges.s1_v_eighties))
+  //   population.push(parseInt(edges.s1_v_seventies))
+  //   population.push(parseInt(edges.s1_v_sixties))
+  //   population.push(parseInt(edges.s1_v_fifties))
+  //   population.push(parseInt(edges.s1_v_forties))
+  //   population.push(parseInt(edges.s1_v_thirries))
+  //   population.push(parseInt(edges.s1_v_twenties))
+  //   population.push(parseInt(edges.s1_v_teen))
 
-    this.setState({
-      chartData: {
-        labels: Labels,
-        datasets: [
-          {
-            label: "Population",
-            data: population,
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-            ],
-          },
-        ],
-      },
-    })
-  }
-
-  componentDidMount() {
-    this.getChartData()
-  }
+  //   this.setState({
+  //     chartData: {
+  //       labels: Labels,
+  //       datasets: [
+  //         {
+  //           label: "Population",
+  //           data: population,
+  //           backgroundColor: [
+  //             "rgba(255, 99, 132, 0.6)",
+  //             "rgba(54, 162, 235, 0.6)",
+  //             "rgba(255, 206, 86, 0.6)",
+  //             "rgba(75, 192, 192, 0.6)",
+  //             "rgba(153, 102, 255, 0.6)",
+  //             "rgba(255, 159, 64, 0.6)",
+  //             "rgba(255, 99, 132, 0.6)",
+  //             "rgba(54, 162, 235, 0.6)",
+  //             "rgba(255, 206, 86, 0.6)",
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   })
+  // }1
+  // componentDidMount() {
+  //   this.getChartData()
+  // }
 
   render() {
     const { data } = this.props
-    const { chartData } = this.state
+    // const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
     const kenblock = data.kenblock
 
+    // propsでわたすchartデータ用
+    // const s1a = data.allAirtable
+    const population = [
+      edges.s1_v_nineties,
+      edges.s1_v_eighties,
+      edges.s1_v_seventies,
+      edges.s1_v_sixties,
+      edges.s1_v_fifties,
+      edges.s1_v_forties,
+      edges.s1_v_thirries,
+      edges.s1_v_twenties,
+      edges.s1_v_teen,
+    ]
+
+    //　表に表示する数字の桁数フォーマット
     const cma_s1_ttl_pop = String(edges.s1_ttl_pop).replace(
       /(\d)(?=(\d\d\d)+$)/g,
       "$1,"
@@ -133,53 +149,11 @@ class senkyo1aTemplate extends Component {
         </div>
 
         <div className="relative h-64 w-9/10 mx-auto my-4">
-          <HorizontalBar
-            data={chartData}
-            options={{
-              title: {
-                display: true,
-                text: `${edges.s1_syu_block}ブロックの年代別有権者数`,
-                fontSize: 18,
-              },
-              legend: {
-                display: false,
-                position: "top",
-              },
-              scales: {
-                xAxes: [
-                  {
-                    ticks: {
-                      callback: function(label, index, labels) {
-                        return label
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                      },
-                    },
-                  },
-                ],
-              },
-              plugins: {
-                datalabels: {
-                  display: true,
-                  color: "#777",
-                  anchor: "end",
-                  align: "start",
-                  offset: -50,
-                  font: {
-                    weight: "bold",
-                    size: "11",
-                  },
-                  formatter: value => {
-                    return value
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  },
-                },
-              },
-              responsive: true,
-              maintainAspectRatio: false,
-            }}
-          />
+          <S1aChart
+            // data={s1a}
+            title={`${edges.s1_syu_block}ブロック`}
+            population={population}
+          ></S1aChart>
         </div>
 
         <div className="block md:flex mt-8">

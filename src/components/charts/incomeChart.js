@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { HorizontalBar } from "react-chartjs-2"
-// import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 export default class incomeChart extends Component {
   constructor(props) {

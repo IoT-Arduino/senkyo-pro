@@ -80,7 +80,7 @@ README.MD
 * [tailwind CheetSheet](https://nerdcave.com/tailwind-cheat-sheet)
 * [Chart.js](https://www.chartjs.org/)
 * [react-chartjs-2](https://github.com/jerairrest/react-chartjs-2)
-
+* [chartjs-plugin-datalabels](https://chartjs-plugin-datalabels.netlify.app)
 
 ## 🚀 Deploy
 
