@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-// import { HorizontalBar } from "react-chartjs-2"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,93 +7,13 @@ import Topics from "../components/topics"
 import S1aChart from "../components/charts/populationChart.js"
 
 class senkyo1bTemplate extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     chartData: {
-  //       labels: [],
-  //       datasets: [
-  //         {
-  //           label: "Population",
-  //           data: [],
-  //           backgroundColor: [
-  //             "rgba(255, 99, 132, 0.6)",
-  //             "rgba(54, 162, 235, 0.6)",
-  //             "rgba(255, 206, 86, 0.6)",
-  //             "rgba(75, 192, 192, 0.6)",
-  //             "rgba(153, 102, 255, 0.6)",
-  //             "rgba(255, 159, 64, 0.6)",
-  //             "rgba(255, 99, 132, 0.6)",
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   }
-  // }
-
-  // getChartData = () => {
-  //   const { data } = this.props
-  //   const edges = data.allAirtable.edges[0].node.data
-
-  //   let Labels = []
-  //   let population = []
-
-  //   Labels.push("90代以上")
-  //   Labels.push("80代")
-  //   Labels.push("70代")
-  //   Labels.push("60代")
-  //   Labels.push("50代")
-  //   Labels.push("40代")
-  //   Labels.push("30代")
-  //   Labels.push("20代")
-  //   Labels.push("10代")
-
-  //   population.push(parseInt(edges.s1_v_nineties))
-  //   population.push(parseInt(edges.s1_v_eighties))
-  //   population.push(parseInt(edges.s1_v_seventies))
-  //   population.push(parseInt(edges.s1_v_sixties))
-  //   population.push(parseInt(edges.s1_v_fifties))
-  //   population.push(parseInt(edges.s1_v_forties))
-  //   population.push(parseInt(edges.s1_v_thirries))
-  //   population.push(parseInt(edges.s1_v_twenties))
-  //   population.push(parseInt(edges.s1_v_teen))
-
-  //   this.setState({
-  //     chartData: {
-  //       labels: Labels,
-  //       datasets: [
-  //         {
-  //           label: "Population",
-  //           data: population,
-  //           backgroundColor: [
-  //             "rgba(255, 99, 132, 0.6)",
-  //             "rgba(54, 162, 235, 0.6)",
-  //             "rgba(255, 206, 86, 0.6)",
-  //             "rgba(75, 192, 192, 0.6)",
-  //             "rgba(153, 102, 255, 0.6)",
-  //             "rgba(255, 159, 64, 0.6)",
-  //             "rgba(255, 99, 132, 0.6)",
-  //             "rgba(54, 162, 235, 0.6)",
-  //             "rgba(255, 206, 86, 0.6)",
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   })
-  // }
-
-  // componentDidMount() {
-  //   this.getChartData()
-  // }
 
   render() {
     const { data } = this.props
-    // const { chartData } = this.state
     const edges = data.allAirtable.edges[0].node.data
     const cityBlock = data.cityBlock
 
     // propsでわたすchartデータ用
-    // const s1a = data.allAirtable
     const population = [
       edges.s1_v_nineties,
       edges.s1_v_eighties,
@@ -152,7 +71,6 @@ class senkyo1bTemplate extends Component {
 
         <div className="relative h-64 w-9/10 mx-auto my-4">
           <S1aChart
-            // data={s1a}
             title={edges.s1_pref}
             population={population}
           ></S1aChart>

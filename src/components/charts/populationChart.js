@@ -28,8 +28,7 @@ export default class incomeChart extends Component {
       }
 
   getChartData = () => {
-    const { data } = this.props
-    // const edges = data.edges[0].node.data
+    // const { data } = this.props
  
     let Labels = []
     let population = []
@@ -44,19 +43,7 @@ export default class incomeChart extends Component {
     Labels.push("20代")
     Labels.push("10代")
 
-    // population.push(parseInt(edges.s1_v_nineties))
-    // population.push(parseInt(edges.s1_v_eighties))
-    // population.push(parseInt(edges.s1_v_seventies))
-    // population.push(parseInt(edges.s1_v_sixties))
-    // population.push(parseInt(edges.s1_v_fifties))
-    // population.push(parseInt(edges.s1_v_forties))
-    // population.push(parseInt(edges.s1_v_thirries))
-    // population.push(parseInt(edges.s1_v_twenties))
-    // population.push(parseInt(edges.s1_v_teen))
-
     const populationData = this.props.population
-    console.log(populationData)
-
     population = populationData
 
     this.setState({
@@ -89,9 +76,7 @@ export default class incomeChart extends Component {
 
   render(props) {
     const { chartData } = this.state
-    // const edges = this.props.data.edges[0].node.data
     const title = this.props.title
-
     const chartTitle = `${title}の年代別有権者数`
 
     return (

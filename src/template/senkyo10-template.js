@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Pie } from "react-chartjs-2"
-// ↓　必要なので削除しないこと。
+// ↓　Do not delete
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 class senkyo10Template extends Component {
