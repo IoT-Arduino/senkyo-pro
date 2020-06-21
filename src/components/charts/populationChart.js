@@ -28,7 +28,6 @@ export default class incomeChart extends Component {
       }
 
   getChartData = () => {
-    // const { data } = this.props
  
     let Labels = []
     let population = []

@@ -566,66 +566,6 @@ class senkyo10Template extends Component {
     const sanTotal =
       parseInt(edges.s10_san_shou, 10) + parseInt(edges.s10_san_hirei, 10)
 
-    // in
-    const cma_s10_in_touhi = String(edges.s10_in_touhi).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_in_kifu = String(edges.s10_in_kifu).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_in_jigyou = String(edges.s10_in_jigyou).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_in_honshibu = String(edges.s10_in_honshibu).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_in_seitoukoufu = String(edges.s10_in_seitoukoufu).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_in_other = String(edges.s10_in_other).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-
-    //out
-    const cma_s10_out_jinkenhi = String(edges.s10_out_jinkenhi).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_out_other = String(edges.s10_out_other).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_out_jimusho = String(edges.s10_out_jimusho).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_out_soshiki = String(edges.s10_out_soshiki).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_out_senkyo = String(edges.s10_out_senkyo).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_out_kikanshi = String(edges.s10_out_kikanshi).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_out_senden = String(edges.s10_out_senden).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s10_out_other_2 = String(edges.s10_out_other_2).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-
     //total
     const inTotal =
       edges.s10_in_touhi +
@@ -634,8 +574,6 @@ class senkyo10Template extends Component {
       edges.s10_in_honshibu +
       edges.s10_in_seitoukoufu +
       edges.s10_in_other
-
-    const cma_inTotal = String(inTotal).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,")
 
     const outTotal =
       edges.s10_out_jinkenhi +
@@ -646,8 +584,6 @@ class senkyo10Template extends Component {
       edges.s10_out_kikanshi +
       edges.s10_out_senden +
       edges.s10_out_other_2
-
-    const cma_outTotal = String(outTotal).replace(/(\d)(?=(\d\d\d)+$)/g, "$1,")
 
     const s10 = this.props.data.s10
 
@@ -784,19 +720,19 @@ class senkyo10Template extends Component {
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">党費</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_in_touhi}
+                      {edges.s10_in_touhi.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">寄付収入</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_in_kifu}
+                      {edges.s10_in_kifu.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">事業収入</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_in_jigyou}
+                      {edges.s10_in_jigyou.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
@@ -804,7 +740,7 @@ class senkyo10Template extends Component {
                       本部支部交付金収入
                     </td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_in_honshibu}
+                      {edges.s10_in_honshibu.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
@@ -812,20 +748,20 @@ class senkyo10Template extends Component {
                       政党交付金収入
                     </td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_in_seitoukoufu}
+                      {edges.s10_in_seitoukoufu.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">その他収入</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_in_other}
+                      {edges.s10_in_other.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-400 border-b-2">政党収入合計（千円）</td>
                     <td className="text-right w-24 px-2 border-b-2 bg-gray-400">
                       {" "}
-                      {cma_inTotal}
+                      {inTotal.toLocaleString()}
                     </td>
                   </tr>
                 </tbody>
@@ -842,7 +778,7 @@ class senkyo10Template extends Component {
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">人件費</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_out_jinkenhi}
+                      {edges.s10_out_jinkenhi.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
@@ -850,43 +786,43 @@ class senkyo10Template extends Component {
                       光熱費・備品費
                     </td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_out_other}
+                      {edges.s10_out_other.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">事務所費</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_out_jimusho}
+                      {edges.s10_out_jimusho.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">組織活動費</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_out_soshiki}
+                      {edges.s10_out_soshiki.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">選挙関係費</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_out_senkyo}
+                      {edges.s10_out_senkyo.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">機関紙費</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_out_kikanshi}
+                      {edges.s10_out_kikanshi.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">宣伝費</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_out_senden}
+                      {edges.s10_out_senden.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
                     <td className="px-2 bg-gray-200 border-b-2">その他支出</td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s10_out_other_2}
+                      {edges.s10_out_other_2.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
@@ -894,7 +830,7 @@ class senkyo10Template extends Component {
                       政党支出合計（千円）
                     </td>
                     <td className="text-right w-24 px-2 border-b-2 bg-gray-400">
-                      {cma_outTotal}
+                      {outTotal.toLocaleString()}
                     </td>
                   </tr>
                 </tbody>

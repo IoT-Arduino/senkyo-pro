@@ -116,7 +116,6 @@ export default class incomeChart extends Component {
             responsive: true,
             maintainAspectRatio: false,
           }}
-        //   className="mb-8"
         />
       )
   }

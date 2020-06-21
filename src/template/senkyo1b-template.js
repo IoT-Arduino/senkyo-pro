@@ -7,7 +7,6 @@ import Topics from "../components/topics"
 import S1aChart from "../components/charts/populationChart.js"
 
 class senkyo1bTemplate extends Component {
-
   render() {
     const { data } = this.props
     const edges = data.allAirtable.edges[0].node.data
@@ -26,31 +25,10 @@ class senkyo1bTemplate extends Component {
       edges.s1_v_teen,
     ]
 
-    const cma_s1_ttl_pop = String(edges.s1_ttl_pop).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s1_ttl_votes = String(edges.s1_ttl_votes).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s1_housyu_y = String(edges.s1_housyu_y).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-
+    // 当選者得票率の計算
     const s1_chou_toku_rate =
       Math.round((edges.s1_chou_toku_votes / edges.s1_chou_ef_vote) * 10000) /
       100
-
-    const cma_s1_chou_ef_vote = String(edges.s1_chou_ef_vote).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
-    const cma_s1_chou_toku_votes = String(edges.s1_chou_toku_votes).replace(
-      /(\d)(?=(\d\d\d)+$)/g,
-      "$1,"
-    )
 
     return (
       <Layout>
@@ -61,19 +39,18 @@ class senkyo1bTemplate extends Component {
         <div className="sm:flex border-2 rounded sm:justify-around py-4 text-center w-2/3 m-auto">
           <div className="text-center">
             <p>人口</p>
-            <p className="text-center">{cma_s1_ttl_pop}人</p>
+            <p className="text-center">{edges.s1_ttl_pop.toLocaleString()}人</p>
           </div>
           <div className="text-center mt-4 sm:mt-0">
             <p>有権者数*推計</p>
-            <p className="text-center">{cma_s1_ttl_votes}人</p>
+            <p className="text-center">
+              {edges.s1_ttl_votes.toLocaleString()}人
+            </p>
           </div>
         </div>
 
         <div className="relative h-64 w-9/10 mx-auto my-4">
-          <S1aChart
-            title={edges.s1_pref}
-            population={population}
-          ></S1aChart>
+          <S1aChart title={edges.s1_pref} population={population}></S1aChart>
         </div>
 
         <div className="block md:flex mt-8">
@@ -94,7 +71,7 @@ class senkyo1bTemplate extends Component {
                     議員報酬
                   </td>
                   <td className="text-right w-40 px-2 border-b-2">
-                    {cma_s1_housyu_y}円/年
+                    {edges.s1_housyu_y.toLocaleString()}円/年
                   </td>
                 </tr>
                 <tr>
@@ -127,7 +104,7 @@ class senkyo1bTemplate extends Component {
                       前回有効投票数
                     </td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s1_chou_ef_vote}
+                      {edges.s1_chou_ef_vote.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
@@ -135,7 +112,7 @@ class senkyo1bTemplate extends Component {
                       当選者得票数
                     </td>
                     <td className="text-right w-24 px-2 border-b-2">
-                      {cma_s1_chou_toku_votes}
+                      {edges.s1_chou_toku_votes.toLocaleString()}
                     </td>
                   </tr>
                   <tr>
