@@ -84,7 +84,7 @@ README.MD
 
 ## 🚀 Deploy
 
-dotenv File is required for API access key of Airtable.
+Netlify
 
 
 
