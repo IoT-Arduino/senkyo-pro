@@ -4,7 +4,6 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import Footer from "./footer"
-// import "./layout.css"
 import "../styles/tailwind.css"
 
 const LayoutTop = ({ children }) => {
@@ -20,9 +19,12 @@ const LayoutTop = ({ children }) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header siteTitle={data.site.siteMetadata.title} className="sm:text-xl text-2xl"/>
-        <main className="flex-grow">{children}</main>
-        <Footer />
+      <Header
+        siteTitle={data.site.siteMetadata.title}
+        className="sm:text-xl text-2xl"
+      />
+      <main className="flex-grow">{children}</main>
+      <Footer />
     </div>
   )
 }
